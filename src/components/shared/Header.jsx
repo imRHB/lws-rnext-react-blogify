@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 
+import Search from "../Search";
+import AppLink from "../ui/AppLink";
 import logo from "/assets/logo.svg";
 
 export default function Header() {
@@ -13,6 +15,8 @@ export default function Header() {
                     </Link>
                 </div>
 
+                <Search />
+
                 {/* <!-- Actions - Login, Write, Home, Search --> */}
                 {/* <!-- Notes for Developers --> */}
                 {/* <!-- For Logged in User - Write, Profile, Logout Menu --> */}
@@ -20,14 +24,13 @@ export default function Header() {
                 <div>
                     <ul className="flex items-center space-x-5">
                         <li>
-                            <Link
-                                to="/create-blog"
-                                className="px-6 py-2 text-white transition-all duration-200 bg-indigo-600 rounded-md md:py-3 hover:bg-indigo-700"
-                            >
-                                Write
-                            </Link>
+                            <AppLink
+                                href="/create-blog"
+                                label="Write"
+                                variant="primary"
+                            />
                         </li>
-                        <li>
+                        {/* <li>
                             <Link
                                 to="/search"
                                 className="flex items-center gap-2 cursor-pointer"
@@ -38,7 +41,7 @@ export default function Header() {
                                 />
                                 <span>Search</span>
                             </Link>
-                        </li>
+                        </li> */}
                         <li>
                             <Link
                                 to="/login"
@@ -49,7 +52,7 @@ export default function Header() {
                         </li>
                         <li className="flex items-center">
                             {/* <!-- Circular Div with background color --> */}
-                            <div className="text-white bg-orange-600 avater-img">
+                            <div className="text-white bg-orange-600 avatar-img">
                                 <span className="">S</span>
                                 {/* <!-- User's first name initial --> */}
                             </div>
