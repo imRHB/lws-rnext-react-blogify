@@ -1,10 +1,17 @@
 import { Link } from "react-router-dom";
 
+import useAuth from "../../hooks/useAuth";
 import Search from "../Search";
 import AppLink from "../ui/AppLink";
 import logo from "/assets/logo.svg";
 
 export default function Header() {
+    const { auth, setAuth } = useAuth();
+
+    function handleLogout() {
+        setAuth({});
+    }
+
     return (
         <header>
             <nav className="container">
@@ -43,12 +50,21 @@ export default function Header() {
                             </Link>
                         </li> */}
                         <li>
-                            <Link
-                                to="/login"
-                                className="transition-all duration-200 text-white/50 hover:text-white"
-                            >
-                                Login
-                            </Link>
+                            {auth?.user ? (
+                                <p
+                                    className="cursor-pointer"
+                                    onClick={handleLogout}
+                                >
+                                    Logout
+                                </p>
+                            ) : (
+                                <Link
+                                    to="/login"
+                                    className="transition-all duration-200 text-white/50 hover:text-white"
+                                >
+                                    Login
+                                </Link>
+                            )}
                         </li>
                         <li className="flex items-center">
                             {/* <!-- Circular Div with background color --> */}
@@ -60,7 +76,8 @@ export default function Header() {
                             {/* <!-- Logged-in user's name --> */}
                             <Link to="/profile">
                                 <span className="ml-2 text-white">
-                                    Saad Hasan
+                                    {/* Saad Hasan */}
+                                    {auth?.user?.firstName}
                                 </span>
                             </Link>
                             {/* <!-- Profile Image --> */}

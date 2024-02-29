@@ -1,17 +1,19 @@
 import axios from "axios";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 import Field from "../components/form/Field";
 import useAuth from "../hooks/useAuth";
 
 export default function LoginPage() {
     const { setAuth } = useAuth();
+    const navigate = useNavigate();
 
     const {
         register,
         handleSubmit,
         formState: { errors },
-        // setError
+        setError,
     } = useForm({
         defaultValues: {
             email: "",
@@ -30,18 +32,21 @@ export default function LoginPage() {
                 const { token, user } = response.data;
 
                 if (token) {
-                    const authToken = token.authToken;
+                    const accessToken = token.accessToken;
                     const refreshToken = token.refreshToken;
 
-                    setAuth({ user, authToken, refreshToken });
+                    setAuth({ user, accessToken, refreshToken });
+
+                    navigate("/");
                 }
             }
         } catch (error) {
             console.error(error);
+            setError("root.manual", {
+                type: "manual",
+                message: error?.message,
+            });
         }
-
-        const user = { ...formData };
-        setAuth({ user });
     }
 
     return (
@@ -83,6 +88,8 @@ export default function LoginPage() {
                             className="w-full p-3 bg-[#030317] border border-white/20 rounded-md focus:outline-none focus:border-indigo-500"
                         />
                     </Field>
+
+                    <p>{errors?.root?.manual?.message}</p>
 
                     <div className="mt-6" />
                     <button
