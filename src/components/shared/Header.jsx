@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import Search from "../Search";
 import AppLink from "../ui/AppLink";
+import Avatar from "../ui/Avatar";
 import logo from "/assets/logo.svg";
 
 export default function Header() {
@@ -66,22 +67,20 @@ export default function Header() {
                                 </Link>
                             )}
                         </li>
-                        <li className="flex items-center">
-                            {/* <!-- Circular Div with background color --> */}
-                            <div className="text-white bg-orange-600 avatar-img">
-                                <span className="">S</span>
-                                {/* <!-- User's first name initial --> */}
-                            </div>
+                        {auth?.user && (
+                            <li className="flex items-center">
+                                <Avatar name={auth?.user?.firstName} />
 
-                            {/* <!-- Logged-in user's name --> */}
-                            <Link to="/profile">
-                                <span className="ml-2 text-white">
-                                    {/* Saad Hasan */}
-                                    {auth?.user?.firstName}
-                                </span>
-                            </Link>
-                            {/* <!-- Profile Image --> */}
-                        </li>
+                                {/* <!-- Logged-in user's name --> */}
+                                <Link to="/profile">
+                                    <span className="ml-2 text-white">
+                                        {/* Saad Hasan */}
+                                        {auth?.user?.firstName}
+                                    </span>
+                                </Link>
+                                {/* <!-- Profile Image --> */}
+                            </li>
+                        )}
                     </ul>
                 </div>
             </nav>

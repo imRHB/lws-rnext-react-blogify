@@ -1,6 +1,8 @@
 import Avatar from "../ui/Avatar";
 
-export default function BlogCard() {
+export default function BlogCard({ blog }) {
+    const { title, content } = blog;
+
     return (
         <article className="blog-card">
             <img
@@ -11,14 +13,10 @@ export default function BlogCard() {
             <div className="relative mt-2">
                 <a href="./single-blog.html">
                     <h3 className="text-xl text-slate-300 lg:text-2xl">
-                        <a href="./single-blog.html">React Roadmap in 2024</a>
+                        <a href="./single-blog.html">{title}</a>
                     </h3>
                 </a>
-                <p className="mt-1 mb-6 text-base text-slate-500">
-                    Aenean eleifend ante maecenas pulvinar montes lorem et pede
-                    dis dolor pretium donec dictum. Vici consequat justo enim.
-                    Venenatis eget adipiscing luctus lorem.
-                </p>
+                <p className="mt-1 mb-6 text-base text-slate-500">{content}</p>
 
                 {/* <!-- Meta Informations --> */}
                 <div className="flex items-center justify-between">
