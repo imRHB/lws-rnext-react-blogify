@@ -2,10 +2,12 @@ import { Link } from "react-router-dom";
 
 import Avatar from "../ui/Avatar";
 
+import useUserProfile from "../../hooks/useUserProfile";
 import blogThumbnail from "/assets/blogs/React-Roadmap.jpg";
 
 export default function BlogCard({ blog }) {
-    const { title, content, id } = blog;
+    const { user } = useUserProfile();
+    const { author, title, content, id, likes } = blog;
 
     return (
         <Link to={`/blogs/${id}`} className="blog-card">
@@ -17,7 +19,9 @@ export default function BlogCard({ blog }) {
                         <a href="./single-blog.html">{title}</a>
                     </h3>
                 </a>
-                <p className="mt-1 mb-6 text-base text-slate-500">{content}</p>
+                <p className="mt-1 mb-6 text-base text-slate-500">
+                    {content.slice(0, 200)}
+                </p>
 
                 {/* <!-- Meta Informations --> */}
                 <div className="flex items-center justify-between">
@@ -27,13 +31,15 @@ export default function BlogCard({ blog }) {
                         </div> */}
 
                         <Avatar
-                            name="Akash Ahmed"
+                            name={author.firstName}
                             imgSrc="https://i.pravatar.cc/80"
                         />
 
                         <div>
                             <h5 className="text-sm text-slate-500">
-                                <a href="./profile.html">Saad Hasan</a>
+                                <a href="./profile.html">
+                                    {author.firstName} {author.lastName}
+                                </a>
                             </h5>
                             <div className="flex items-center text-xs text-slate-700">
                                 <span>June 28, 2018</span>
@@ -42,23 +48,26 @@ export default function BlogCard({ blog }) {
                     </div>
 
                     <div className="px-2 py-1 text-sm text-slate-700">
-                        <span>100 Likes</span>
+                        <span>
+                            {likes.length} {likes.length > 1 ? "Likes" : "Like"}
+                        </span>
                     </div>
                 </div>
 
                 {/* <!-- action dot --> */}
-                <div className="absolute top-0 right-0">
-                    <button>
-                        <img
-                            src="./assets/icons/3dots.svg"
-                            alt="3dots of Action"
-                        />
-                    </button>
+                {user.id === author.id && (
+                    <div className="absolute top-0 right-0">
+                        <button>
+                            <img
+                                src="./assets/icons/3dots.svg"
+                                alt="3dots of Action"
+                            />
+                        </button>
 
-                    {/* <!-- Action Menus Popup --> */}
-                    {/* <BlogItemActions /> */}
-                </div>
-                {/* <!-- action dot ends --> */}
+                        {/* <!-- Action Menus Popup --> */}
+                        {/* <BlogItemActions /> */}
+                    </div>
+                )}
             </div>
         </Link>
     );

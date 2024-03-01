@@ -67,18 +67,24 @@ export default function Header() {
                                 </Link>
                             )}
                         </li>
-                        {auth?.user && (
-                            <li className="flex items-center">
-                                <Avatar name={auth?.user?.firstName} />
 
-                                {/* <!-- Logged-in user's name --> */}
-                                <Link to="/profile">
-                                    <span className="ml-2 text-white">
-                                        {/* Saad Hasan */}
+                        {auth?.user && (
+                            <li>
+                                <Link
+                                    to="/profile"
+                                    className="flex items-center px-3 py-1.5 rounded-lg hover:bg-slate-800/80 space-x-3"
+                                >
+                                    <Avatar
+                                        name={auth?.user?.firstName}
+                                        // imgSrc="https://i.pravatar.cc/80"
+                                    />
+
+                                    <p className="text-sm text-white">
                                         {auth?.user?.firstName}
-                                    </span>
+                                        <br />
+                                        {auth?.user?.lastName}
+                                    </p>
                                 </Link>
-                                {/* <!-- Profile Image --> */}
                             </li>
                         )}
                     </ul>

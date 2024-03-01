@@ -1,23 +1,26 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 import getFirstChar from "../../lib/getFirstChar";
 
-export default function Avatar({ name, imgSrc }) {
+export default function Avatar({ name, imgSrc, size }) {
     const charAvatar = getFirstChar(name);
 
     return (
         <React.Fragment>
             {imgSrc ? (
-                <Link to="/">
-                    <img
-                        className="rounded-full size-10"
-                        src={imgSrc}
-                        alt="lws"
-                    />
-                </Link>
+                <img
+                    className={`${
+                        size === "large" ? "size-32" : "size-8"
+                    } rounded-full`}
+                    src={imgSrc}
+                    alt="lws"
+                />
             ) : (
-                <div className="text-white bg-indigo-600 avatar-img">
+                <div
+                    className={`${
+                        size === "large" ? "size-32 text-5xl" : "text-base"
+                    } text-white bg-indigo-600 avatar-img`}
+                >
                     <span>{charAvatar}</span>
                 </div>
             )}

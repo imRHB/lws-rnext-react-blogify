@@ -12,29 +12,35 @@ import ProductList from "./pages/ProductList";
 import ProfilePage from "./pages/Profile";
 import RegisterPage from "./pages/Register";
 import AuthProvider from "./provider/AuthProvider";
+import ProfileProvider from "./provider/ProfileProvider";
 
 export default function App() {
     return (
         <AuthProvider>
             <Router>
-                <Header />
-                <Routes>
-                    <Route element={<PrivateRoute />}>
+                <ProfileProvider>
+                    <Header />
+                    <Routes>
+                        <Route element={<PrivateRoute />}>
+                            <Route
+                                path="/create-blog"
+                                element={<CreateBlogPage />}
+                            />
+                            <Route path="/profile" element={<ProfilePage />} />
+                        </Route>
+                        <Route path="/" element={<HomePage />} exact />
+                        <Route path="/login" element={<LoginPage />} />
+                        <Route path="/register" element={<RegisterPage />} />
                         <Route
-                            path="/create-blog"
-                            element={<CreateBlogPage />}
+                            path="/blogs/:blogId"
+                            element={<BlogDetails />}
                         />
-                        <Route path="/profile" element={<ProfilePage />} />
-                    </Route>
-                    <Route path="/" element={<HomePage />} exact />
-                    <Route path="/login" element={<LoginPage />} />
-                    <Route path="/register" element={<RegisterPage />} />
-                    <Route path="/blogs/:blogId" element={<BlogDetails />} />
 
-                    <Route path="/products" element={<ProductList />} />
+                        <Route path="/products" element={<ProductList />} />
 
-                    <Route path="*" element={<NotFoundPage />} />
-                </Routes>
+                        <Route path="*" element={<NotFoundPage />} />
+                    </Routes>
+                </ProfileProvider>
                 <Footer />
             </Router>
         </AuthProvider>
