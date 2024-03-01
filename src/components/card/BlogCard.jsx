@@ -1,15 +1,16 @@
+import { Link } from "react-router-dom";
+
 import Avatar from "../ui/Avatar";
 
+import blogThumbnail from "/assets/blogs/React-Roadmap.jpg";
+
 export default function BlogCard({ blog }) {
-    const { title, content } = blog;
+    const { title, content, id } = blog;
 
     return (
-        <article className="blog-card">
-            <img
-                className="blog-thumb"
-                src="./assets/blogs/React-Roadmap.jpg"
-                alt=""
-            />
+        <Link to={`/blogs/${id}`} className="blog-card">
+            <img className="blog-thumb" src={blogThumbnail} alt="" />
+
             <div className="relative mt-2">
                 <a href="./single-blog.html">
                     <h3 className="text-xl text-slate-300 lg:text-2xl">
@@ -27,7 +28,7 @@ export default function BlogCard({ blog }) {
 
                         <Avatar
                             name="Akash Ahmed"
-                            // imgSrc="https://i.pravatar.cc/80"
+                            imgSrc="https://i.pravatar.cc/80"
                         />
 
                         <div>
@@ -55,19 +56,10 @@ export default function BlogCard({ blog }) {
                     </button>
 
                     {/* <!-- Action Menus Popup --> */}
-                    <div className="action-modal-container">
-                        <button className="action-menu-item hover:text-lwsGreen">
-                            <img src="./assets/icons/edit.svg" alt="Edit" />
-                            Edit
-                        </button>
-                        <button className="action-menu-item hover:text-red-500">
-                            <img src="./assets/icons/delete.svg" alt="Delete" />
-                            Delete
-                        </button>
-                    </div>
+                    {/* <BlogItemActions /> */}
                 </div>
                 {/* <!-- action dot ends --> */}
             </div>
-        </article>
+        </Link>
     );
 }

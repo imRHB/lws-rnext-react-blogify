@@ -1,7 +1,7 @@
 import useBlogs from "../../hooks/useBlogs";
 import BlogCard from "../card/BlogCard";
 
-export default function MainContents() {
+export default function MainBlogs() {
     const { blogs, hasMore, loaderRef } = useBlogs();
 
     return (

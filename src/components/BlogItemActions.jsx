@@ -1,7 +1,7 @@
 import trashIcon from "/assets/icons/delete.svg";
 import pencilIcon from "/assets/icons/edit.svg";
 
-export default function ItemAction() {
+export default function BlogItemActions() {
     return (
         <div className="absolute top-0 right-0">
             <button>
