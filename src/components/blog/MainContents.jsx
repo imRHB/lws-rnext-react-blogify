@@ -2,7 +2,7 @@ import useBlogsQuery from "../../hooks/useBlogsQuery";
 import BlogCard from "../card/BlogCard";
 
 export default function MainContents() {
-    const { blogs } = useBlogsQuery();
+    const { blogs } = useBlogsQuery(5, 1);
     console.log(blogs);
 
     return (

@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 
 import { api } from "../api";
 
-export default function useBlogsQuery({ limit, page }) {
+export default function useBlogsQuery(limit, page) {
     const [blogs, setBlogs] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
+
+    console.log(limit, page);
 
     useEffect(() => {
         let isMounted = true;
