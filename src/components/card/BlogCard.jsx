@@ -55,7 +55,7 @@ export default function BlogCard({ blog }) {
                 </div>
 
                 {/* <!-- action dot --> */}
-                {user.id === author.id && (
+                {user?.id === author.id && (
                     <div className="absolute top-0 right-0">
                         <button>
                             <img

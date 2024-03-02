@@ -14,7 +14,7 @@ export default function Header() {
     }
 
     return (
-        <header>
+        <header className="sticky top-0 bg-[#030317] z-10 backdrop-filter backdrop-blur-md bg-opacity-50">
             <nav className="container">
                 {/* <!-- Logo --> */}
                 <div>
