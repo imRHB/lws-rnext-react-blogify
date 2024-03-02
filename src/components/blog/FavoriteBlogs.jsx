@@ -5,6 +5,8 @@ import BlogItem from "../card/BlogItem";
 export default function FavoriteBlogs() {
     const { user } = useUserProfile();
 
+    console.log("user?.favourites:", user?.favourites);
+
     return (
         <section className="sidebar-card">
             <SectionTitle title="Your Favourites ❤️" />
