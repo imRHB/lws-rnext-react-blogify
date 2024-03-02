@@ -10,7 +10,9 @@ export default function Avatar({ name, imgSrc, size }) {
             {imgSrc ? (
                 <img
                     className={`${
-                        size === "large" ? "size-32" : "size-8"
+                        size === "large"
+                            ? "size-28 ring-4 ring-[#00D991] w-full h-full"
+                            : "size-8"
                     } rounded-full`}
                     src={imgSrc}
                     alt="lws"

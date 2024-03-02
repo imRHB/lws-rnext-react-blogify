@@ -32,7 +32,15 @@ export default function BlogCard({ blog }) {
 
                         <Avatar
                             name={author.firstName}
-                            imgSrc="https://i.pravatar.cc/80"
+                            imgSrc={
+                                user?.id === author.id
+                                    ? `${
+                                          import.meta.env.VITE_SERVER_BASE_URL
+                                      }/uploads/avatar/${user?.avatar}`
+                                    : `${
+                                          import.meta.env.VITE_SERVER_BASE_URL
+                                      }/uploads/avatar/${author.avatar}`
+                            }
                         />
 
                         <div>

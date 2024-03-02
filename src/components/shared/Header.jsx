@@ -1,12 +1,14 @@
 import { Link } from "react-router-dom";
 
 import useAuth from "../../hooks/useAuth";
+import useUserProfile from "../../hooks/useUserProfile";
 import Search from "../Search";
 import AppLink from "../ui/AppLink";
 import Avatar from "../ui/Avatar";
 import logo from "/assets/logo.svg";
 
 export default function Header() {
+    const { user } = useUserProfile();
     const { auth, setAuth } = useAuth();
 
     function handleLogout() {
@@ -75,14 +77,16 @@ export default function Header() {
                                     className="flex items-center px-3 py-1.5 rounded-lg hover:bg-slate-800/80 space-x-3"
                                 >
                                     <Avatar
-                                        name={auth?.user?.firstName}
-                                        // imgSrc="https://i.pravatar.cc/80"
+                                        name={user?.firstName}
+                                        imgSrc={`${
+                                            import.meta.env.VITE_SERVER_BASE_URL
+                                        }/uploads/avatar/${user?.avatar}`}
                                     />
 
                                     <p className="text-sm text-white">
-                                        {auth?.user?.firstName}
+                                        {user?.firstName}
                                         <br />
-                                        {auth?.user?.lastName}
+                                        {user?.lastName}
                                     </p>
                                 </Link>
                             </li>

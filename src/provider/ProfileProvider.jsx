@@ -18,7 +18,7 @@ export default function ProfileProvider({ children }) {
                         auth?.user?.id
                     }`
                 );
-                console.log("response:", response);
+
                 setUser(response?.data);
             } catch (error) {
                 console.error(error);
