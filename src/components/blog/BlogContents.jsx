@@ -1,72 +1,61 @@
-import blogImg from "/assets/blogs/React-Roadmap.jpg";
+import useUserProfile from "../../hooks/useUserProfile";
+import { getTimestamp } from "../../lib/getTimestamp";
+import Avatar from "../ui/Avatar";
 
-export default function BlogContents() {
+export default function BlogContents({ blog }) {
+    const { user } = useUserProfile();
+
+    const { author, title, content, createdAt, likes, tags, thumbnail } = blog;
+    const tagList = tags?.split(",");
+
     return (
         <article className="container py-8 text-center">
-            <h1 className="text-3xl font-bold md:text-5xl">
-                Integer Maecenas Eget Viverra
-            </h1>
+            <h1 className="text-3xl font-bold md:text-5xl">{title}</h1>
+
             <div className="flex items-center justify-center gap-4 my-4">
                 <div className="flex items-center space-x-2 capitalize">
-                    <div className="text-white bg-indigo-600 avatar-img">
-                        <span className="">S</span>
-                    </div>
-                    <h5 className="text-sm text-slate-500">Saad Hasan</h5>
+                    <Avatar
+                        name={author?.firstName}
+                        imgSrc={
+                            user && user?.id === author?.id
+                                ? `${
+                                      import.meta.env.VITE_SERVER_BASE_URL
+                                  }/uploads/avatar/${user?.avatar}`
+                                : `${
+                                      import.meta.env.VITE_SERVER_BASE_URL
+                                  }/uploads/avatar/${author?.avatar}`
+                        }
+                    />
+                    <h5 className="text-sm text-slate-500">
+                        {author?.firstName} {author?.lastName}
+                    </h5>
                 </div>
                 <span className="text-sm text-slate-700 dot">
-                    June 28, 2018
+                    {createdAt && getTimestamp(createdAt)}
                 </span>
-                <span className="text-sm text-slate-700 dot">100 Likes</span>
+                <span className="text-sm text-slate-700 dot">
+                    {likes?.length} {likes?.length > 1 ? "Likes" : "Like"}
+                </span>
             </div>
-            <img
-                className="object-cover w-full mx-auto md:w-8/12 h-80 md:h-96"
-                src={blogImg}
-                alt=""
-            />
 
-            {/* <!-- Tags --> */}
+            {thumbnail && (
+                <img
+                    className="object-cover w-full mx-auto md:w-8/12 h-80 md:h-96"
+                    src={`${
+                        import.meta.env.VITE_SERVER_BASE_URL
+                    }/uploads/blog/${thumbnail}`}
+                    alt=""
+                />
+            )}
+
             <ul className="tags">
-                <li>JavaScript</li>
-                <li>Node</li>
-                <li>React</li>
-                <li>Next</li>
+                {tagList?.map((tag) => (
+                    <li key={tag}>{tag}</li>
+                ))}
             </ul>
 
-            {/* <!-- Content --> */}
             <div className="mx-auto w-full md:w-10/12 text-slate-300 text-base md:text-lg leading-8 py-2 !text-left">
-                Today I was mob programming with Square&apos;s Mobile &
-                Performance Reliability team and we toyed with an interesting
-                idea. Our codebase has classes that represent screens a user can
-                navigate to. These classes are defined in modules, and these
-                modules have an owner team defined. When navigating to a screen,
-                we wanted to have the owner team information available, at
-                runtime. We created a build tool that looks at about 1000 Screen
-                classes, determines the owner team, and generates a class to do
-                the lookup at runtime. The generated code looked like this:
-                <br />
-                mapOf(vararg pairs: Pair) is a nice utility to create a map
-                (more specifically, a LinkedHashMap) but using that syntax leads
-                to the creation of a temporary vararg array of size 1000, as
-                well as 1000 temporary Pair instances. Memory hoarding
-                Let&apos;s look at the retained size of the map we just created:
-                ~30 characters per class name * 2 bytes per character = 60 bytes
-                per entry Each entry is stored as a LinkedHashMapEntry which
-                adds 2 references to HashMap.Node which itself holds 3
-                references and 1 int. On a 64bit VM that&apos;s 5 references * 8
-                bytes, plus 4 bytes for the int: 44 bytes per entry. So for the
-                entries alone we&apos;re at (60 + 44) * 1000 = 104 KB. The
-                default load factor is 75%, which means the size of the array
-                backing the hashmap must always be at least 25% greater than the
-                number of entries. And the array size has to be a factor of 2.
-                So, for 1000 entries, that&apos;s an object array of size 2048:
-                2048 * 8 = 16,314 bytes. The total retained size of the map is
-                ~120 KB. Can we do better? Could we make it... 0?
-                <h2 className="mt-4 text-3xl font-bold">100% code-based map</h2>
-                What if we generate code that returns the right team for a given
-                screen, instead of creating a map? Since we know the full list
-                of screen classes, we can check ahead of time whether
-                there&apos;s any hashcode conflict, and if not, we can generate
-                code that directly
+                {content}
             </div>
         </article>
     );
