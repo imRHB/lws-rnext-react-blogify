@@ -7,8 +7,6 @@ export default function useBlogsQuery(limit, page) {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    console.log(limit, page);
-
     useEffect(() => {
         let isMounted = true;
 

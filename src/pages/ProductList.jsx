@@ -5,8 +5,6 @@ import useProducts from "../hooks/useProducts";
 export default function ProductList() {
     const { products, loaderRef, hasMore } = useProducts();
 
-    console.log(products);
-
     return (
         <div className="container">
             <div className="grid grid-cols-1 gap-8 py-8">

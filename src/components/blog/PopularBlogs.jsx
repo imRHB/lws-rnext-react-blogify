@@ -25,8 +25,6 @@ export default function PopularBlogs() {
         fetchPopularBlogs();
     }, []);
 
-    console.log(popularBlogs);
-
     return (
         <section className="sidebar-card">
             <SectionTitle title="Most Popular 👍️" />

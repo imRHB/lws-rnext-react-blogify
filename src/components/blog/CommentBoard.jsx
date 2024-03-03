@@ -1,15 +1,17 @@
 import CommentBox from "./CommentBox";
 import CommentList from "./CommentList";
 
-export default function CommentBoard() {
+export default function CommentBoard({ blogId, comments }) {
     return (
         <section id="comments">
             <div className="container w-full mx-auto md:w-10/12">
-                <h2 className="my-8 text-3xl font-bold">Comments (3)</h2>
+                <h2 className="my-8 text-3xl font-bold">
+                    Comments ({comments?.length})
+                </h2>
 
-                <CommentBox />
+                <CommentBox blogId={blogId} />
 
-                <CommentList />
+                <CommentList comments={comments} />
             </div>
         </section>
     );

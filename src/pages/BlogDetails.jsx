@@ -30,12 +30,10 @@ export default function BlogDetailsPage() {
         }
     }, [blogId]);
 
-    console.log("blog:", blog);
-
     return (
         <main>
             <BlogContents blog={blog} />
-            <CommentBoard />
+            <CommentBoard blogId={blogId} comments={blog?.comments} />
             <BlogActions />
         </main>
     );
