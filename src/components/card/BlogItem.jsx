@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 export default function BlogItem({ blog, category }) {
-    const tagList = blog.tags.split(",");
+    const tagList = blog.tags?.split(",");
 
     return (
         <article>

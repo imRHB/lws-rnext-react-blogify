@@ -1,11 +1,16 @@
 import { useState } from "react";
 
+import { actions } from "../../actions";
 import { api } from "../../api";
-import useUserProfile from "../../hooks/useUserProfile";
+import useBlog from "../../hooks/useBlog";
+import useProfile from "../../hooks/useProfile";
 import Avatar from "../ui/Avatar";
 
 export default function CommentBox({ blogId }) {
-    const { user } = useUserProfile();
+    // const { user } = useUserProfile();
+
+    const { state } = useProfile();
+    const { dispatch } = useBlog();
 
     const [comment, setComment] = useState("");
 
@@ -22,21 +27,29 @@ export default function CommentBox({ blogId }) {
 
             if (response.status === 200) {
                 setComment("");
-                // setUser({ ...user, bio: response.data.user.bio });
-                // setIsEditing(false);
+                dispatch({
+                    type: actions.blog.POST_COMMENT,
+                    payload: {
+                        blog: {
+                            ...response.data,
+                        },
+                    },
+                });
             }
         } catch (error) {
             console.error(error);
         }
     }
 
+    // async function handlePostCommentByEnter(){}
+
     return (
         <section className="flex items-start space-x-4">
             <Avatar
-                name={`${user?.firstName} ${user?.lastName}`}
+                name={`${state?.user?.firstName} ${state?.user?.lastName}`}
                 imgSrc={`${
                     import.meta.env.VITE_SERVER_BASE_URL
-                }/uploads/avatar/${user?.avatar}`}
+                }/uploads/avatar/${state?.user?.avatar}`}
             />
             <div className="w-full">
                 {/* <textarea
@@ -51,6 +64,7 @@ export default function CommentBox({ blogId }) {
                     rows="4"
                     value={comment}
                     onChange={(evt) => setComment(evt.target.value)}
+                    // onKeyDown={handlePostCommentByEnter}
                     className="block w-full p-4 transition rounded-lg ring-2 text-slate-300 focus:outline-none focus:bg-transparent focus:ring-2 focus:ring-blue-900/50 bg-slate-900 ring-slate-800"
                 />
 

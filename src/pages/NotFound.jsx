@@ -1,3 +1,9 @@
+import AppLayout from "../components/AppLayout";
+
 export default function NotFoundPage() {
-    return <div>NotFound</div>;
+    return (
+        <AppLayout authPage="true">
+            <div>NotFound</div>;
+        </AppLayout>
+    );
 }

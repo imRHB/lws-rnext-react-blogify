@@ -8,7 +8,7 @@ export default function AppLayout({ children, authPage }) {
         <React.Fragment>
             {!authPage && <Header />}
 
-            <main className="container">{children}</main>
+            <main>{children}</main>
 
             {!authPage && <Footer />}
         </React.Fragment>

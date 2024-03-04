@@ -1,17 +1,17 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-import useUserProfile from "../../hooks/useUserProfile";
 import { getTimestamp } from "../../lib/getTimestamp";
 import BlogItemActions from "../blog/BlogItemActions";
 import Avatar from "../ui/Avatar";
 
+import useProfile from "../../hooks/useProfile";
 import dotsIcon from "/assets/icons/3dots.svg";
 
 export default function BlogCard({ blog }) {
     const [showActions, setShowActions] = useState(false);
 
-    const { user } = useUserProfile();
+    const { state } = useProfile();
     const { author, title, content, createdAt, id, likes, thumbnail } = blog;
 
     function handleBlogActions(evt) {
@@ -43,11 +43,13 @@ export default function BlogCard({ blog }) {
                             <Avatar
                                 name={author.firstName}
                                 imgSrc={
-                                    user?.id === author.id
+                                    state?.user?.id === author.id
                                         ? `${
                                               import.meta.env
                                                   .VITE_SERVER_BASE_URL
-                                          }/uploads/avatar/${user?.avatar}`
+                                          }/uploads/avatar/${
+                                              state?.user?.avatar
+                                          }`
                                         : `${
                                               import.meta.env
                                                   .VITE_SERVER_BASE_URL
@@ -75,7 +77,7 @@ export default function BlogCard({ blog }) {
                     </div>
                 </div>
 
-                {user?.id === author.id && (
+                {state?.user?.id === author.id && (
                     <div className="absolute -top-1.5 -right-1.5">
                         <button
                             className="p-1.5 rounded-full hover:bg-slate-900"

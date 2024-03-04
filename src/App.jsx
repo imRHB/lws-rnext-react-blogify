@@ -1,8 +1,6 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
 import PrivateRoute from "./components/PrivateRoute";
-import Footer from "./components/shared/Footer";
-import Header from "./components/shared/Header";
 import BlogDetailsPage from "./pages/BlogDetails";
 import CreateBlogPage from "./pages/CreateBlog";
 import HomePage from "./pages/Home";
@@ -12,37 +10,52 @@ import ProductList from "./pages/ProductList";
 import ProfilePage from "./pages/Profile";
 import RegisterPage from "./pages/Register";
 import AuthProvider from "./provider/AuthProvider";
+import BlogProvider from "./provider/BlogProvider";
 import ProfileProvider from "./provider/ProfileProvider";
+import SearchProvider from "./provider/SearchProvider";
 
 export default function App() {
     return (
         <AuthProvider>
-            <Router>
+            <SearchProvider>
                 <ProfileProvider>
-                    <Header />
-                    <Routes>
-                        <Route element={<PrivateRoute />}>
-                            <Route
-                                path="/create-blog"
-                                element={<CreateBlogPage />}
-                            />
-                            <Route path="/profile" element={<ProfilePage />} />
-                        </Route>
-                        <Route path="/" element={<HomePage />} exact />
-                        <Route path="/login" element={<LoginPage />} />
-                        <Route path="/register" element={<RegisterPage />} />
-                        <Route
-                            path="/blogs/:blogId"
-                            element={<BlogDetailsPage />}
-                        />
+                    <BlogProvider>
+                        <Router>
+                            {/* <Header /> */}
+                            <Routes>
+                                <Route element={<PrivateRoute />}>
+                                    <Route
+                                        path="/create-blog"
+                                        element={<CreateBlogPage />}
+                                    />
+                                    <Route
+                                        path="/profile"
+                                        element={<ProfilePage />}
+                                    />
+                                    <Route
+                                        path="/blogs/:blogId"
+                                        element={<BlogDetailsPage />}
+                                    />
+                                </Route>
+                                <Route path="/" element={<HomePage />} exact />
+                                <Route path="/login" element={<LoginPage />} />
+                                <Route
+                                    path="/register"
+                                    element={<RegisterPage />}
+                                />
+                                {/* testing route */}
+                                <Route
+                                    path="/products"
+                                    element={<ProductList />}
+                                />
 
-                        <Route path="/products" element={<ProductList />} />
-
-                        <Route path="*" element={<NotFoundPage />} />
-                    </Routes>
+                                <Route path="*" element={<NotFoundPage />} />
+                            </Routes>
+                            {/* <Footer /> */}
+                        </Router>
+                    </BlogProvider>
                 </ProfileProvider>
-                <Footer />
-            </Router>
+            </SearchProvider>
         </AuthProvider>
     );
 }

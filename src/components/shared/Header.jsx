@@ -1,24 +1,29 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-import useAuth from "../../hooks/useAuth";
-import useUserProfile from "../../hooks/useUserProfile";
+import { actions } from "../../actions";
+import useProfile from "../../hooks/useProfile";
 import Search from "../Search";
 import AppLink from "../ui/AppLink";
 import Avatar from "../ui/Avatar";
+
+import logoutIcon from "/assets/icons/logout.svg";
 import logo from "/assets/logo.svg";
 
 export default function Header() {
-    const { user } = useUserProfile();
-    const { auth, setAuth } = useAuth();
+    const navigate = useNavigate();
+
+    const { state, dispatch } = useProfile();
 
     function handleLogout() {
-        setAuth({});
+        dispatch({
+            type: actions.profile.USER_SIGNED_OUT,
+        });
+        navigate("/");
     }
 
     return (
         <header className="sticky top-0 bg-[#030317] z-10 backdrop-filter backdrop-blur-md bg-opacity-50">
             <nav className="container">
-                {/* <!-- Logo --> */}
                 <div>
                     <Link to="/">
                         <img className="w-32" src={logo} alt="lws" />
@@ -53,13 +58,13 @@ export default function Header() {
                             </Link>
                         </li> */}
                         <li>
-                            {auth?.user ? (
-                                <p
-                                    className="cursor-pointer"
+                            {state?.user ? (
+                                <div
+                                    className="flex items-center h-12 px-3 py-1 rounded-lg cursor-pointer hover:bg-slate-800/80"
                                     onClick={handleLogout}
                                 >
-                                    Logout
-                                </p>
+                                    <img src={logoutIcon} alt="Logout" />
+                                </div>
                             ) : (
                                 <Link
                                     to="/login"
@@ -70,23 +75,25 @@ export default function Header() {
                             )}
                         </li>
 
-                        {auth?.user && (
+                        {state?.user && (
                             <li>
                                 <Link
                                     to="/profile"
                                     className="flex items-center px-3 py-1.5 rounded-lg hover:bg-slate-800/80 space-x-3"
                                 >
                                     <Avatar
-                                        name={user?.firstName}
+                                        name={state?.user?.firstName}
                                         imgSrc={`${
                                             import.meta.env.VITE_SERVER_BASE_URL
-                                        }/uploads/avatar/${user?.avatar}`}
+                                        }/uploads/avatar/${
+                                            state?.user?.avatar
+                                        }`}
                                     />
 
                                     <p className="text-sm text-white">
-                                        {user?.firstName}
+                                        {state?.user?.firstName}
                                         <br />
-                                        {user?.lastName}
+                                        {state?.user?.lastName}
                                     </p>
                                 </Link>
                             </li>

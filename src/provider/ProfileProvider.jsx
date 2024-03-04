@@ -1,10 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 
+import { profileInitialState } from "../constant";
 import { ProfileContext } from "../context";
 import useApi from "../hooks/useApi";
 import useAuth from "../hooks/useAuth";
+import { profileReducer } from "../reducers/profileReducer";
 
 export default function ProfileProvider({ children }) {
+    const [state, dispatch] = useReducer(profileReducer, profileInitialState);
+
     const [user, setUser] = useState(null);
 
     const { auth } = useAuth();
@@ -32,7 +36,7 @@ export default function ProfileProvider({ children }) {
     }, [api, auth?.user?.id]);
 
     return (
-        <ProfileContext.Provider value={{ user, setUser }}>
+        <ProfileContext.Provider value={{ state, dispatch }}>
             {children}
         </ProfileContext.Provider>
     );

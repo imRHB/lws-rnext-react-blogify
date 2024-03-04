@@ -1,23 +1,23 @@
 import { useRef, useState } from "react";
 
+import { actions } from "../../actions";
 import { api } from "../../api";
-import useUserProfile from "../../hooks/useUserProfile";
+import useProfile from "../../hooks/useProfile";
 import Avatar from "../ui/Avatar";
-
 import Spinner from "../ui/Spinner";
+
 import pencilIcon from "/assets/icons/edit.svg";
 
 export default function UserImage() {
-    const { user, setUser } = useUserProfile();
-
     const avatarUploadRef = useRef(null);
     const [isUploading, setIsUploading] = useState(false);
+
+    const { state, dispatch } = useProfile();
 
     function handleUpdateAvatar(evt) {
         evt.preventDefault();
 
         avatarUploadRef.current.click();
-
         avatarUploadRef.current.addEventListener("change", avatarPreview);
     }
 
@@ -42,7 +42,13 @@ export default function UserImage() {
             );
 
             if (response.status === 200) {
-                setUser({ ...user, avatar: response.data.user.avatar });
+                dispatch({
+                    type: actions.profile.UPDATE_USER_PROFILE,
+                    payload: {
+                        ...state,
+                        user: response.data.user,
+                    },
+                });
             }
         } catch (error) {
             console.error(error);
@@ -53,19 +59,16 @@ export default function UserImage() {
 
     return (
         <div className="relative mb-8 max-h-[180px] max-w-[180px] h-[120px] w-[120px] rounded-full lg:mb-11 lg:max-h-[218px] lg:max-w-[218px]">
-            {/* <div className="grid w-full h-full text-5xl text-white bg-orange-600 rounded-full place-items-center">
-                            <span className="">S</span>
-                        </div> */}
             {isUploading ? (
                 <div className="grid text-sm text-white rounded-full bg-slate-900 size-32 place-items-center">
                     <Spinner status="Uploading..." />
                 </div>
             ) : (
                 <Avatar
-                    name={user.firstName}
+                    name={state?.user?.firstName}
                     imgSrc={`${
                         import.meta.env.VITE_SERVER_BASE_URL
-                    }/uploads/avatar/${user.avatar}`}
+                    }/uploads/avatar/${state?.user?.avatar}`}
                     size="large"
                 />
             )}

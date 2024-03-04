@@ -1,20 +1,19 @@
 import React from "react";
 
-import useUserProfile from "../../hooks/useUserProfile";
-import BlogCard from "../card/BlogCard";
+import useProfile from "../../hooks/useProfile";
 import SectionTitle from "../SectionTitle";
+import BlogCard from "../card/BlogCard";
 
 export default function UserBlogs() {
-    const { user } = useUserProfile();
+    const { state } = useProfile();
 
     return (
         <React.Fragment>
-            {/* <h4 className="mt-6 text-xl lg:mt-8 lg:text-2xl">Your Blogs</h4> */}
             <SectionTitle title="Your Blogs" />
 
             <div className="my-6 space-y-4">
-                {user?.blogs.length > 0 &&
-                    user?.blogs.map((blog) => (
+                {state?.blogs?.length > 0 &&
+                    state?.blogs?.map((blog) => (
                         <BlogCard key={blog.id} blog={blog} />
                     ))}
 
