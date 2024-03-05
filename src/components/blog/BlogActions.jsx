@@ -48,8 +48,6 @@ export default function BlogActions({ blogId, comments }) {
                 {}
             );
 
-            console.log("response:", response);
-
             if (response.status === 200) {
                 dispatch({
                     type: actions.blog.TOGGLE_FAVOURITE_BLOG,

@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
+import useProfile from "../../hooks/useProfile";
 import { getTimestamp } from "../../lib/getTimestamp";
 import BlogItemActions from "../blog/BlogItemActions";
 import Avatar from "../ui/Avatar";
 
-import useProfile from "../../hooks/useProfile";
 import dotsIcon from "/assets/icons/3dots.svg";
 
 export default function BlogCard({ blog }) {
@@ -86,7 +86,7 @@ export default function BlogCard({ blog }) {
                             <img src={dotsIcon} alt="3dots of Action" />
                         </button>
 
-                        {showActions && <BlogItemActions />}
+                        {showActions && <BlogItemActions blogId={id} />}
                     </div>
                 )}
             </div>

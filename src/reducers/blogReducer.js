@@ -45,6 +45,17 @@ export const blogReducer = (state, action) => {
             };
         }
 
+        case actions.blog.DELETE_BLOG: {
+            const updatedBlogs = state.blogs.filter(
+                (blog) => blog.id !== action.payload.blogId
+            );
+
+            return {
+                ...state,
+                blogs: updatedBlogs,
+            };
+        }
+
         default:
             return state;
     }

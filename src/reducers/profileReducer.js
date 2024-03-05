@@ -31,6 +31,17 @@ export const profileReducer = (state, action) => {
             };
         }
 
+        case actions.profile.DELETE_BLOG: {
+            const updatedBlogs = state.blogs.filter(
+                (blog) => blog.id !== action.payload.blogId
+            );
+
+            return {
+                ...state,
+                blogs: updatedBlogs,
+            };
+        }
+
         case actions.profile.USER_SIGNED_OUT: {
             return {
                 ...state,
