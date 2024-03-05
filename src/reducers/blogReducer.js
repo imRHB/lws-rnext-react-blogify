@@ -27,7 +27,7 @@ export const blogReducer = (state, action) => {
             return {
                 ...state,
                 blog: action.payload.blog,
-                favouriteBlogs: [...state.favouriteBlogs, action.payload.blog],
+                // favouriteBlogs: [...state.favouriteBlogs, action.payload.blog],
             };
         }
 
@@ -35,6 +35,13 @@ export const blogReducer = (state, action) => {
             return {
                 ...state,
                 blog: action.payload.blog,
+            };
+        }
+
+        case actions.blog.CREATE_BLOG: {
+            return {
+                ...state,
+                blogs: [...state.blogs, action.payload.blog],
             };
         }
 

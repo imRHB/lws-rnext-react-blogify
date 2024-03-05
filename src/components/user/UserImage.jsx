@@ -27,6 +27,7 @@ export default function UserImage() {
         setIsUploading(true);
         try {
             const file = await avatarUploadRef.current.files[0];
+            console.log("file:", file);
 
             if (!file) {
                 console.error("No file selected");

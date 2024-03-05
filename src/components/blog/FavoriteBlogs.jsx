@@ -1,10 +1,14 @@
+import useBlog from "../../hooks/useBlog";
 import useProfile from "../../hooks/useProfile";
 import SectionTitle from "../SectionTitle";
 import BlogItem from "../card/BlogItem";
 
 export default function FavoriteBlogs() {
     const { state } = useProfile();
-    console.log("state?.favouriteBlogs:", state?.favouriteBlogs);
+    const { state: blogState } = useBlog();
+
+    // console.log("state?.favouriteBlogs:", state?.favouriteBlogs);
+    // console.log("blogState?.favouriteBlogs:", blogState?.favouriteBlogs);
 
     return (
         <section className="sidebar-card">
@@ -16,7 +20,7 @@ export default function FavoriteBlogs() {
                 </div>
             ) : (
                 <div className="my-5 space-y-5">
-                    {state?.favouriteBlogs?.map((favBlog) => (
+                    {blogState?.favouriteBlogs?.map((favBlog) => (
                         <BlogItem
                             key={favBlog.id}
                             blog={favBlog}

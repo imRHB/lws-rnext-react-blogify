@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { actions } from "../actions";
 import AppLayout from "../components/AppLayout";
@@ -9,8 +9,11 @@ import useAuth from "../hooks/useAuth";
 import useProfile from "../hooks/useProfile";
 
 export default function LoginPage() {
-    const { setAuth } = useAuth();
     const navigate = useNavigate();
+    const location = useLocation();
+    const { from } = location.state || { from: { pathname: "/" } };
+
+    const { setAuth } = useAuth();
     const { dispatch } = useProfile();
 
     const {
@@ -50,7 +53,7 @@ export default function LoginPage() {
 
                     setAuth({ user, accessToken, refreshToken });
 
-                    navigate("/");
+                    navigate(from);
                 }
             }
         } catch (error) {
