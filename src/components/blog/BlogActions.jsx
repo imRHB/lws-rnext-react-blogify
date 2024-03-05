@@ -2,6 +2,8 @@ import { api } from "../../api";
 
 import { actions } from "../../actions";
 import useBlog from "../../hooks/useBlog";
+import useProfile from "../../hooks/useProfile";
+
 import commentIcon from "/assets/icons/comment.svg";
 import heartIconFilled from "/assets/icons/heart-filled.svg";
 import heartIcon from "/assets/icons/heart.svg";
@@ -9,12 +11,16 @@ import thumbsUpIcon from "/assets/icons/like.svg";
 
 export default function BlogActions({ blogId, comments }) {
     const { state, dispatch } = useBlog();
+    const { state: profileState } = useProfile();
 
     const isLiked = state?.blog?.likes?.some(
-        (item) => state?.user?.id === item?.id
+        (item) => profileState?.user?.id === item?.id
     );
+
     const isFavourite = state?.blog?.isFavourite;
-    console.log("isLiked:", isLiked);
+    // const isFavourite = state?.favouriteBlogs?.find(
+    //     (blog) => blog?.id === blogId
+    // );
 
     async function handleToggleLike() {
         try {

@@ -9,6 +9,13 @@ export const blogReducer = (state, action) => {
             };
         }
 
+        case actions.blog.FETCH_FAVORITE_BLOGS: {
+            return {
+                ...state,
+                favouriteBlogs: action.payload.blogs,
+            };
+        }
+
         case actions.blog.FETCH_BLOG_BY_ID: {
             return {
                 ...state,
