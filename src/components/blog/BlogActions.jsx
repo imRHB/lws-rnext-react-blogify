@@ -7,11 +7,15 @@ import useProfile from "../../hooks/useProfile";
 import commentIcon from "/assets/icons/comment.svg";
 import heartIconFilled from "/assets/icons/heart-filled.svg";
 import heartIcon from "/assets/icons/heart.svg";
+import thumbsUpFilledIcon from "/assets/icons/like-filled.svg";
 import thumbsUpIcon from "/assets/icons/like.svg";
 
-export default function BlogActions({ blogId, comments }) {
+export default function BlogActions() {
     const { state, dispatch } = useBlog();
     const { state: profileState } = useProfile();
+
+    const blogId = state?.blog?.id;
+    const comments = state?.blog?.comments;
 
     const isLiked = state?.blog?.likes?.some(
         (item) => profileState?.user?.id === item?.id
@@ -72,7 +76,7 @@ export default function BlogActions({ blogId, comments }) {
             <ul className="floating-action-menus">
                 <li onClick={handleToggleLike}>
                     <img
-                        src={isLiked ? heartIconFilled : thumbsUpIcon}
+                        src={isLiked ? thumbsUpFilledIcon : thumbsUpIcon}
                         alt="like"
                     />
                     <span>{state?.blog?.likes?.length}</span>

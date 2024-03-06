@@ -10,9 +10,9 @@ import CommentBoard from "../components/blog/CommentBoard";
 import useBlog from "../hooks/useBlog";
 
 export default function BlogDetailsPage() {
+    const [blog, setBlog] = useState({});
     const { blogId } = useParams();
     const { state, dispatch } = useBlog();
-    const [blog, setBlog] = useState({});
 
     useEffect(() => {
         const fetchBlogById = async () => {
@@ -46,13 +46,8 @@ export default function BlogDetailsPage() {
     return (
         <AppLayout>
             <BlogContents blog={blog} />
-            <CommentBoard blogId={blogId} comments={state?.blog?.comments} />
-            <BlogActions
-                blogId={blogId}
-                likes={state?.blog?.likes}
-                comments={state?.blog?.comments}
-                isFavourite={state?.blog?.isFavourite}
-            />
+            <CommentBoard comments={state?.blog?.comments} />
+            <BlogActions />
         </AppLayout>
     );
 }

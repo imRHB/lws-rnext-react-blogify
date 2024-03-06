@@ -6,13 +6,14 @@ import useBlog from "../../hooks/useBlog";
 import useProfile from "../../hooks/useProfile";
 import Avatar from "../ui/Avatar";
 
-export default function CommentBox({ blogId }) {
+export default function CommentBox() {
     // const { user } = useUserProfile();
+    const [comment, setComment] = useState("");
 
     const { state } = useProfile();
-    const { dispatch } = useBlog();
+    const { state: blogState, dispatch } = useBlog();
 
-    const [comment, setComment] = useState("");
+    const blogId = blogState?.blog?.id;
 
     async function handlePostComment(evt) {
         evt.preventDefault();

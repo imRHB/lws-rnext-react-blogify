@@ -45,13 +45,6 @@ export const blogReducer = (state, action) => {
             };
         }
 
-        case actions.blog.POST_COMMENT: {
-            return {
-                ...state,
-                blog: action.payload.blog,
-            };
-        }
-
         case actions.blog.CREATE_BLOG: {
             return {
                 ...state,
@@ -79,6 +72,20 @@ export const blogReducer = (state, action) => {
             return {
                 ...state,
                 blogs: updatedBlogs,
+            };
+        }
+
+        case actions.blog.POST_COMMENT: {
+            return {
+                ...state,
+                blog: action.payload.blog,
+            };
+        }
+
+        case actions.blog.DELETE_COMMENT: {
+            return {
+                ...state,
+                blog: action.payload.blog,
             };
         }
 

@@ -23,5 +23,6 @@ export const actions = {
         TOGGLE_LIKE_BLOG: "TOGGLE_LIKE_BLOG",
         TOGGLE_FAVOURITE_BLOG: "TOGGLE_FAVOURITE_BLOG",
         POST_COMMENT: "POST_COMMENT",
+        DELETE_COMMENT: "DELETE_COMMENT",
     },
 };

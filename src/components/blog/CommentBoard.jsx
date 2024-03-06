@@ -1,7 +1,7 @@
 import CommentBox from "./CommentBox";
 import CommentList from "./CommentList";
 
-export default function CommentBoard({ blogId, comments }) {
+export default function CommentBoard({ comments }) {
     return (
         <section id="comments">
             <div className="container w-full mx-auto md:w-10/12">
@@ -9,9 +9,9 @@ export default function CommentBoard({ blogId, comments }) {
                     Comments ({comments?.length})
                 </h2>
 
-                <CommentBox blogId={blogId} />
+                <CommentBox />
 
-                <CommentList comments={comments} />
+                <CommentList />
             </div>
         </section>
     );
