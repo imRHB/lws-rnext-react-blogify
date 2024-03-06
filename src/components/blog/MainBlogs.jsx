@@ -1,16 +1,17 @@
-import axios from "axios";
 import { useEffect } from "react";
 
 import { actions } from "../../actions";
 import useBlog from "../../hooks/useBlog";
+import useBlogs from "../../hooks/useBlogs";
 import BlogCard from "../card/BlogCard";
 
 export default function MainBlogs() {
-    // const { blogs, hasMore, loaderRef } = useBlogs();
+    const { blogs, hasMore, loaderRef } = useBlogs();
 
     const { state, dispatch } = useBlog();
 
-    useEffect(() => {
+    /* worked */
+    /* useEffect(() => {
         async function fetchBlogs() {
             try {
                 const response = await axios.get(
@@ -31,7 +32,16 @@ export default function MainBlogs() {
         }
 
         fetchBlogs();
-    }, [dispatch]);
+    }, [dispatch]); */
+
+    useEffect(() => {
+        dispatch({
+            type: actions.blog.FETCH_BLOGS_INFINITELY,
+            payload: {
+                blogs,
+            },
+        });
+    }, [blogs, dispatch]);
 
     return (
         <main className="space-y-3 md:col-span-5">
@@ -40,7 +50,7 @@ export default function MainBlogs() {
                     <BlogCard key={blog.id} blog={blog} />
                 ))}
 
-            {/* {hasMore ? (
+            {hasMore ? (
                 <div
                     ref={loaderRef}
                     className="flex items-center justify-center h-24 bg-slate-900"
@@ -51,7 +61,7 @@ export default function MainBlogs() {
                 <div className="flex items-center justify-center h-24 bg-slate-900">
                     <p className="text-xl font-bold">No more blogs!</p>
                 </div>
-            )} */}
+            )}
         </main>
     );
 }
