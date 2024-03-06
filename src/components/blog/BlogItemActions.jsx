@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 import { actions } from "../../actions";
 import { api } from "../../api";
 import useBlog from "../../hooks/useBlog";
@@ -7,8 +9,16 @@ import trashIcon from "/assets/icons/delete.svg";
 import pencilIcon from "/assets/icons/edit.svg";
 
 export default function BlogItemActions({ blogId }) {
+    const navigate = useNavigate();
+
     const { dispatch } = useBlog();
     const { dispatch: profileDispatch } = useProfile();
+
+    function handleEditBlog(evt) {
+        evt.preventDefault();
+
+        navigate(`/blogs/${blogId}/edit`);
+    }
 
     async function handleDeleteBlog(evt) {
         evt.preventDefault();
@@ -40,7 +50,10 @@ export default function BlogItemActions({ blogId }) {
 
     return (
         <div className="z-50 action-modal-container">
-            <button className="action-menu-item hover:text-lwsGreen">
+            <button
+                className="action-menu-item hover:text-lwsGreen"
+                onClick={handleEditBlog}
+            >
                 <img src={pencilIcon} alt="Edit" />
                 Edit
             </button>

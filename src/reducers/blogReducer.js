@@ -52,6 +52,18 @@ export const blogReducer = (state, action) => {
             };
         }
 
+        case actions.blog.UPDATE_BLOG: {
+            const oldBlogs = state.blogs.filter(
+                (blog) => blog.id !== action.payload.blogId
+            );
+
+            return {
+                ...state,
+                blog: action.payload.blog,
+                blogs: [...oldBlogs, action.payload.blog],
+            };
+        }
+
         case actions.blog.DELETE_BLOG: {
             const updatedBlogs = state.blogs.filter(
                 (blog) => blog.id !== action.payload.blogId

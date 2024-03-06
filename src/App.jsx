@@ -3,6 +3,7 @@ import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute";
 import BlogDetailsPage from "./pages/BlogDetails";
 import CreateBlogPage from "./pages/CreateBlog";
+import EditBlogPage from "./pages/EditBlog";
 import HomePage from "./pages/Home";
 import LoginPage from "./pages/Login";
 import NotFoundPage from "./pages/NotFound";
@@ -35,6 +36,10 @@ export default function App() {
                                     <Route
                                         path="/blogs/:blogId"
                                         element={<BlogDetailsPage />}
+                                    />
+                                    <Route
+                                        path="/blogs/:blogId/edit"
+                                        element={<EditBlogPage />}
                                     />
                                 </Route>
                                 <Route path="/" element={<HomePage />} exact />
