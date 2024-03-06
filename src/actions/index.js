@@ -25,4 +25,8 @@ export const actions = {
         POST_COMMENT: "POST_COMMENT",
         DELETE_COMMENT: "DELETE_COMMENT",
     },
+    search: {
+        SEARCH_QUERY: "SEARCH_QUERY",
+        SEARCH_BLOGS: "SEARCH_BLOGS",
+    },
 };
