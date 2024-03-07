@@ -24,27 +24,27 @@ export default function SearchResultItem({ blog }) {
     }
 
     return (
-        <div>
+        <div className="py-4">
             <Link
                 to={`/blogs/${blog?.id}`}
-                className="flex gap-6 py-2"
+                className="flex items-center gap-6 rounded-md group"
                 onClick={handleSearchItemClick}
             >
                 <img
-                    className="object-cover rounded-lg w-60"
+                    className="object-cover rounded-md aspect-video max-h-36"
                     src={`${
                         import.meta.env.VITE_SERVER_BASE_URL
                     }/uploads/blog/${blog?.thumbnail}`}
                     alt={blog?.title}
                 />
-                <div className="mt-2">
+
+                <div className="flex flex-col justify-between my-2 mr-3">
                     <div>
                         <h3 className="text-xl font-bold text-slate-300">
                             {blog?.title}
                         </h3>
-
                         <p className="mt-1 mb-6 text-sm text-slate-500">
-                            {blog?.content?.slice(0, 200)}
+                            {blog?.content?.slice(0, 160)}
                         </p>
                     </div>
 

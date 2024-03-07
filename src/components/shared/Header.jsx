@@ -38,40 +38,26 @@ export default function Header() {
                 {/* <!-- For Not Logged in User - Login Menu --> */}
                 <div>
                     <ul className="flex items-center space-x-5">
-                        <li>
-                            <AppLink
-                                href="/create-blog"
-                                label="Write"
-                                variant="primary"
-                            />
-                        </li>
-                        {/* <li>
-                            <Link
-                                to="/search"
-                                className="flex items-center gap-2 cursor-pointer"
-                            >
-                                <img
-                                    src="./assets/icons/search.svg"
-                                    alt="Search"
+                        {state?.user && (
+                            <li>
+                                <AppLink
+                                    href="/create-blog"
+                                    label="Write"
+                                    variant="primary"
                                 />
-                                <span>Search</span>
-                            </Link>
-                        </li> */}
+                            </li>
+                        )}
+
                         <li>
                             {state?.user ? (
                                 <div
-                                    className="flex items-center h-12 px-3 py-1 rounded-lg cursor-pointer hover:bg-slate-800/80"
+                                    className="flex items-center h-12 px-3 py-1 rounded-lg cursor-pointer hover:bg-slate-900 hover:ring-1 ring-inset ring-slate-800"
                                     onClick={handleLogout}
                                 >
                                     <img src={logoutIcon} alt="Logout" />
                                 </div>
                             ) : (
-                                <Link
-                                    to="/login"
-                                    className="transition-all duration-200 text-white/50 hover:text-white"
-                                >
-                                    Login
-                                </Link>
+                                <AppLink href="/login" label="Login" />
                             )}
                         </li>
 
@@ -79,7 +65,7 @@ export default function Header() {
                             <li>
                                 <Link
                                     to="/profile"
-                                    className="flex items-center px-3 py-1.5 rounded-lg hover:bg-slate-800/80 space-x-3"
+                                    className="flex items-center px-3 py-1.5 rounded-lg space-x-3 hover:bg-slate-900 hover:ring-1 ring-inset ring-slate-800"
                                 >
                                     <Avatar
                                         name={state?.user?.firstName}
@@ -103,4 +89,13 @@ export default function Header() {
             </nav>
         </header>
     );
+}
+
+{
+    /* <Link
+                                    to="/login"
+                                    className="transition-all duration-200 text-white/50 hover:text-white"
+                                >
+                                    Login
+                                </Link> */
 }

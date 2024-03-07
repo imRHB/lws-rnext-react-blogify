@@ -72,7 +72,7 @@ export default function Search() {
                     id="search-box"
                     name="search-box"
                     placeholder="Search blogs..."
-                    className="block w-full px-4 py-3 pl-12 transition rounded-lg ring-2 text-slate-300 focus:outline-none focus:bg-transparent focus:ring-2 focus:ring-blue-900/50 bg-slate-900 ring-slate-800"
+                    className="block w-full px-4 py-3 pl-12 transition bg-transparent rounded-lg ring-2 text-slate-300 focus:outline-none focus:bg-slate-950/20 focus:ring-2 focus:ring-blue-900/50 ring-slate-800"
                     onFocus={openModal}
                     onBlur={isOpen ? null : closeModal}
                 />
@@ -81,14 +81,14 @@ export default function Search() {
             <Portal>
                 <ModalLayout isOpen={isOpen} onClose={closeModal}>
                     <section className="absolute top-0 left-0 z-50 grid w-full h-full place-items-center bg-slate-800/50 backdrop-blur-sm">
-                        <div className="relative w-6/12 p-4 mx-auto border rounded-lg shadow-lg bg-slate-900 border-slate-600/50 shadow-slate-400/10">
+                        <div className="relative w-6/12 p-6 mx-auto border rounded-lg shadow-lg bg-slate-900 border-slate-600/50 shadow-slate-400/10">
                             <div className="space-y-4">
                                 <div className="flex justify-between gap-6">
                                     <h3 className="text-xl font-bold text-slate-400">
                                         Search for your desire blogs
                                     </h3>
 
-                                    <div className="absolute flex items-center gap-4 right-2 top-2">
+                                    <div className="absolute flex items-center gap-4 right-4 top-4">
                                         <kbd className="px-2 py-0.5 border rounded text-slate-400 border-slate-600">
                                             Esc
                                         </kbd>
@@ -103,7 +103,7 @@ export default function Search() {
                                 </div>
 
                                 <div className="relative">
-                                    <div className="absolute inset-y-0 left-0 flex items-center px-4 py-3 pointer-events-none">
+                                    <div className="absolute inset-y-0 left-0 flex items-center px-4 py-3 pl-6 pointer-events-none">
                                         <img src={magnifyIcon} alt="Search" />
                                         <span className="sr-only">Search</span>
                                     </div>
@@ -113,7 +113,7 @@ export default function Search() {
                                         id="search"
                                         name="search"
                                         placeholder="Search blogs..."
-                                        className="block w-full px-4 py-3 pl-12 transition rounded-lg ring-2 text-slate-300 focus:outline-none focus:bg-transparent focus:ring-2 focus:ring-blue-900/50 bg-slate-900 ring-slate-800"
+                                        className="block w-full px-4 py-3 transition bg-transparent rounded-lg pl-14 ring-2 text-slate-300 focus:outline-none focus:bg-slate-950/20 focus:ring-2 focus:ring-blue-900/50 ring-slate-800"
                                         onChange={handleSearch}
                                         onFocus={openModal}
                                         onBlur={isOpen ? null : closeModal}

@@ -5,10 +5,20 @@ import { api } from "../../api";
 import useBlog from "../../hooks/useBlog";
 import useProfile from "../../hooks/useProfile";
 
+import { useState } from "react";
+import Alert from "../ui/Alert";
 import trashIcon from "/assets/icons/delete.svg";
 import pencilIcon from "/assets/icons/edit.svg";
 
 export default function BlogItemActions({ blogId }) {
+    const [isOpen, setIsOpen] = useState(false);
+
+    const openModal = (evt) => {
+        evt.preventDefault();
+        evt.stopPropagation();
+        setIsOpen(true);
+    };
+
     const navigate = useNavigate();
 
     const { dispatch } = useBlog();
@@ -50,6 +60,8 @@ export default function BlogItemActions({ blogId }) {
 
     return (
         <div className="z-50 action-modal-container">
+            <Alert isOpen={isOpen} setIsOpen={setIsOpen} />
+
             <button
                 className="action-menu-item hover:text-lwsGreen"
                 onClick={handleEditBlog}
@@ -59,7 +71,8 @@ export default function BlogItemActions({ blogId }) {
             </button>
             <button
                 className="action-menu-item hover:text-red-500"
-                onClick={handleDeleteBlog}
+                // onClick={handleDeleteBlog}
+                onClick={(evt) => openModal(evt)}
             >
                 <img src={trashIcon} alt="Delete" />
                 Delete

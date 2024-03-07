@@ -27,15 +27,18 @@ export default function BlogCard({ blog }) {
                 src={`${
                     import.meta.env.VITE_SERVER_BASE_URL
                 }/uploads/blog/${thumbnail}`}
-                alt=""
+                alt={title}
             />
 
-            <div className="relative mt-2">
-                <h3 className="text-xl text-slate-300 lg:text-2xl">{title}</h3>
-
-                <p className="mt-1 mb-6 text-base text-slate-500">
-                    {content.slice(0, 200)}
-                </p>
+            <div className="relative flex flex-col justify-between my-2">
+                <div>
+                    <h3 className="text-xl text-slate-300 lg:text-2xl">
+                        {title}
+                    </h3>
+                    <p className="mt-1 mb-6 text-base text-slate-500">
+                        {content.slice(0, 200)}
+                    </p>
+                </div>
 
                 <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-2 capitalize">

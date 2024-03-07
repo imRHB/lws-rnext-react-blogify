@@ -40,7 +40,7 @@
 
     /* Blogs */
     .blog-card {
-        @apply flex gap-4 flex-col md:flex-row  bg-[#030317] p-3 border border-slate-800/40 rounded-lg transition-all hover:border-blue-900/50 hover:shadow-lg shadow-slate-200/50 cursor-pointer;
+        @apply flex gap-4 flex-col md:flex-row  bg-[#030317] p-3 ring-2 ring-slate-800/40 rounded-lg transition-all hover:ring-blue-900/50 hover:shadow-lg shadow-slate-200/50 cursor-pointer;
     }
 
     .blog-card > div {
@@ -53,7 +53,7 @@
 
     /* Sidebar */
     .sidebar-card {
-        @apply p-4 border rounded-lg border-slate-800/40 hover:border-slate-800/90;
+        @apply p-4 rounded-lg ring-2 ring-slate-800/40 hover:ring-slate-800/90;
     }
 
     .dot {

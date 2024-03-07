@@ -6,9 +6,9 @@ export default function AppLink({ href, label, variant }) {
             to={href}
             className={`${
                 variant === "primary"
-                    ? "px-6 py-2 text-white transition-all duration-200 bg-indigo-600 rounded-md md:py-3 hover:bg-indigo-700"
-                    : "text-indigo-600 hover:underline"
-            }`}
+                    ? "bg-indigo-600 ring-indigo-700 hover:bg-indigo-700"
+                    : "bg-slate-900 ring-slate-800 hover:bg-slate-950"
+            } px-6 py-2 transition-all duration-200 rounded-md md:py-3 text-white ring-1 ring-inset`}
         >
             {label}
         </Link>

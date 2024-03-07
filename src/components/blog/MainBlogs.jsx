@@ -44,7 +44,7 @@ export default function MainBlogs() {
     }, [blogs, dispatch]);
 
     return (
-        <main className="space-y-3 md:col-span-5">
+        <main className="space-y-5 md:col-span-5">
             {state?.blogs.length > 0 &&
                 state?.blogs.map((blog) => (
                     <BlogCard key={blog.id} blog={blog} />
