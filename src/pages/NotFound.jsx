@@ -3,7 +3,7 @@ import AppLayout from "../components/AppLayout";
 export default function NotFoundPage() {
     return (
         <AppLayout authPage="true">
-            <div>NotFound</div>;
+            <div>NotFound</div>
         </AppLayout>
     );
 }

@@ -2,8 +2,8 @@ import { useEffect } from "react";
 
 export default function ModalLayout({ isOpen, onClose, children }) {
     useEffect(() => {
-        const handleEscape = (e) => {
-            if (e.key === "Escape") {
+        const handleEscape = (evt) => {
+            if (evt.key === "Escape") {
                 onClose();
             }
         };

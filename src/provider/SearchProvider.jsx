@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useReducer, useState } from "react";
+import { useEffect, useReducer } from "react";
 
 import { actions } from "../actions";
 import { searchInitialState } from "../constant";
@@ -7,11 +7,7 @@ import { SearchContext } from "../context";
 import { searchReducer } from "../reducers/searchReducer";
 
 export default function SearchProvider({ children }) {
-    const [searchQuery, setSearchQuery] = useState("");
-
     const [state, dispatch] = useReducer(searchReducer, searchInitialState);
-
-    console.log(!state?.query);
 
     useEffect(() => {
         async function searchBlogs() {
@@ -32,6 +28,12 @@ export default function SearchProvider({ children }) {
                 }
             } catch (error) {
                 console.error(error);
+                dispatch({
+                    type: actions.search.SEARCH_BLOGS,
+                    payload: {
+                        blogs: [],
+                    },
+                });
             }
         }
 
@@ -46,9 +48,7 @@ export default function SearchProvider({ children }) {
     }, [state?.query]);
 
     return (
-        <SearchContext.Provider
-            value={{ state, dispatch, searchQuery, setSearchQuery }}
-        >
+        <SearchContext.Provider value={{ state, dispatch }}>
             {children}
         </SearchContext.Provider>
     );
