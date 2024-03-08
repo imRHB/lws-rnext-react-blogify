@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 
 import Field from "../components/form/Field";
+import Error from "../components/ui/Error";
 import useProfile from "../hooks/useProfile";
 
 export default function RegisterPage() {
@@ -64,7 +65,7 @@ export default function RegisterPage() {
                     <div className="p-4 sm:px-8 sm:py-6">
                         <form
                             onSubmit={handleSubmit(onSubmit)}
-                            className="space-y-4"
+                            className="space-y-5"
                         >
                             <Field label="First Name" error={errors.firstName}>
                                 <input
@@ -75,7 +76,7 @@ export default function RegisterPage() {
                                     name="firstName"
                                     id="firstName"
                                     placeholder="Jane"
-                                    className="w-full p-3 bg-[#030317] border border-white/20 rounded-md focus:outline-none focus:border-indigo-500"
+                                    className="w-full px-4 py-3 bg-transparent border-2 rounded-md border-white/20 focus:bg-slate-900/50 focus:outline-none focus:border-indigo-500 text-slate-300"
                                 />
                             </Field>
 
@@ -88,7 +89,7 @@ export default function RegisterPage() {
                                     name="lastName"
                                     id="lastName"
                                     placeholder="Doe"
-                                    className="w-full p-3 bg-[#030317] border border-white/20 rounded-md focus:outline-none focus:border-indigo-500"
+                                    className="w-full px-4 py-3 bg-transparent border-2 rounded-md border-white/20 focus:bg-slate-900/50 focus:outline-none focus:border-indigo-500 text-slate-300"
                                 />
                             </Field>
 
@@ -105,7 +106,7 @@ export default function RegisterPage() {
                                     name="email"
                                     id="email"
                                     placeholder="mail@example.com"
-                                    className="w-full p-3 bg-[#030317] border border-white/20 rounded-md focus:outline-none focus:border-indigo-500"
+                                    className="w-full px-4 py-3 bg-transparent border-2 rounded-md border-white/20 focus:bg-slate-900/50 focus:outline-none focus:border-indigo-500 text-slate-300"
                                 />
                             </Field>
 
@@ -122,13 +123,12 @@ export default function RegisterPage() {
                                     name="password"
                                     id="password"
                                     placeholder="* * * * * *"
-                                    className="w-full p-3 bg-[#030317] border border-white/20 rounded-md focus:outline-none focus:border-indigo-500"
+                                    className="w-full px-4 py-3 bg-transparent border-2 rounded-md border-white/20 focus:bg-slate-900/50 focus:outline-none focus:border-indigo-500 text-slate-300"
                                 />
                             </Field>
 
-                            <p>{errors?.root?.manual?.message}</p>
+                            <Error message={errors?.root?.manual?.message} />
 
-                            <div className="mt-6" />
                             <button
                                 type="submit"
                                 className="w-full p-3 text-white transition-all duration-200 bg-indigo-600 rounded-md hover:bg-indigo-700"

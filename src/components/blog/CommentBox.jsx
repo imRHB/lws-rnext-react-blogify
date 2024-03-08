@@ -65,8 +65,7 @@ export default function CommentBox() {
                     rows="4"
                     value={comment}
                     onChange={(evt) => setComment(evt.target.value)}
-                    // onKeyDown={handlePostCommentByEnter}
-                    className="block w-full p-4 transition rounded-lg ring-2 text-slate-300 focus:outline-none focus:bg-transparent focus:ring-2 focus:ring-blue-900/50 bg-slate-900 ring-slate-800"
+                    className="block w-full p-4 transition bg-transparent rounded-lg ring-2 text-slate-300 focus:outline-none focus:bg-slate-950/20 focus:ring-2 focus:ring-blue-900/50 ring-slate-800"
                 />
 
                 <div className="flex justify-end mt-4">

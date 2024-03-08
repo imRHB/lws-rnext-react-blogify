@@ -56,7 +56,8 @@ export default function UserBio() {
                         rows="4"
                         value={bio}
                         onChange={(evt) => setBio(evt.target.value)}
-                        className="block w-full p-4 transition rounded-lg ring-2 text-slate-300 focus:outline-none focus:bg-transparent focus:ring-2 focus:ring-blue-900/50 bg-slate-900 ring-slate-800"
+                        className="w-full px-4 py-3 bg-transparent border-2 rounded-md border-white/20 focus:bg-slate-900/50 focus:outline-none focus:border-indigo-500 text-slate-300"
+                        onFocus={isEditing}
                     />
                 ) : (
                     <React.Fragment>
@@ -81,15 +82,19 @@ export default function UserBio() {
             {!publicProfile && isEditing && (
                 <div className="flex flex-col gap-4 my-2">
                     <button
-                        className="px-6 py-2 text-white transition-all duration-200 bg-indigo-600 rounded-md md:py-3 ring-1 ring-indigo-700 hover:bg-indigo-700"
+                        className="px-6 py-2 text-white transition-all duration-200 bg-indigo-600 rounded-md md:py-3 ring-1 ring-indigo-700 hover:bg-indigo-700 disabled:cursor-not-allowed disabled:bg-indigo-900 disabled:ring-indigo-950"
                         onClick={handleUpdateBio}
+                        disabled={state?.user?.bio === bio}
                     >
                         Update
                     </button>
 
                     <button
                         className="px-6 py-2 text-white transition-all duration-200 rounded-md md:py-3 bg-slate-900 ring-1 ring-slate-800 hover:bg-slate-950"
-                        onClick={() => setIsEditing(false)}
+                        onClick={() => {
+                            setBio(state?.user?.bio);
+                            setIsEditing(false);
+                        }}
                     >
                         Cancel
                     </button>

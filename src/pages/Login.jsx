@@ -1,11 +1,12 @@
 import axios from "axios";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
-import { useEffect } from "react";
 import { actions } from "../actions";
 import AppLayout from "../components/AppLayout";
 import Field from "../components/form/Field";
+import Error from "../components/ui/Error";
 import useAuth from "../hooks/useAuth";
 import useProfile from "../hooks/useProfile";
 
@@ -87,7 +88,7 @@ export default function LoginPage() {
                         <div className="p-4 sm:px-8 sm:py-6">
                             <form
                                 onSubmit={handleSubmit(onSubmit)}
-                                className="space-y-4"
+                                className="space-y-5"
                             >
                                 <Field label="Email" error={errors.email}>
                                     <input
@@ -103,7 +104,7 @@ export default function LoginPage() {
                                         name="email"
                                         id="email"
                                         placeholder="mail@example.com"
-                                        className="w-full p-3 bg-[#030317] border border-white/20 rounded-md focus:outline-none focus:border-indigo-500"
+                                        className="w-full px-4 py-3 bg-transparent border-2 rounded-md border-white/20 focus:bg-slate-900/50 focus:outline-none focus:border-indigo-500 text-slate-300"
                                     />
                                 </Field>
 
@@ -120,13 +121,14 @@ export default function LoginPage() {
                                         name="password"
                                         id="password"
                                         placeholder="* * * * * *"
-                                        className="w-full p-3 bg-[#030317] border border-white/20 rounded-md focus:outline-none focus:border-indigo-500"
+                                        className="w-full px-4 py-3 bg-transparent border-2 rounded-md border-white/20 focus:bg-slate-900/50 focus:outline-none focus:border-indigo-500 text-slate-300"
                                     />
                                 </Field>
 
-                                <p>{errors?.root?.manual?.message}</p>
+                                <Error
+                                    message={errors?.root?.manual?.message}
+                                />
 
-                                <div className="mt-6" />
                                 <button
                                     type="submit"
                                     className="w-full p-3 text-white transition-all duration-200 bg-indigo-600 rounded-md hover:bg-indigo-700"
