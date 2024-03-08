@@ -51,6 +51,13 @@ export const profileReducer = (state, action) => {
             };
         }
 
+        case actions.profile.FETCH_PUBLIC_PROFILE: {
+            return {
+                ...state,
+                publicProfile: action.payload.publicProfile,
+            };
+        }
+
         case actions.profile.DATA_FETCHING_SUCCESS: {
             return {
                 ...state,

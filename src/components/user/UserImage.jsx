@@ -14,6 +14,8 @@ export default function UserImage() {
 
     const { state, dispatch } = useProfile();
 
+    const publicProfile = state?.publicProfile;
+
     function handleUpdateAvatar(evt) {
         evt.preventDefault();
 
@@ -66,32 +68,40 @@ export default function UserImage() {
             ) : (
                 <Avatar
                     name={state?.user?.firstName}
-                    imgSrc={`${
-                        import.meta.env.VITE_SERVER_BASE_URL
-                    }/uploads/avatar/${state?.user?.avatar}`}
+                    imgSrc={
+                        !publicProfile
+                            ? `${
+                                  import.meta.env.VITE_SERVER_BASE_URL
+                              }/uploads/avatar/${state?.user?.avatar}`
+                            : `${
+                                  import.meta.env.VITE_SERVER_BASE_URL
+                              }/uploads/avatar/${publicProfile?.avatar}`
+                    }
                     size="large"
                 />
             )}
 
-            <form>
-                <input
-                    type="file"
-                    accept=".png, .jpg, .jpeg"
-                    name="avatar"
-                    id="avatar"
-                    ref={avatarUploadRef}
-                    hidden
-                />
+            {!publicProfile && (
+                <form>
+                    <input
+                        type="file"
+                        accept=".png, .jpg, .jpeg"
+                        name="avatar"
+                        id="avatar"
+                        ref={avatarUploadRef}
+                        hidden
+                    />
 
-                <button
-                    type="submit"
-                    className="absolute bottom-0 right-0 grid rounded-full place-items-center h-7 w-7 bg-slate-700 hover:bg-slate-700/80 disabled:cursor-not-allowed"
-                    onClick={handleUpdateAvatar}
-                    disabled={isUploading}
-                >
-                    <img src={pencilIcon} alt="Edit" />
-                </button>
-            </form>
+                    <button
+                        type="submit"
+                        className="absolute bottom-0 right-0 grid rounded-full place-items-center h-7 w-7 bg-slate-700 hover:bg-slate-700/80 disabled:cursor-not-allowed"
+                        onClick={handleUpdateAvatar}
+                        disabled={isUploading}
+                    >
+                        <img src={pencilIcon} alt="Edit" />
+                    </button>
+                </form>
+            )}
         </div>
     );
 }

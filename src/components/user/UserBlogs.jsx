@@ -7,15 +7,26 @@ import BlogCard from "../card/BlogCard";
 export default function UserBlogs() {
     const { state } = useProfile();
 
+    const publicProfile = state?.publicProfile;
+
     return (
         <React.Fragment>
-            <SectionTitle title="Your Blogs" />
+            <SectionTitle
+                title={
+                    publicProfile
+                        ? `${publicProfile?.firstName} ${publicProfile?.lastName}'s Blogs`
+                        : "Your Blogs"
+                }
+            />
 
             <div className="my-6 space-y-4">
-                {state?.blogs?.length > 0 &&
-                    state?.blogs?.map((blog) => (
-                        <BlogCard key={blog.id} blog={blog} />
-                    ))}
+                {publicProfile
+                    ? publicProfile?.blogs?.map((blog) => (
+                          <BlogCard key={blog.id} blog={blog} />
+                      ))
+                    : state?.blogs?.map((blog) => (
+                          <BlogCard key={blog.id} blog={blog} />
+                      ))}
 
                 {/* {hasMore ? (
                     <div

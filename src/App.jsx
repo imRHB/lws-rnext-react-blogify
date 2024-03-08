@@ -9,6 +9,7 @@ import LoginPage from "./pages/Login";
 import NotFoundPage from "./pages/NotFound";
 import ProductList from "./pages/ProductList";
 import ProfilePage from "./pages/Profile";
+import PublicProfilePage from "./pages/PublicProfile";
 import RegisterPage from "./pages/Register";
 import AuthProvider from "./provider/AuthProvider";
 import BlogProvider from "./provider/BlogProvider";
@@ -24,6 +25,11 @@ export default function App() {
                         <Router>
                             {/* <Header /> */}
                             <Routes>
+                                <Route
+                                    path="/profile/:userId"
+                                    element={<PublicProfilePage />}
+                                />
+
                                 <Route element={<PrivateRoute />}>
                                     <Route
                                         path="/create-blog"
@@ -32,6 +38,7 @@ export default function App() {
                                     <Route
                                         path="/profile"
                                         element={<ProfilePage />}
+                                        exact
                                     />
                                     <Route
                                         path="/blogs/:blogId"
@@ -42,6 +49,7 @@ export default function App() {
                                         element={<EditBlogPage />}
                                     />
                                 </Route>
+
                                 <Route path="/" element={<HomePage />} exact />
                                 <Route path="/login" element={<LoginPage />} />
                                 <Route

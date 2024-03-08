@@ -2,6 +2,7 @@ export const profileInitialState = {
     user: null,
     blogs: [],
     favouriteBlogs: [],
+    publicProfile: null,
     isLoading: false,
     error: null,
 };

@@ -14,6 +14,8 @@ export default function BlogCard({ blog }) {
     const { state } = useProfile();
     const { author, title, content, createdAt, id, likes, thumbnail } = blog;
 
+    const isAuthorLoggedIn = state?.user?.id === author?.id;
+
     function handleBlogActions(evt) {
         evt.preventDefault();
         evt.stopPropagation();
@@ -42,7 +44,13 @@ export default function BlogCard({ blog }) {
 
                 <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-2 capitalize">
-                        <Link to="/profile">
+                        <Link
+                            to={
+                                isAuthorLoggedIn
+                                    ? "/profile"
+                                    : `/profile/${author?.id}`
+                            }
+                        >
                             <Avatar
                                 name={author.firstName}
                                 imgSrc={
@@ -63,7 +71,13 @@ export default function BlogCard({ blog }) {
 
                         <div>
                             <h5 className="text-sm text-slate-500">
-                                <Link to="/profile">
+                                <Link
+                                    to={
+                                        isAuthorLoggedIn
+                                            ? "/profile"
+                                            : `/profile/${author?.id}`
+                                    }
+                                >
                                     {author.firstName} {author.lastName}
                                 </Link>
                             </h5>
