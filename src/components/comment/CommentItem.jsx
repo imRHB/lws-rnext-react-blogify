@@ -14,6 +14,8 @@ export default function CommentItem({ comment }) {
     const { state } = useProfile();
     const { state: blogState } = useBlog();
 
+    const isAuthorLoggedIn = state?.user?.id === comment?.author?.id;
+
     return (
         <div
             key={comment?.id}
@@ -21,7 +23,13 @@ export default function CommentItem({ comment }) {
             onClick={() => setShowActions(false)}
         >
             <div className="flex items-start mr-12 space-x-4 md:mr-20">
-                <Link to="/profile">
+                <Link
+                    to={
+                        isAuthorLoggedIn
+                            ? "/profile"
+                            : `/profile/${comment?.author?.id}`
+                    }
+                >
                     <Avatar
                         name={state?.user?.firstName}
                         imgSrc={
@@ -38,7 +46,13 @@ export default function CommentItem({ comment }) {
                 </Link>
                 <div className="w-full">
                     <p className="max-w-fit">
-                        <Link to="/profile">
+                        <Link
+                            to={
+                                isAuthorLoggedIn
+                                    ? "/profile"
+                                    : `/profile/${comment?.author?.id}`
+                            }
+                        >
                             <h5 className="font-bold text-slate-500">
                                 {comment?.author?.firstName}{" "}
                                 {comment?.author?.lastName}

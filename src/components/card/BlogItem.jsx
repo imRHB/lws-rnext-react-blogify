@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import useProfile from "../../hooks/useProfile";
+import Badge from "../ui/Badge";
 
 export default function BlogItem({ blog, category }) {
     const { state } = useProfile();
@@ -16,11 +17,11 @@ export default function BlogItem({ blog, category }) {
             </Link>
 
             {category === "favorite" && tagList.length > 0 ? (
-                <p className="flex flex-wrap gap-2 text-sm text-slate-600">
+                <ul className="flex flex-wrap gap-3 my-2 text-slate-500">
                     {tagList.map((tag) => (
-                        <Tag key={tag} tag={tag.trim()} />
+                        <Badge key={tag} label={`#${tag.trim()}`} size="xs" />
                     ))}
-                </p>
+                </ul>
             ) : (
                 <p className="text-sm text-slate-600">
                     by{" "}
@@ -39,8 +40,4 @@ export default function BlogItem({ blog, category }) {
             )}
         </article>
     );
-}
-
-function Tag({ tag }) {
-    return <span className="px-2 py-1 rounded-full bg-slate-900">#{tag}</span>;
 }

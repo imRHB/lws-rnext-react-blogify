@@ -1,12 +1,17 @@
-import useUserProfile from "../../hooks/useUserProfile";
+import { Link } from "react-router-dom";
+
+import useProfile from "../../hooks/useProfile";
 import { getTimestamp } from "../../lib/getTimestamp";
 import Avatar from "../ui/Avatar";
+import Badge from "../ui/Badge";
 
 export default function BlogContents({ blog }) {
-    const { user } = useUserProfile();
+    const { state } = useProfile();
 
     const { author, title, content, createdAt, likes, tags, thumbnail } = blog;
     const tagList = tags?.split(",");
+
+    const isAuthorLoggedIn = state?.user?.id === author?.id;
 
     return (
         <article className="container py-8 text-center">
@@ -14,20 +19,36 @@ export default function BlogContents({ blog }) {
 
             <div className="flex items-center justify-center gap-4 my-4">
                 <div className="flex items-center space-x-2 capitalize">
-                    <Avatar
-                        name={author?.firstName}
-                        imgSrc={
-                            user && user?.id === author?.id
-                                ? `${
-                                      import.meta.env.VITE_SERVER_BASE_URL
-                                  }/uploads/avatar/${user?.avatar}`
-                                : `${
-                                      import.meta.env.VITE_SERVER_BASE_URL
-                                  }/uploads/avatar/${author?.avatar}`
+                    <Link
+                        to={
+                            isAuthorLoggedIn
+                                ? "/profile"
+                                : `/profile/${author?.id}`
                         }
-                    />
+                    >
+                        <Avatar
+                            name={author?.firstName}
+                            imgSrc={
+                                state?.user && state?.user?.id === author?.id
+                                    ? `${
+                                          import.meta.env.VITE_SERVER_BASE_URL
+                                      }/uploads/avatar/${state?.user?.avatar}`
+                                    : `${
+                                          import.meta.env.VITE_SERVER_BASE_URL
+                                      }/uploads/avatar/${author?.avatar}`
+                            }
+                        />
+                    </Link>
                     <h5 className="text-sm text-slate-500">
-                        {author?.firstName} {author?.lastName}
+                        <Link
+                            to={
+                                isAuthorLoggedIn
+                                    ? "/profile"
+                                    : `/profile/${author?.id}`
+                            }
+                        >
+                            {author?.firstName} {author?.lastName}
+                        </Link>
                     </h5>
                 </div>
                 <span className="text-sm text-slate-700 dot">
@@ -48,9 +69,9 @@ export default function BlogContents({ blog }) {
                 />
             )}
 
-            <ul className="tags">
+            <ul className="flex flex-wrap items-center justify-center gap-3 my-4 text-slate-300">
                 {tagList?.map((tag) => (
-                    <li key={tag}>{tag}</li>
+                    <Badge key={tag} label={tag} />
                 ))}
             </ul>
 

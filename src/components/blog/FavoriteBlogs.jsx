@@ -53,7 +53,7 @@ export default function FavoriteBlogs() {
                                 />
                             ))
                         ) : (
-                            <Message description="Your have no favourite blogs yet!" />
+                            <Message description="You have no favourite blogs yet!" />
                         )}
                     </React.Fragment>
                 )}
