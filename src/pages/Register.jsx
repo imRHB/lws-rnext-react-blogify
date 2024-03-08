@@ -1,11 +1,15 @@
 import axios from "axios";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 
 import Field from "../components/form/Field";
+import useProfile from "../hooks/useProfile";
 
 export default function RegisterPage() {
     const navigate = useNavigate();
+
+    const { state } = useProfile();
 
     const {
         register,
@@ -39,6 +43,10 @@ export default function RegisterPage() {
             });
         }
     }
+
+    useEffect(() => {
+        if (state?.user) navigate("/");
+    }, [navigate, state?.user]);
 
     return (
         <section className="container relative">

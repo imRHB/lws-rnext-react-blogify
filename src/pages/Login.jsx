@@ -2,6 +2,7 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
+import { useEffect } from "react";
 import { actions } from "../actions";
 import AppLayout from "../components/AppLayout";
 import Field from "../components/form/Field";
@@ -14,7 +15,7 @@ export default function LoginPage() {
     const { from } = location.state || { from: { pathname: "/" } };
 
     const { setAuth } = useAuth();
-    const { dispatch } = useProfile();
+    const { state, dispatch } = useProfile();
 
     const {
         register,
@@ -64,6 +65,10 @@ export default function LoginPage() {
             });
         }
     }
+
+    useEffect(() => {
+        if (state?.user) navigate("/");
+    }, [navigate, state?.user]);
 
     return (
         <AppLayout authPage="true">
