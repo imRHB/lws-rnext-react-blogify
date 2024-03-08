@@ -4,6 +4,7 @@ import { actions } from "../../actions";
 import useBlog from "../../hooks/useBlog";
 import useBlogs from "../../hooks/useBlogs";
 import BlogCard from "../card/BlogCard";
+import Message from "../Message";
 
 export default function MainBlogs() {
     const { blogs, hasMore, loaderRef } = useBlogs();
@@ -41,25 +42,42 @@ export default function MainBlogs() {
                 blogs,
             },
         });
+
+        return () => {
+            dispatch({
+                type: actions.blog.FETCH_BLOGS_INFINITELY,
+                payload: {
+                    blogs: [],
+                },
+            });
+        };
     }, [blogs, dispatch]);
 
     return (
         <main className="space-y-5 md:col-span-5">
-            {state?.blogs.length > 0 &&
+            {state?.blogs.length > 0 ? (
                 state?.blogs.map((blog) => (
                     <BlogCard key={blog.id} blog={blog} />
-                ))}
+                ))
+            ) : (
+                <div className="flex flex-col items-center justify-center min-h-[40vh]">
+                    <Message
+                        title="No blogs found!"
+                        description="No blogs found on the server, check back later."
+                    />
+                </div>
+            )}
 
             {hasMore ? (
                 <div
                     ref={loaderRef}
-                    className="flex items-center justify-center h-24 bg-slate-900"
+                    className="flex items-center justify-center h-24 rounded-lg bg-slate-900/30"
                 >
-                    <p className="text-xl font-bold">fetching blogs...</p>
+                    <Message description="Fetching blogs..." />
                 </div>
             ) : (
-                <div className="flex items-center justify-center h-24 bg-slate-900">
-                    <p className="text-xl font-bold">No more blogs!</p>
+                <div className="flex items-center justify-center h-24 rounded-lg bg-slate-900/30">
+                    <Message description="You have reached to the end! No more blogs on the server!" />
                 </div>
             )}
         </main>

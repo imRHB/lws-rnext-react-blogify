@@ -53,6 +53,7 @@ export default function Header() {
                                 <div
                                     className="flex items-center h-12 px-3 py-1 rounded-lg cursor-pointer hover:bg-slate-900 hover:ring-1 ring-inset ring-slate-800"
                                     onClick={handleLogout}
+                                    title="Logout"
                                 >
                                     <img src={logoutIcon} alt="Logout" />
                                 </div>
@@ -89,13 +90,4 @@ export default function Header() {
             </nav>
         </header>
     );
-}
-
-{
-    /* <Link
-                                    to="/login"
-                                    className="transition-all duration-200 text-white/50 hover:text-white"
-                                >
-                                    Login
-                                </Link> */
 }

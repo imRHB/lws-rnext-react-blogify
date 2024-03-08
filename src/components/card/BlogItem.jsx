@@ -1,7 +1,11 @@
 import { Link } from "react-router-dom";
+import useProfile from "../../hooks/useProfile";
 
 export default function BlogItem({ blog, category }) {
+    const { state } = useProfile();
+
     const tagList = blog.tags?.split(",");
+    const isAuthorLoggedIn = state?.user?.id === blog?.author?.id;
 
     return (
         <article>
@@ -20,7 +24,13 @@ export default function BlogItem({ blog, category }) {
             ) : (
                 <p className="text-sm text-slate-600">
                     by{" "}
-                    <Link to="/profile">
+                    <Link
+                        to={
+                            isAuthorLoggedIn
+                                ? "/profile"
+                                : `/profile/${blog?.author?.id}`
+                        }
+                    >
                         {blog.author.firstName} {blog.author.lastName}
                     </Link>{" "}
                     <span>·</span> {blog.likes.length}{" "}

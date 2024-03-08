@@ -1,18 +1,16 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 
 import { actions } from "../../actions";
 import { api } from "../../api";
 import useBlog from "../../hooks/useBlog";
 import useProfile from "../../hooks/useProfile";
+import Message from "../Message";
 import SectionTitle from "../SectionTitle";
 import BlogItem from "../card/BlogItem";
 
 export default function FavoriteBlogs() {
     const { state } = useProfile();
     const { state: blogState, dispatch: blogDispatch } = useBlog();
-
-    // console.log("state?.favouriteBlogs:", state?.favouriteBlogs);
-    // console.log("blogState?.favouriteBlogs:", blogState?.favouriteBlogs);
 
     useEffect(() => {
         async function fetchFavoriteBlogs() {
@@ -41,21 +39,25 @@ export default function FavoriteBlogs() {
         <section className="sidebar-card">
             <SectionTitle title="Your Favourites ❤️" />
 
-            {!state?.user ? (
-                <div>
-                    <p>Login to see your favourite blogs!</p>
-                </div>
-            ) : (
-                <div className="my-5 space-y-5">
-                    {blogState?.favouriteBlogs?.map((favBlog) => (
-                        <BlogItem
-                            key={favBlog.id}
-                            blog={favBlog}
-                            category="favorite"
-                        />
-                    ))}
-                </div>
-            )}
+            <div className="my-5 space-y-5">
+                {!state?.user ? (
+                    <Message description="Login to see your favourite blogs!" />
+                ) : (
+                    <React.Fragment>
+                        {blogState?.favouriteBlogs?.length > 0 ? (
+                            blogState?.favouriteBlogs?.map((favBlog) => (
+                                <BlogItem
+                                    key={favBlog.id}
+                                    blog={favBlog}
+                                    category="favorite"
+                                />
+                            ))
+                        ) : (
+                            <Message description="Your have no favourite blogs yet!" />
+                        )}
+                    </React.Fragment>
+                )}
+            </div>
         </section>
     );
 }

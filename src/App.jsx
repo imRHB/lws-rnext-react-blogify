@@ -1,5 +1,6 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
+import AuthRoute from "./components/AuthRoute";
 import PrivateRoute from "./components/PrivateRoute";
 import BlogDetailsPage from "./pages/BlogDetails";
 import CreateBlogPage from "./pages/CreateBlog";
@@ -51,11 +52,17 @@ export default function App() {
                                 </Route>
 
                                 <Route path="/" element={<HomePage />} exact />
-                                <Route path="/login" element={<LoginPage />} />
-                                <Route
-                                    path="/register"
-                                    element={<RegisterPage />}
-                                />
+
+                                <Route element={<AuthRoute />}>
+                                    <Route
+                                        path="/login"
+                                        element={<LoginPage />}
+                                    />
+                                    <Route
+                                        path="/register"
+                                        element={<RegisterPage />}
+                                    />
+                                </Route>
                                 {/* testing route */}
                                 <Route
                                     path="/products"

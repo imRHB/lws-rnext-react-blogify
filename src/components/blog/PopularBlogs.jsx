@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
+import Message from "../Message";
 import SectionTitle from "../SectionTitle";
 import BlogItem from "../card/BlogItem";
 
@@ -30,10 +31,13 @@ export default function PopularBlogs() {
             <SectionTitle title="Most Popular 👍️" />
 
             <div className="my-5 space-y-5">
-                {popularBlogs.length > 0 &&
-                    popularBlogs.map((blog) => (
+                {popularBlogs?.length > 0 ? (
+                    popularBlogs?.map((blog) => (
                         <BlogItem key={blog.id} blog={blog} />
-                    ))}
+                    ))
+                ) : (
+                    <Message description="No popular blogs found!" />
+                )}
             </div>
         </section>
     );
