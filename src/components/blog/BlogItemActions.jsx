@@ -34,6 +34,10 @@ export default function BlogItemActions({ blogId, title, setShowActions }) {
     async function handleDeleteBlog(evt) {
         evt.preventDefault();
 
+        dispatch({
+            type: actions.blog.DATA_FETCHING_STARTED,
+        });
+
         try {
             const response = await api.delete(
                 `${import.meta.env.VITE_SERVER_BASE_URL}/blogs/${blogId}`
@@ -57,7 +61,12 @@ export default function BlogItemActions({ blogId, title, setShowActions }) {
                 });
             }
         } catch (error) {
-            console.error(error);
+            dispatch({
+                type: actions.blog.DATA_FETCHING_FAILED,
+                payload: {
+                    error,
+                },
+            });
         }
     }
 

@@ -25,8 +25,7 @@ export default function ProfileProvider({ children }) {
 
                 setUser(response?.data);
             } catch (error) {
-                console.error(error);
-                throw error;
+                throw new Error(error);
             }
         };
 

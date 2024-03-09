@@ -31,7 +31,6 @@ export default function SearchProvider({ children }) {
                     });
                 }
             } catch (error) {
-                console.error(error);
                 dispatch({
                     type: actions.search.SEARCH_BLOGS,
                     payload: {

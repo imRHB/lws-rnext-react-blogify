@@ -22,8 +22,6 @@ export const blogReducer = (state, action) => {
             return {
                 ...state,
                 blogs: action.payload.blogs,
-                isLoading: false,
-                error: null,
             };
         }
 

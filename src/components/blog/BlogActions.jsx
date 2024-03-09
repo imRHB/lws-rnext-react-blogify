@@ -35,6 +35,10 @@ export default function BlogActions() {
             return;
         }
 
+        dispatch({
+            type: actions.blog.DATA_FETCHING_STARTED,
+        });
+
         try {
             const response = await api.post(
                 `${import.meta.env.VITE_SERVER_BASE_URL}/blogs/${blogId}/like`,
@@ -53,7 +57,12 @@ export default function BlogActions() {
                 });
             }
         } catch (error) {
-            console.error(error);
+            dispatch({
+                type: actions.blog.DATA_FETCHING_FAILED,
+                payload: {
+                    error,
+                },
+            });
         }
     }
 
@@ -62,6 +71,10 @@ export default function BlogActions() {
             toast.warning("Login to add this blog in your favourite list!");
             return;
         }
+
+        dispatch({
+            type: actions.blog.DATA_FETCHING_STARTED,
+        });
 
         try {
             const response = await api.patch(
@@ -86,7 +99,12 @@ export default function BlogActions() {
                 });
             }
         } catch (error) {
-            console.error(error);
+            dispatch({
+                type: actions.blog.DATA_FETCHING_FAILED,
+                payload: {
+                    error,
+                },
+            });
         }
     }
 

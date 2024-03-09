@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { actions } from "../actions";
 import { api } from "../api";
 import AppLayout from "../components/AppLayout";
+import Message from "../components/Message";
 import Field from "../components/form/Field";
 import useBlog from "../hooks/useBlog";
 import useProfile from "../hooks/useProfile";
@@ -23,6 +24,10 @@ export default function EditBlogPage() {
 
     useEffect(() => {
         const fetchBlogById = async () => {
+            dispatch({
+                type: actions.blog.DATA_FETCHING_STARTED,
+            });
+
             try {
                 const response = await api.get(
                     `${import.meta.env.VITE_SERVER_BASE_URL}/blogs/${blogId}`
@@ -40,8 +45,12 @@ export default function EditBlogPage() {
                     }); */
                 }
             } catch (error) {
-                console.error(error);
-                throw error;
+                dispatch({
+                    type: actions.blog.DATA_FETCHING_FAILED,
+                    payload: {
+                        error,
+                    },
+                });
             }
         };
 
@@ -76,6 +85,10 @@ export default function EditBlogPage() {
     };
 
     async function onSubmit(data) {
+        dispatch({
+            type: actions.blog.DATA_FETCHING_STARTED,
+        });
+
         try {
             const formData = new FormData();
 
@@ -103,7 +116,12 @@ export default function EditBlogPage() {
                 navigate(`/blogs/${blogId}`);
             }
         } catch (error) {
-            console.error(error);
+            dispatch({
+                type: actions.blog.DATA_FETCHING_FAILED,
+                payload: {
+                    error,
+                },
+            });
         }
     }
 
@@ -244,8 +262,11 @@ export default function EditBlogPage() {
                         </div>
                     </form>
                 ) : (
-                    <div>
-                        <p>You are not authorized to update this blog!</p>
+                    <div className="flex flex-col items-center justify-center min-h-[60vh]">
+                        <Message
+                            title="Permission denied"
+                            description="You are not authorized to update this blog!"
+                        />
                     </div>
                 )}
             </div>

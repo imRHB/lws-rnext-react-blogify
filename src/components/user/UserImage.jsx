@@ -28,11 +28,12 @@ export default function UserImage() {
         evt.preventDefault();
 
         setIsUploading(true);
+
         try {
             const file = await avatarUploadRef.current.files[0];
 
             if (!file) {
-                console.error("No file selected");
+                toast.warning("No file selected!");
                 return;
             }
 
@@ -56,7 +57,12 @@ export default function UserImage() {
                 });
             }
         } catch (error) {
-            console.error(error);
+            dispatch({
+                type: actions.profile.DATA_FETCHING_FAILED,
+                payload: {
+                    error,
+                },
+            });
         } finally {
             setIsUploading(false);
         }

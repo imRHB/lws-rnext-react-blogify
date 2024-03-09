@@ -18,6 +18,10 @@ export default function CommentBox() {
     async function handlePostComment(evt) {
         evt.preventDefault();
 
+        dispatch({
+            type: actions.blog.DATA_FETCHING_STARTED,
+        });
+
         try {
             const response = await api.post(
                 `${
@@ -38,7 +42,12 @@ export default function CommentBox() {
                 });
             }
         } catch (error) {
-            console.error(error);
+            dispatch({
+                type: actions.blog.DATA_FETCHING_FAILED,
+                payload: {
+                    error,
+                },
+            });
         }
     }
 

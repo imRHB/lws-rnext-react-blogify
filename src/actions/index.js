@@ -1,5 +1,6 @@
 export const actions = {
     profile: {
+        USER_CREATED: "USER_CREATED",
         USER_SIGNED_IN: "USER_SIGNED_IN",
         FETCH_USER_PROFILE: "FETCH_USER_PROFILE",
         UPDATE_USER_PROFILE: "UPDATE_USER_PROFILE",

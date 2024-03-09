@@ -18,6 +18,10 @@ export default function UserBio() {
     async function handleUpdateBio(evt) {
         evt.preventDefault();
 
+        dispatch({
+            type: actions.profile.DATA_FETCHING_STARTED,
+        });
+
         try {
             const response = await api.patch(
                 `${import.meta.env.VITE_SERVER_BASE_URL}/profile`,
@@ -38,7 +42,12 @@ export default function UserBio() {
                 setIsEditing(false);
             }
         } catch (error) {
-            console.error(error);
+            dispatch({
+                type: actions.profile.DATA_FETCHING_FAILED,
+                payload: {
+                    error,
+                },
+            });
         }
     }
 

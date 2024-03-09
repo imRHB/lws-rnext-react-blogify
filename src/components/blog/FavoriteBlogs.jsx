@@ -14,6 +14,10 @@ export default function FavoriteBlogs() {
 
     useEffect(() => {
         async function fetchFavoriteBlogs() {
+            blogDispatch({
+                type: actions.blog.DATA_FETCHING_STARTED,
+            });
+
             try {
                 const response = await api.get(
                     `${import.meta.env.VITE_SERVER_BASE_URL}/blogs/favourites`
@@ -28,7 +32,12 @@ export default function FavoriteBlogs() {
                     });
                 }
             } catch (error) {
-                console.error(error);
+                blogDispatch({
+                    type: actions.blog.DATA_FETCHING_FAILED,
+                    payload: {
+                        error,
+                    },
+                });
             }
         }
 

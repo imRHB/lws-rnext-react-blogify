@@ -24,6 +24,10 @@ export default function CommentItemAction({ commentId, setShowActions }) {
     async function handleDeleteComment(evt) {
         evt.preventDefault();
 
+        dispatch({
+            type: actions.blog.DATA_FETCHING_STARTED,
+        });
+
         try {
             const response = await api.delete(
                 `${
@@ -44,7 +48,12 @@ export default function CommentItemAction({ commentId, setShowActions }) {
                 });
             }
         } catch (error) {
-            console.error(error);
+            dispatch({
+                type: actions.blog.DATA_FETCHING_FAILED,
+                payload: {
+                    error,
+                },
+            });
         }
     }
 

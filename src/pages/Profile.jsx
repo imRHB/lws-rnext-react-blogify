@@ -19,6 +19,10 @@ export default function ProfilePage() {
 
     useEffect(() => {
         const fetchProfile = async () => {
+            dispatch({
+                type: actions.profile.DATA_FETCHING_STARTED,
+            });
+
             try {
                 const response = await api.get(
                     `${import.meta.env.VITE_SERVER_BASE_URL}/profile/${
@@ -35,8 +39,12 @@ export default function ProfilePage() {
                     });
                 }
             } catch (error) {
-                console.error(error);
-                throw error;
+                dispatch({
+                    type: actions.profile.DATA_FETCHING_FAILED,
+                    payload: {
+                        error,
+                    },
+                });
             }
         };
 

@@ -4,21 +4,23 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
+import { actions } from "../actions";
 import AppLayout from "../components/AppLayout";
 import Field from "../components/form/Field";
 import Error from "../components/ui/Error";
+import Spinner from "../components/ui/Spinner";
 import useProfile from "../hooks/useProfile";
 
 export default function RegisterPage() {
     const navigate = useNavigate();
 
-    const { state } = useProfile();
+    const { state, dispatch } = useProfile();
 
     const {
         register,
         handleSubmit,
         formState: { errors },
-        setError,
+        // setError,
     } = useForm({
         defaultValues: {
             firstName: "",
@@ -29,6 +31,10 @@ export default function RegisterPage() {
     });
 
     async function onSubmit(formData) {
+        dispatch({
+            type: actions.profile.DATA_FETCHING_STARTED,
+        });
+
         try {
             const response = await axios.post(
                 `${import.meta.env.VITE_SERVER_BASE_URL}/auth/register`,
@@ -36,21 +42,41 @@ export default function RegisterPage() {
             );
 
             if (response.status === 201) {
+                dispatch({
+                    type: actions.profile.USER_CREATED,
+                });
                 toast.success("Account is created successfully!");
                 navigate("/login");
             }
         } catch (error) {
-            console.error(error);
-            setError("root.manual", {
+            dispatch({
+                type: actions.profile.DATA_FETCHING_FAILED,
+                payload: {
+                    error,
+                },
+            });
+
+            /* setError("root.manual", {
                 type: "manual",
                 message: error?.message,
-            });
+            }); */
         }
     }
 
     useEffect(() => {
         if (state?.user) navigate("/");
     }, [navigate, state?.user]);
+
+    useEffect(() => {
+        return () => {
+            dispatch({
+                type: actions.profile.DATA_FETCHING_FAILED,
+                payload: {
+                    error: null,
+                },
+            });
+        };
+    }, [dispatch]);
 
     return (
         <AppLayout authPage="true">
@@ -139,14 +165,21 @@ export default function RegisterPage() {
                                 </Field>
 
                                 <Error
-                                    message={errors?.root?.manual?.message}
+                                    message={
+                                        state?.error?.response?.data?.error
+                                    }
                                 />
 
                                 <button
                                     type="submit"
-                                    className="w-full p-3 text-white transition-all duration-200 bg-indigo-600 rounded-md hover:bg-indigo-700"
+                                    className="w-full px-6 py-2 text-lg text-white transition-all duration-200 bg-indigo-600 rounded-md sm:py-3 ring-1 ring-indigo-700 hover:bg-indigo-700 disabled:cursor-not-allowed disabled:bg-indigo-900 disabled:ring-indigo-950"
+                                    disabled={state?.isLoading}
                                 >
-                                    Create account
+                                    {state?.isLoading ? (
+                                        <Spinner />
+                                    ) : (
+                                        "Create account"
+                                    )}
                                 </button>
                             </form>
                         </div>

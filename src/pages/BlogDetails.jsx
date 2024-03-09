@@ -41,7 +41,6 @@ export default function BlogDetailsPage() {
                     });
                 }
             } catch (error) {
-                console.error(error);
                 dispatch({
                     type: actions.blog.DATA_FETCHING_FAILED,
                     payload: {

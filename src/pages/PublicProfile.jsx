@@ -42,7 +42,6 @@ export default function PublicProfilePage() {
                     });
                 }
             } catch (error) {
-                console.error(error);
                 dispatch({
                     type: actions.profile.DATA_FETCHING_FAILED,
                     payload: {

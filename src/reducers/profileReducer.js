@@ -18,6 +18,14 @@ export const profileReducer = (state, action) => {
             };
         }
 
+        case actions.profile.USER_CREATED: {
+            return {
+                ...state,
+                isLoading: false,
+                error: null,
+            };
+        }
+
         case actions.profile.USER_SIGNED_IN: {
             return {
                 ...state,

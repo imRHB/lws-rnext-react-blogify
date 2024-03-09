@@ -43,6 +43,10 @@ export default function CreateBlogPage() {
     };
 
     async function onSubmit(data) {
+        dispatch({
+            type: actions.blog.DATA_FETCHING_STARTED,
+        });
+
         try {
             const formData = new FormData();
 
@@ -69,7 +73,12 @@ export default function CreateBlogPage() {
                 navigate(`/blogs/${response.data.blog.id}`);
             }
         } catch (error) {
-            console.error(error);
+            dispatch({
+                type: actions.blog.DATA_FETCHING_FAILED,
+                payload: {
+                    error,
+                },
+            });
         }
     }
 
