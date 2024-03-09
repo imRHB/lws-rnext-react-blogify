@@ -1,4 +1,6 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import PrivateRoute from "./components/PrivateRoute";
 import BlogDetailsPage from "./pages/BlogDetails";
@@ -72,6 +74,17 @@ export default function App() {
                     </BlogProvider>
                 </ProfileProvider>
             </SearchProvider>
+
+            <ToastContainer
+                position="bottom-right"
+                theme="dark"
+                toastStyle={{
+                    backgroundColor: "#0F172A",
+                    border: "1px solid rgb(71 85 105 / 0.5)",
+                }}
+                stacked
+                hideProgressBar
+            />
         </AuthProvider>
     );
 }

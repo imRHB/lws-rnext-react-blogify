@@ -1,6 +1,7 @@
-import { api } from "../../api";
+import { toast } from "react-toastify";
 
 import { actions } from "../../actions";
+import { api } from "../../api";
 import useBlog from "../../hooks/useBlog";
 import useProfile from "../../hooks/useProfile";
 
@@ -14,6 +15,8 @@ export default function BlogActions() {
     const { state, dispatch } = useBlog();
     const { state: profileState } = useProfile();
 
+    const isLoggedIn = profileState?.user;
+
     const blogId = state?.blog?.id;
     const comments = state?.blog?.comments;
 
@@ -21,12 +24,17 @@ export default function BlogActions() {
         (item) => profileState?.user?.id === item?.id
     );
 
-    const isFavourite = state?.blog?.isFavourite;
+    const isFavourite = isLoggedIn && state?.blog?.isFavourite;
     // const isFavourite = state?.favouriteBlogs?.find(
     //     (blog) => blog?.id === blogId
     // );
 
     async function handleToggleLike() {
+        if (!isLoggedIn) {
+            toast.warning("Login to like this blog!");
+            return;
+        }
+
         try {
             const response = await api.post(
                 `${import.meta.env.VITE_SERVER_BASE_URL}/blogs/${blogId}/like`,
@@ -50,6 +58,11 @@ export default function BlogActions() {
     }
 
     async function handleToggleFavourite() {
+        if (!isLoggedIn) {
+            toast.warning("Login to add this blog in your favourite list!");
+            return;
+        }
+
         try {
             const response = await api.patch(
                 `${

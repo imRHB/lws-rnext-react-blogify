@@ -5,6 +5,7 @@ import useBlog from "../../hooks/useBlog";
 import useBlogs from "../../hooks/useBlogs";
 import BlogCard from "../card/BlogCard";
 import Message from "../Message";
+import Spinner from "../ui/Spinner";
 
 export default function MainBlogs() {
     const { blogs, hasMore, loaderRef } = useBlogs();
@@ -71,14 +72,15 @@ export default function MainBlogs() {
             {hasMore ? (
                 <div
                     ref={loaderRef}
-                    className="flex items-center justify-center h-24 rounded-lg bg-slate-900/30"
+                    className="flex flex-col items-center justify-center gap-3 rounded-lg h-36 bg-slate-900/30"
                 >
-                    <Message description="Fetching blogs..." />
+                    <Spinner />
+                    <Message description="Fetching blogs" />
                 </div>
             ) : (
-                <div className="flex items-center justify-center h-24 rounded-lg bg-slate-900/30">
+                <div className="flex items-center justify-center rounded-lg h-36 bg-slate-900/30">
                     <Message
-                        title="No more blogs!"
+                        title="That's all from us today!"
                         description="You have reached to the end! No more blogs on the server!"
                     />
                 </div>

@@ -4,7 +4,7 @@ import logo from "/assets/logo.svg";
 
 export default function Footer() {
     return (
-        <footer className="my-6 md:my-8 bg-[#030317]">
+        <footer className="my-8 md:my-16 bg-[#030317]">
             <div className="container flex items-center justify-between mx-auto">
                 <Link to="/">
                     <img className="w-28" src={logo} alt="lws" />
