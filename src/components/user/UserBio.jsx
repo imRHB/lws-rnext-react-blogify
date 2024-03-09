@@ -63,7 +63,9 @@ export default function UserBio() {
                     <React.Fragment>
                         {!publicProfile && (
                             <p className="leading-[188%] text-gray-400 lg:text-lg">
-                                {state?.user?.bio}
+                                {state?.user?.bio?.trim()?.length <= 0
+                                    ? "No bio is added, add your bio"
+                                    : state?.user?.bio}
                             </p>
                         )}
                     </React.Fragment>

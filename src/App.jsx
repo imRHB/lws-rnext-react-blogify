@@ -41,16 +41,17 @@ export default function App() {
                                         exact
                                     />
                                     <Route
-                                        path="/blogs/:blogId"
-                                        element={<BlogDetailsPage />}
-                                    />
-                                    <Route
                                         path="/blogs/:blogId/edit"
                                         element={<EditBlogPage />}
                                     />
                                 </Route>
 
                                 <Route path="/" element={<HomePage />} exact />
+                                <Route
+                                    path="/blogs/:blogId"
+                                    element={<BlogDetailsPage />}
+                                    exact
+                                />
 
                                 <Route path="/login" element={<LoginPage />} />
                                 <Route

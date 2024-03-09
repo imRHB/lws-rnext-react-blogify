@@ -54,13 +54,15 @@ export default function BlogCard({ blog }) {
                             <Avatar
                                 name={author.firstName}
                                 imgSrc={
-                                    state?.user?.id === author.id
-                                        ? `${
-                                              import.meta.env
-                                                  .VITE_SERVER_BASE_URL
-                                          }/uploads/avatar/${
-                                              state?.user?.avatar
-                                          }`
+                                    state?.user?.id === author?.id
+                                        ? state?.user?.avatar
+                                            ? `${
+                                                  import.meta.env
+                                                      .VITE_SERVER_BASE_URL
+                                              }/uploads/avatar/${
+                                                  state?.user?.avatar
+                                              }`
+                                            : null
                                         : `${
                                               import.meta.env
                                                   .VITE_SERVER_BASE_URL

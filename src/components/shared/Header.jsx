@@ -70,11 +70,16 @@ export default function Header() {
                                 >
                                     <Avatar
                                         name={state?.user?.firstName}
-                                        imgSrc={`${
-                                            import.meta.env.VITE_SERVER_BASE_URL
-                                        }/uploads/avatar/${
+                                        imgSrc={
                                             state?.user?.avatar
-                                        }`}
+                                                ? `${
+                                                      import.meta.env
+                                                          .VITE_SERVER_BASE_URL
+                                                  }/uploads/avatar/${
+                                                      state?.user?.avatar
+                                                  }`
+                                                : null
+                                        }
                                     />
 
                                     <p className="text-sm text-white">

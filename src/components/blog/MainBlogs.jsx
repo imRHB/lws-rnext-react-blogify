@@ -77,7 +77,10 @@ export default function MainBlogs() {
                 </div>
             ) : (
                 <div className="flex items-center justify-center h-24 rounded-lg bg-slate-900/30">
-                    <Message description="You have reached to the end! No more blogs on the server!" />
+                    <Message
+                        title="No more blogs!"
+                        description="You have reached to the end! No more blogs on the server!"
+                    />
                 </div>
             )}
         </main>

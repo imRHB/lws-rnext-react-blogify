@@ -30,9 +30,14 @@ export default function BlogContents({ blog }) {
                             name={author?.firstName}
                             imgSrc={
                                 state?.user && state?.user?.id === author?.id
-                                    ? `${
-                                          import.meta.env.VITE_SERVER_BASE_URL
-                                      }/uploads/avatar/${state?.user?.avatar}`
+                                    ? state?.user?.avatar
+                                        ? `${
+                                              import.meta.env
+                                                  .VITE_SERVER_BASE_URL
+                                          }/uploads/avatar/${
+                                              state?.user?.avatar
+                                          }`
+                                        : null
                                     : `${
                                           import.meta.env.VITE_SERVER_BASE_URL
                                       }/uploads/avatar/${author?.avatar}`

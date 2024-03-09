@@ -67,15 +67,23 @@ export default function UserImage() {
                 </div>
             ) : (
                 <Avatar
-                    name={state?.user?.firstName}
+                    name={
+                        !publicProfile
+                            ? state?.user?.firstName
+                            : publicProfile?.firstName
+                    }
                     imgSrc={
                         !publicProfile
+                            ? state?.user?.avatar
+                                ? `${
+                                      import.meta.env.VITE_SERVER_BASE_URL
+                                  }/uploads/avatar/${state?.user?.avatar}`
+                                : null
+                            : publicProfile?.avatar
                             ? `${
                                   import.meta.env.VITE_SERVER_BASE_URL
-                              }/uploads/avatar/${state?.user?.avatar}`
-                            : `${
-                                  import.meta.env.VITE_SERVER_BASE_URL
                               }/uploads/avatar/${publicProfile?.avatar}`
+                            : null
                     }
                     size="large"
                 />

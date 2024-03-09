@@ -12,10 +12,13 @@ import useAuth from "../hooks/useAuth";
 import useProfile from "../hooks/useProfile";
 
 export default function ProfilePage() {
-    const { dispatch } = useProfile();
+    const { state, dispatch } = useProfile();
 
     const { auth } = useAuth();
     const { api } = useApi();
+
+    console.log("auth:", auth);
+    console.log("state:", state);
 
     useEffect(() => {
         const fetchProfile = async () => {

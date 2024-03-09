@@ -42,15 +42,17 @@ export default function CommentBox() {
         }
     }
 
-    // async function handlePostCommentByEnter(){}
-
     return (
         <section className="flex items-start space-x-4">
             <Avatar
                 name={`${state?.user?.firstName} ${state?.user?.lastName}`}
-                imgSrc={`${
-                    import.meta.env.VITE_SERVER_BASE_URL
-                }/uploads/avatar/${state?.user?.avatar}`}
+                imgSrc={
+                    state?.user?.avatar
+                        ? `${
+                              import.meta.env.VITE_SERVER_BASE_URL
+                          }/uploads/avatar/${state?.user?.avatar}`
+                        : null
+                }
             />
             <div className="w-full">
                 {/* <textarea
