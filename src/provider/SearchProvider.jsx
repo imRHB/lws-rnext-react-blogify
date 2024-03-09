@@ -11,6 +11,10 @@ export default function SearchProvider({ children }) {
 
     useEffect(() => {
         async function searchBlogs() {
+            dispatch({
+                type: actions.search.DATA_FETCHING_STARTED,
+            });
+
             try {
                 const response = await axios.get(
                     `${import.meta.env.VITE_SERVER_BASE_URL}/search?q=${
@@ -32,6 +36,13 @@ export default function SearchProvider({ children }) {
                     type: actions.search.SEARCH_BLOGS,
                     payload: {
                         blogs: [],
+                    },
+                });
+
+                dispatch({
+                    type: actions.search.DATA_FETCHING_FAILED,
+                    payload: {
+                        error: error.response.data,
                     },
                 });
             }

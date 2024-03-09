@@ -2,10 +2,28 @@ import { actions } from "../actions";
 
 export const blogReducer = (state, action) => {
     switch (action.type) {
+        case actions.blog.DATA_FETCHING_STARTED: {
+            return {
+                ...state,
+                isLoading: true,
+                error: null,
+            };
+        }
+
+        case actions.blog.DATA_FETCHING_FAILED: {
+            return {
+                ...state,
+                isLoading: false,
+                error: action.payload.error,
+            };
+        }
+
         case actions.blog.FETCH_ALL_BLOGS: {
             return {
                 ...state,
                 blogs: action.payload.blogs,
+                isLoading: false,
+                error: null,
             };
         }
 
@@ -20,6 +38,8 @@ export const blogReducer = (state, action) => {
             return {
                 ...state,
                 favouriteBlogs: action.payload.blogs,
+                isLoading: false,
+                error: null,
             };
         }
 
@@ -27,6 +47,8 @@ export const blogReducer = (state, action) => {
             return {
                 ...state,
                 blog: action.payload.blog,
+                isLoading: false,
+                error: null,
             };
         }
 
@@ -34,6 +56,8 @@ export const blogReducer = (state, action) => {
             return {
                 ...state,
                 blog: action.payload.blog,
+                isLoading: false,
+                error: null,
             };
         }
 
@@ -41,6 +65,8 @@ export const blogReducer = (state, action) => {
             return {
                 ...state,
                 blog: action.payload.blog,
+                isLoading: false,
+                error: null,
                 // favouriteBlogs: [...state.favouriteBlogs, action.payload.blog],
             };
         }
@@ -49,6 +75,8 @@ export const blogReducer = (state, action) => {
             return {
                 ...state,
                 blogs: [...state.blogs, action.payload.blog],
+                isLoading: false,
+                error: null,
             };
         }
 
@@ -61,6 +89,8 @@ export const blogReducer = (state, action) => {
                 ...state,
                 blog: action.payload.blog,
                 blogs: [...oldBlogs, action.payload.blog],
+                isLoading: false,
+                error: null,
             };
         }
 
@@ -72,6 +102,8 @@ export const blogReducer = (state, action) => {
             return {
                 ...state,
                 blogs: updatedBlogs,
+                isLoading: false,
+                error: null,
             };
         }
 
@@ -79,6 +111,8 @@ export const blogReducer = (state, action) => {
             return {
                 ...state,
                 blog: action.payload.blog,
+                isLoading: false,
+                error: null,
             };
         }
 
@@ -86,6 +120,8 @@ export const blogReducer = (state, action) => {
             return {
                 ...state,
                 blog: action.payload.blog,
+                isLoading: false,
+                error: null,
             };
         }
 

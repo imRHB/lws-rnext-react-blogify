@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import { actions } from "../actions";
@@ -7,6 +7,8 @@ import AppLayout from "../components/AppLayout";
 import BlogActions from "../components/blog/BlogActions";
 import BlogContents from "../components/blog/BlogContents";
 import CommentBoard from "../components/blog/CommentBoard";
+import Error from "../components/ui/Error";
+import Spinner from "../components/ui/Spinner";
 import useBlog from "../hooks/useBlog";
 
 export default function BlogDetailsPage() {
@@ -14,8 +16,14 @@ export default function BlogDetailsPage() {
     const { blogId } = useParams();
     const { state, dispatch } = useBlog();
 
+    const { isLoading, error } = state;
+
     useEffect(() => {
         const fetchBlogById = async () => {
+            dispatch({
+                type: actions.blog.DATA_FETCHING_STARTED,
+            });
+
             try {
                 const response = await api.get(
                     `${import.meta.env.VITE_SERVER_BASE_URL}/blogs/${blogId}`
@@ -34,7 +42,12 @@ export default function BlogDetailsPage() {
                 }
             } catch (error) {
                 console.error(error);
-                throw error;
+                dispatch({
+                    type: actions.blog.DATA_FETCHING_FAILED,
+                    payload: {
+                        error: error.response.data,
+                    },
+                });
             }
         };
 
@@ -43,11 +56,29 @@ export default function BlogDetailsPage() {
         }
     }, [blogId, dispatch]);
 
+    let content = null;
+
+    if (isLoading) {
+        content = <Spinner />;
+    }
+
+    if (!isLoading && error) {
+        content = <Error message={error?.message} />;
+    }
+
+    if (!isLoading && !error) {
+        content = (
+            <React.Fragment>
+                <BlogContents blog={blog} />
+                <CommentBoard comments={state?.blog?.comments} />
+                <BlogActions />
+            </React.Fragment>
+        );
+    }
+
     return (
         <AppLayout>
-            <BlogContents blog={blog} />
-            <CommentBoard comments={state?.blog?.comments} />
-            <BlogActions />
+            <section className="container min-h-[50vh]">{content}</section>
         </AppLayout>
     );
 }

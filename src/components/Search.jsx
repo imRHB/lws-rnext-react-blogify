@@ -7,6 +7,7 @@ import Portal from "./Portal";
 
 import Message from "./Message";
 import SearchResultItem from "./SearchResultItem";
+import Spinner from "./ui/Spinner";
 import closeIcon from "/assets/icons/close.svg";
 import magnifyIcon from "/assets/icons/search.svg";
 
@@ -131,29 +132,43 @@ export default function Search() {
                                 </div>
                             ) : (
                                 <React.Fragment>
-                                    <h3 className="mt-6 font-bold text-slate-300">
-                                        Search Results ({state?.blogs?.length})
-                                    </h3>
+                                    {state?.isLoading ? (
+                                        <div className="flex flex-col items-center justify-center gap-3 py-6">
+                                            <Spinner />
+                                            <Message description="searching blogs" />
+                                        </div>
+                                    ) : (
+                                        <React.Fragment>
+                                            <h3 className="mt-6 font-bold text-slate-300">
+                                                Search Results (
+                                                {state?.blogs?.length})
+                                            </h3>
 
-                                    <div className="my-4 divide-y-2 divide-slate-500/30 max-h-[440px] overflow-y-scroll overscroll-contain">
-                                        {state?.blogs?.length > 0 ? (
-                                            state?.blogs?.map((blog) => {
-                                                return (
-                                                    <SearchResultItem
-                                                        key={blog.id}
-                                                        blog={blog}
-                                                    />
-                                                );
-                                            })
-                                        ) : (
-                                            <div className="flex flex-col items-center justify-center gap-2 pt-6 pb-4">
-                                                <Message
-                                                    title="No blogs found"
-                                                    description={`We could not find any blogs with "${state?.query}", try searching with different keyword`}
-                                                />
+                                            <div className="my-4 divide-y-2 divide-slate-500/30 max-h-[440px] overflow-y-scroll overscroll-contain">
+                                                {state?.blogs?.length > 0 ? (
+                                                    state?.blogs?.map(
+                                                        (blog) => {
+                                                            return (
+                                                                <SearchResultItem
+                                                                    key={
+                                                                        blog.id
+                                                                    }
+                                                                    blog={blog}
+                                                                />
+                                                            );
+                                                        }
+                                                    )
+                                                ) : (
+                                                    <div className="flex flex-col items-center justify-center gap-2 pt-6 pb-4">
+                                                        <Message
+                                                            title="No blogs found"
+                                                            description={`We could not find any blogs with "${state?.query}", try searching with different keyword`}
+                                                        />
+                                                    </div>
+                                                )}
                                             </div>
-                                        )}
-                                    </div>
+                                        </React.Fragment>
+                                    )}
                                 </React.Fragment>
                             )}
                         </div>

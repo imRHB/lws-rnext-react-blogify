@@ -7,21 +7,30 @@ export default function useBlogs() {
     const [blogs, setBlogs] = useState([]);
     const [page, setPage] = useState(1);
     const [hasMore, setHasMore] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
 
     const loaderRef = useRef(null);
 
     useEffect(() => {
         const fetchBlogs = async () => {
-            const response = await axios.get(
-                `http://localhost:3000/blogs?limit=${blogsPerPage}&page=${page}`
-            );
-            const data = response.data;
+            setIsLoading(true);
 
-            if (data.blogs.length === 0) {
-                setHasMore(false);
-            } else {
-                setBlogs((prevBlogs) => [...prevBlogs, ...data.blogs]);
-                setPage((prevPage) => prevPage + 1);
+            try {
+                const response = await axios.get(
+                    `http://localhost:3000/blogs?limit=${blogsPerPage}&page=${page}`
+                );
+                const data = response.data;
+
+                if (data.blogs.length === 0) {
+                    setHasMore(false);
+                } else {
+                    setBlogs((prevBlogs) => [...prevBlogs, ...data.blogs]);
+                    setPage((prevPage) => prevPage + 1);
+                }
+            } catch (error) {
+                console.error(error);
+            } finally {
+                setIsLoading(false);
             }
         };
 
@@ -46,5 +55,5 @@ export default function useBlogs() {
         };
     }, [hasMore, page]);
 
-    return { blogs, loaderRef, hasMore };
+    return { blogs, loaderRef, hasMore, isLoading };
 }

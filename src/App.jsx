@@ -47,13 +47,13 @@ export default function App() {
                                         element={<EditBlogPage />}
                                     />
                                 </Route>
-
-                                <Route path="/" element={<HomePage />} exact />
                                 <Route
                                     path="/blogs/:blogId"
                                     element={<BlogDetailsPage />}
                                     exact
                                 />
+
+                                <Route path="/" element={<HomePage />} exact />
 
                                 <Route path="/login" element={<LoginPage />} />
                                 <Route

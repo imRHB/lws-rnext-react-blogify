@@ -6,6 +6,15 @@ export const profileReducer = (state, action) => {
             return {
                 ...state,
                 isLoading: true,
+                error: null,
+            };
+        }
+
+        case actions.profile.DATA_FETCHING_FAILED: {
+            return {
+                ...state,
+                isLoading: false,
+                error: action.payload.error,
             };
         }
 
@@ -14,6 +23,8 @@ export const profileReducer = (state, action) => {
                 ...state,
                 user: action.payload.user,
                 favouriteBlogs: action.payload.favouriteBlogs,
+                isLoading: false,
+                error: null,
             };
         }
 
@@ -21,6 +32,8 @@ export const profileReducer = (state, action) => {
             return {
                 ...state,
                 blogs: action.payload.blogs,
+                isLoading: false,
+                error: null,
             };
         }
 
@@ -28,6 +41,8 @@ export const profileReducer = (state, action) => {
             return {
                 ...state,
                 user: action.payload.user,
+                isLoading: false,
+                error: null,
             };
         }
 
@@ -39,6 +54,8 @@ export const profileReducer = (state, action) => {
             return {
                 ...state,
                 blogs: updatedBlogs,
+                isLoading: false,
+                error: null,
             };
         }
 
@@ -48,6 +65,8 @@ export const profileReducer = (state, action) => {
                 user: null,
                 blogs: [],
                 favouriteBlogs: [],
+                isLoading: false,
+                error: null,
             };
         }
 
@@ -55,23 +74,8 @@ export const profileReducer = (state, action) => {
             return {
                 ...state,
                 publicProfile: action.payload.publicProfile,
-            };
-        }
-
-        case actions.profile.DATA_FETCHING_SUCCESS: {
-            return {
-                ...state,
                 isLoading: false,
-                user: action.payload.user,
-                blogs: action.payload.blogs,
-            };
-        }
-
-        case actions.profile.DATA_FETCHING_FAILED: {
-            return {
-                ...state,
-                isLoading: false,
-                error: action.payload.error,
+                error: null,
             };
         }
 

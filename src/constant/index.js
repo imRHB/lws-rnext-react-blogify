@@ -19,4 +19,6 @@ export const blogInitialState = {
 export const searchInitialState = {
     query: "",
     blogs: [],
+    isLoading: false,
+    error: null,
 };

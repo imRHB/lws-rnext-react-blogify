@@ -8,7 +8,7 @@ import Message from "../Message";
 import Spinner from "../ui/Spinner";
 
 export default function MainBlogs() {
-    const { blogs, hasMore, loaderRef } = useBlogs();
+    const { blogs, hasMore, loaderRef, isLoading } = useBlogs();
 
     const { state, dispatch } = useBlog();
 
@@ -56,18 +56,18 @@ export default function MainBlogs() {
 
     return (
         <main className="space-y-5 md:col-span-5">
-            {state?.blogs.length > 0 ? (
-                state?.blogs.map((blog) => (
-                    <BlogCard key={blog.id} blog={blog} />
-                ))
-            ) : (
-                <div className="flex flex-col items-center justify-center min-h-[40vh]">
-                    <Message
-                        title="No blogs found!"
-                        description="No blogs found on the server, check back later."
-                    />
-                </div>
-            )}
+            {state?.blogs.length > 0
+                ? state?.blogs.map((blog) => (
+                      <BlogCard key={blog.id} blog={blog} />
+                  ))
+                : !isLoading && (
+                      <div className="flex flex-col items-center justify-center min-h-[40vh]">
+                          <Message
+                              title="No blogs found!"
+                              description="No blogs found on the server, check back later."
+                          />
+                      </div>
+                  )}
 
             {hasMore ? (
                 <div

@@ -14,7 +14,7 @@ export default function BlogContents({ blog }) {
     const isAuthorLoggedIn = state?.user?.id === author?.id;
 
     return (
-        <article className="container py-8 text-center">
+        <div className="py-8 text-center">
             <h1 className="text-3xl font-bold md:text-5xl">{title}</h1>
 
             <div className="flex items-center justify-center gap-4 my-4">
@@ -83,6 +83,6 @@ export default function BlogContents({ blog }) {
             <div className="mx-auto w-full md:w-10/12 text-slate-300 text-base md:text-lg leading-8 py-2 !text-left">
                 {content}
             </div>
-        </article>
+        </div>
     );
 }
