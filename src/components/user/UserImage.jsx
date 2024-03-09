@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import { toast } from "react-toastify";
 
 import { actions } from "../../actions";
 import { api } from "../../api";
@@ -44,6 +45,8 @@ export default function UserImage() {
             );
 
             if (response.status === 200) {
+                toast.success("Avatar has been updated successfully!");
+
                 dispatch({
                     type: actions.profile.UPDATE_USER_PROFILE,
                     payload: {

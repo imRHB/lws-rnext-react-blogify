@@ -1,15 +1,16 @@
 import axios from "axios";
 import { useEffect, useReducer, useState } from "react";
 
+import { api } from "../api";
 import { blogInitialState } from "../constant";
 import { BlogContext } from "../context";
-import useBlogs from "../hooks/useBlogs";
+import useMainBlogs from "../hooks/useMainBlogs";
 import useProfile from "../hooks/useProfile";
 import { blogReducer } from "../reducers/blogReducer";
 
 export default function BlogProvider({ children }) {
     const [popularBlogs, setPopularBlogs] = useState([]);
-    const { blogs } = useBlogs();
+    const { blogs, error } = useMainBlogs();
     const { state: profileState } = useProfile();
     const [favouriteBlogs, setFavouriteBlogs] = useState(
         profileState?.favouriteBlogs ?? []
@@ -36,7 +37,7 @@ export default function BlogProvider({ children }) {
     useEffect(() => {
         async function fetchFavouriteBlogs() {
             try {
-                const response = await axios.get(
+                const response = await api.get(
                     `${import.meta.env.VITE_SERVER_BASE_URL}/blogs/favourites`
                 );
 
@@ -57,6 +58,7 @@ export default function BlogProvider({ children }) {
         popularBlogs,
         // favouriteBlogs: profileState?.user?.id && profileState?.favouriteBlogs,
         favouriteBlogs,
+        error,
     });
 
     return (

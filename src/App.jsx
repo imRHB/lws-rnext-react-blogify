@@ -9,7 +9,6 @@ import EditBlogPage from "./pages/EditBlog";
 import HomePage from "./pages/Home";
 import LoginPage from "./pages/Login";
 import NotFoundPage from "./pages/NotFound";
-import ProductList from "./pages/ProductList";
 import ProfilePage from "./pages/Profile";
 import PublicProfilePage from "./pages/PublicProfile";
 import RegisterPage from "./pages/Register";
@@ -52,19 +51,12 @@ export default function App() {
                                     element={<BlogDetailsPage />}
                                     exact
                                 />
-
                                 <Route path="/" element={<HomePage />} exact />
 
                                 <Route path="/login" element={<LoginPage />} />
                                 <Route
                                     path="/register"
                                     element={<RegisterPage />}
-                                />
-
-                                {/* testing route */}
-                                <Route
-                                    path="/products"
-                                    element={<ProductList />}
                                 />
 
                                 <Route path="*" element={<NotFoundPage />} />

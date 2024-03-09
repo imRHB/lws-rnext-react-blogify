@@ -4,8 +4,8 @@ import { useParams } from "react-router-dom";
 
 import { actions } from "../actions";
 import AppLayout from "../components/AppLayout";
+import Message from "../components/Message";
 import Divider from "../components/shared/Divider";
-import Error from "../components/ui/Error";
 import Spinner from "../components/ui/Spinner";
 import UserBio from "../components/user/UserBio";
 import UserBlogs from "../components/user/UserBlogs";
@@ -73,7 +73,12 @@ export default function PublicProfilePage() {
     }
 
     if (!isLoading && error) {
-        content = <Error message={error?.error} />;
+        content = (
+            <Message
+                title={error?.error}
+                description="We couldn't found the user!"
+            />
+        );
     }
 
     if (!isLoading && !error) {

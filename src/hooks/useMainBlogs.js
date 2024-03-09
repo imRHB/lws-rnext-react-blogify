@@ -3,11 +3,12 @@ import { useEffect, useRef, useState } from "react";
 
 const blogsPerPage = 4;
 
-export default function useBlogs() {
+export default function useMainBlogs() {
     const [blogs, setBlogs] = useState([]);
     const [page, setPage] = useState(1);
     const [hasMore, setHasMore] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(null);
 
     const loaderRef = useRef(null);
 
@@ -29,6 +30,8 @@ export default function useBlogs() {
                 }
             } catch (error) {
                 console.error(error);
+                setError(error);
+                setHasMore(false);
             } finally {
                 setIsLoading(false);
             }
@@ -55,5 +58,5 @@ export default function useBlogs() {
         };
     }, [hasMore, page]);
 
-    return { blogs, loaderRef, hasMore, isLoading };
+    return { blogs, loaderRef, hasMore, isLoading, error };
 }

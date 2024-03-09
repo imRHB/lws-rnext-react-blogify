@@ -72,6 +72,12 @@ export default function BlogActions() {
             );
 
             if (response.status === 200) {
+                toast.success(
+                    `You have ${isFavourite ? "removed" : "added"} this blog ${
+                        isFavourite ? "from" : "in"
+                    } your favourite list!`
+                );
+
                 dispatch({
                     type: actions.blog.TOGGLE_FAVOURITE_BLOG,
                     payload: {

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import { actions } from "../actions";
 import { api } from "../api";
@@ -56,6 +57,8 @@ export default function CreateBlogPage() {
             );
 
             if (response.status === 201) {
+                toast.success("A new blog is created successfully!");
+
                 dispatch({
                     type: actions.blog.CREATE_BLOG,
                     payload: {
@@ -179,7 +182,7 @@ export default function CreateBlogPage() {
 
                     <button
                         type="submit"
-                        className="px-6 py-2 text-white transition-all duration-200 bg-indigo-600 rounded-md md:py-3 hover:bg-indigo-700 disabled:cursor-not-allowed disabled:bg-indigo-900 disabled:ring-indigo-950"
+                        className="px-6 py-2 text-white transition-all duration-200 bg-indigo-600 rounded-md md:py-3 ring-1 ring-indigo-700 hover:bg-indigo-700 disabled:cursor-not-allowed disabled:bg-indigo-900 disabled:ring-indigo-950"
                     >
                         Create blog
                     </button>

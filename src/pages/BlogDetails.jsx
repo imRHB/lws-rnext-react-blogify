@@ -4,10 +4,10 @@ import { useParams } from "react-router-dom";
 import { actions } from "../actions";
 import { api } from "../api";
 import AppLayout from "../components/AppLayout";
+import Message from "../components/Message";
 import BlogActions from "../components/blog/BlogActions";
 import BlogContents from "../components/blog/BlogContents";
 import CommentBoard from "../components/blog/CommentBoard";
-import Error from "../components/ui/Error";
 import Spinner from "../components/ui/Spinner";
 import useBlog from "../hooks/useBlog";
 
@@ -63,7 +63,12 @@ export default function BlogDetailsPage() {
     }
 
     if (!isLoading && error) {
-        content = <Error message={error?.message} />;
+        content = (
+            <Message
+                title={error?.message}
+                description="We couldn't found the blog!"
+            />
+        );
     }
 
     if (!isLoading && !error) {
@@ -78,7 +83,7 @@ export default function BlogDetailsPage() {
 
     return (
         <AppLayout>
-            <section className="container min-h-[50vh]">{content}</section>
+            <section className="container min-h-[60vh]">{content}</section>
         </AppLayout>
     );
 }

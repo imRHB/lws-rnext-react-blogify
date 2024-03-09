@@ -1,14 +1,14 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 
 import { actions } from "../../actions";
 import useBlog from "../../hooks/useBlog";
-import useBlogs from "../../hooks/useBlogs";
-import BlogCard from "../card/BlogCard";
+import useMainBlogs from "../../hooks/useMainBlogs";
 import Message from "../Message";
+import BlogCard from "../card/BlogCard";
 import Spinner from "../ui/Spinner";
 
 export default function MainBlogs() {
-    const { blogs, hasMore, loaderRef, isLoading } = useBlogs();
+    const { blogs, error, hasMore, loaderRef, isLoading } = useMainBlogs();
 
     const { state, dispatch } = useBlog();
 
@@ -54,37 +54,49 @@ export default function MainBlogs() {
         };
     }, [blogs, dispatch]);
 
-    return (
-        <main className="space-y-5 md:col-span-5">
-            {state?.blogs.length > 0
-                ? state?.blogs.map((blog) => (
-                      <BlogCard key={blog.id} blog={blog} />
-                  ))
-                : !isLoading && (
-                      <div className="flex flex-col items-center justify-center min-h-[40vh]">
-                          <Message
-                              title="No blogs found!"
-                              description="No blogs found on the server, check back later."
-                          />
-                      </div>
-                  )}
+    if (!isLoading)
+        return (
+            <main className="space-y-5 md:col-span-5">
+                {state?.blogs.length > 0
+                    ? state?.blogs.map((blog) => (
+                          <BlogCard key={blog.id} blog={blog} />
+                      ))
+                    : !error && (
+                          <div className="flex flex-col items-center justify-center min-h-[60vh]">
+                              <Message
+                                  title="No blogs found!"
+                                  description="No blogs found on the server, check back later."
+                              />
+                          </div>
+                      )}
 
-            {hasMore ? (
-                <div
-                    ref={loaderRef}
-                    className="flex flex-col items-center justify-center gap-3 rounded-lg h-36 bg-slate-900/30"
-                >
-                    <Spinner />
-                    <Message description="Fetching blogs" />
-                </div>
-            ) : (
-                <div className="flex items-center justify-center rounded-lg h-36 bg-slate-900/30">
-                    <Message
-                        title="That's all from us today!"
-                        description="You have reached to the end! No more blogs on the server!"
-                    />
-                </div>
-            )}
-        </main>
-    );
+                {hasMore ? (
+                    <div
+                        ref={loaderRef}
+                        className="flex flex-col items-center justify-center gap-3 rounded-lg h-36 bg-slate-900/30"
+                    >
+                        <Spinner />
+                        <Message description="Fetching blogs" />
+                    </div>
+                ) : (
+                    <React.Fragment>
+                        {error ? (
+                            <div className="flex flex-col items-center justify-center min-h-[60vh]">
+                                <Message
+                                    title={error?.code}
+                                    description={error?.message}
+                                />
+                            </div>
+                        ) : (
+                            <div className="flex items-center justify-center rounded-lg h-36 bg-slate-900/30">
+                                <Message
+                                    title="That's all from us today!"
+                                    description="You have reached to the end! No more blogs on the server!"
+                                />
+                            </div>
+                        )}
+                    </React.Fragment>
+                )}
+            </main>
+        );
 }

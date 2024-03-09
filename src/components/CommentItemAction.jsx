@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 import { actions } from "../actions";
 import { api } from "../api";
@@ -31,6 +32,8 @@ export default function CommentItemAction({ commentId, setShowActions }) {
             );
 
             if (response.status === 200) {
+                toast.success("Comment has been deleted successfully!");
+
                 dispatch({
                     type: actions.blog.DELETE_COMMENT,
                     payload: {

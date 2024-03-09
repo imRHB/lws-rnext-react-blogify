@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import { actions } from "../actions";
 import { api } from "../api";
@@ -89,6 +90,8 @@ export default function EditBlogPage() {
             );
 
             if (response.status === 200) {
+                toast.success("Blog has been updated successfully!");
+
                 dispatch({
                     type: actions.blog.UPDATE_BLOG,
                     payload: {
@@ -102,6 +105,11 @@ export default function EditBlogPage() {
         } catch (error) {
             console.error(error);
         }
+    }
+
+    function handleCancel() {
+        setBlog({});
+        navigate(`/blogs/${blogId}`);
     }
 
     return (
@@ -119,9 +127,15 @@ export default function EditBlogPage() {
                         )}
                         <div className="grid place-items-center bg-slate-900/50 h-[150px] rounded-md my-4">
                             <label htmlFor="thumbnail">
-                                {imagePreview ? (
+                                {imagePreview ?? blog?.thumbnail ? (
                                     <img
-                                        src={imagePreview}
+                                        src={
+                                            imagePreview ??
+                                            `${
+                                                import.meta.env
+                                                    .VITE_SERVER_BASE_URL
+                                            }/uploads/blog/${blog?.thumbnail}`
+                                        }
                                         alt="Preview"
                                         className="w-auto my-0.5 h-36 rounded"
                                     />
@@ -213,12 +227,21 @@ export default function EditBlogPage() {
                             />
                         </Field>
 
-                        <button
-                            type="submit"
-                            className="px-6 py-2 text-white transition-all duration-200 bg-indigo-600 rounded-md md:py-3 hover:bg-indigo-700 disabled:cursor-not-allowed disabled:bg-indigo-900 disabled:ring-indigo-950"
-                        >
-                            Update blog
-                        </button>
+                        <div className="flex gap-4">
+                            <button
+                                type="submit"
+                                className="px-6 py-2 text-white transition-all duration-200 bg-indigo-600 rounded-md md:py-3 ring-1 ring-indigo-700 hover:bg-indigo-700 disabled:cursor-not-allowed disabled:bg-indigo-900 disabled:ring-indigo-950"
+                            >
+                                Update
+                            </button>
+
+                            <button
+                                className="px-6 py-2 text-white transition-all duration-200 rounded-md md:py-3 bg-slate-900 ring-1 ring-slate-800 hover:bg-slate-950"
+                                onClick={handleCancel}
+                            >
+                                Cancel
+                            </button>
+                        </div>
                     </form>
                 ) : (
                     <div>

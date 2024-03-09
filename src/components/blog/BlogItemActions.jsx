@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import { actions } from "../../actions";
 import { api } from "../../api";
@@ -39,6 +40,8 @@ export default function BlogItemActions({ blogId, title, setShowActions }) {
             );
 
             if (response.status === 200) {
+                toast.success("Blog has been deleted successfully!");
+
                 dispatch({
                     type: actions.blog.DELETE_BLOG,
                     payload: {

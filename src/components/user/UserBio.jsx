@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 
 import { actions } from "../../actions";
 import { api } from "../../api";
@@ -24,6 +25,8 @@ export default function UserBio() {
             );
 
             if (response.status === 200) {
+                toast.success("Your bio has been updated!");
+
                 dispatch({
                     type: actions.profile.UPDATE_USER_PROFILE,
                     payload: {

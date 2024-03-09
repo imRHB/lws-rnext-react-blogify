@@ -22,9 +22,9 @@
 
 -   ব্লগ ডিটেইলস পেজে Get Single Blog থেকে ডেটা নিয়ে এসে দেখাতে হবে । সেখানে টেমপ্লেটে দেয়া তথ্য গুলো ঠিক ঠাক ভাবে বসাতে হবে । ব্লগের কন্টেন্ট দেখানোর জন্যে dangerouslySetInnerHTML ব্যবহার করতে পারেন। এটি সম্পর্কে না জেনে থাকলে এই ব্লগ টি পড়তে পারেন - When to use dangerouslySetInnerHTML in React? । তবে dangerouslySetInnerHTML ব্যবহার করা বাধ্যতামূলক নয়। ✅
 
--   ব্লগ ডিটেইলস পেজে Floating অবস্থায় Like, Favourite এবং Comment বাটন রয়েছে। লাইকে ক্লিক করলে লাইক হবে, Favourite এ ক্লিক করলে Favourite লিস্ট JSON এ যাবে এবং Comment এ ক্লিক করলে Comment সেকশন নিয়ে যাবে । তবে, ইউজার যদি লগড ইন না থাকে, তাহলে ইউজার যখন Like বা Favourite করার চেষ্টা করবে, তখন সুন্দর করে বাধা দিতে হবে । Like/Unlike করার জন্যে Like এবং Favourite/Unfavourite করার জন্যে Favourite এই API কল করতে হবে । ❎
+-   ব্লগ ডিটেইলস পেজে Floating অবস্থায় Like, Favourite এবং Comment বাটন রয়েছে। লাইকে ক্লিক করলে লাইক হবে, Favourite এ ক্লিক করলে Favourite লিস্ট JSON এ যাবে এবং Comment এ ক্লিক করলে Comment সেকশন নিয়ে যাবে । তবে, ইউজার যদি লগড ইন না থাকে, তাহলে ইউজার যখন Like বা Favourite করার চেষ্টা করবে, তখন সুন্দর করে বাধা দিতে হবে । Like/Unlike করার জন্যে Like এবং Favourite/Unfavourite করার জন্যে Favourite এই API কল করতে হবে । ✅
 
--   ব্লগ ডিটেইলস পেজের Comment সেকশনে Comment নিয়ে এসে দেখাতে হবে । এক্ষেত্রে পুর্বের 'Get Single Blog' এর রেসপন্স এই Comment গুলো থাকবে । তবে, লগইন না থাকা অবস্থায় Comment দেখা যাবে কিন্তু Comment করা যাবে না। ❎
+-   ব্লগ ডিটেইলস পেজের Comment সেকশনে Comment নিয়ে এসে দেখাতে হবে । এক্ষেত্রে পুর্বের 'Get Single Blog' এর রেসপন্স এই Comment গুলো থাকবে । তবে, লগইন না থাকা অবস্থায় Comment দেখা যাবে কিন্তু Comment করা যাবে না। ✅
 
 -   Logged in ইউজার চাইলে নিজের Comment ডিলিট করতে পারবে । Comment ডিলিটের জন্যে টেমপ্লেটে আমরা কোনো কোড দেইনি। তাই সেটি আপনাকে নিজেই করতে হবে এবং Comment ডিলিট এর জন্যে API ডকুমেন্টেশন দেয়া হয়েছে, সে অনুযায়ী আপনাকে Implement করতে হবে । ✅
 

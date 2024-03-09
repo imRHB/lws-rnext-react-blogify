@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import AppLayout from "../components/AppLayout";
 import Field from "../components/form/Field";
@@ -35,6 +36,7 @@ export default function RegisterPage() {
             );
 
             if (response.status === 201) {
+                toast.success("Account is created successfully!");
                 navigate("/login");
             }
         } catch (error) {
