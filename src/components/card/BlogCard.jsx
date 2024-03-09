@@ -103,7 +103,13 @@ export default function BlogCard({ blog }) {
                             <img src={dotsIcon} alt="3dots of Action" />
                         </button>
 
-                        {showActions && <BlogItemActions blogId={id} />}
+                        {showActions && (
+                            <BlogItemActions
+                                blogId={id}
+                                title={title}
+                                setShowActions={setShowActions}
+                            />
+                        )}
                     </div>
                 )}
             </div>

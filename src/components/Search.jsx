@@ -80,87 +80,84 @@ export default function Search() {
 
             <Portal>
                 <ModalLayout isOpen={isOpen} onClose={closeModal}>
-                    <section className="absolute top-0 left-0 z-50 grid w-full h-full place-items-center bg-slate-800/50 backdrop-blur-sm">
-                        <div className="relative w-6/12 p-6 mx-auto border rounded-lg shadow-lg bg-slate-900 border-slate-600/50 shadow-slate-400/10">
-                            <div className="space-y-4">
-                                <div className="flex justify-between gap-6">
-                                    <h3 className="text-xl font-bold text-slate-400">
-                                        Search for your desire blogs
-                                    </h3>
+                    <div className="relative w-6/12 p-6 mx-auto border rounded-lg shadow-lg bg-slate-900 border-slate-600/50 shadow-slate-400/10">
+                        <div className="space-y-4">
+                            <div className="flex justify-between gap-6">
+                                <h3 className="text-xl font-bold text-slate-400">
+                                    Search for your desire blogs
+                                </h3>
 
-                                    <div className="absolute flex items-center gap-4 right-4 top-4">
-                                        <kbd className="px-2 py-0.5 border rounded text-slate-400 border-slate-600">
-                                            Esc
-                                        </kbd>
+                                <div className="absolute flex items-center gap-4 right-4 top-4">
+                                    <kbd className="px-2 py-0.5 border rounded text-slate-400 border-slate-600">
+                                        Esc
+                                    </kbd>
 
-                                        <img
-                                            src={closeIcon}
-                                            alt="Close"
-                                            className="w-8 h-8 cursor-pointer"
-                                            onClick={closeModal}
-                                        />
-                                    </div>
-                                </div>
-
-                                <div className="relative">
-                                    <div className="absolute inset-y-0 left-0 flex items-center px-4 py-3 pl-6 pointer-events-none">
-                                        <img src={magnifyIcon} alt="Search" />
-                                        <span className="sr-only">Search</span>
-                                    </div>
-
-                                    <input
-                                        type="text"
-                                        id="search"
-                                        name="search"
-                                        placeholder="Search blogs..."
-                                        className="block w-full px-4 py-3 transition bg-transparent rounded-lg pl-14 ring-2 text-slate-300 focus:outline-none focus:bg-slate-950/20 focus:ring-2 focus:ring-blue-900/50 ring-slate-800"
-                                        onChange={handleSearch}
-                                        onFocus={openModal}
-                                        onBlur={isOpen ? null : closeModal}
+                                    <img
+                                        src={closeIcon}
+                                        alt="Close"
+                                        className="w-8 h-8 cursor-pointer"
+                                        onClick={closeModal}
                                     />
                                 </div>
                             </div>
 
-                            {/* search results */}
-                            <div>
-                                {!state?.query ? (
-                                    <div className="flex flex-col items-center justify-center gap-2 pt-6 pb-4">
-                                        <Message
-                                            title="Search blogs"
-                                            description="Start typing to search blogs"
-                                        />
-                                    </div>
-                                ) : (
-                                    <React.Fragment>
-                                        <h3 className="mt-6 font-bold text-slate-300">
-                                            Search Results (
-                                            {state?.blogs?.length})
-                                        </h3>
+                            <div className="relative">
+                                <div className="absolute inset-y-0 left-0 flex items-center px-4 py-3 pl-6 pointer-events-none">
+                                    <img src={magnifyIcon} alt="Search" />
+                                    <span className="sr-only">Search</span>
+                                </div>
 
-                                        <div className="my-4 divide-y-2 divide-slate-500/30 max-h-[440px] overflow-y-scroll overscroll-contain">
-                                            {state?.blogs?.length > 0 ? (
-                                                state?.blogs?.map((blog) => {
-                                                    return (
-                                                        <SearchResultItem
-                                                            key={blog.id}
-                                                            blog={blog}
-                                                        />
-                                                    );
-                                                })
-                                            ) : (
-                                                <div className="flex flex-col items-center justify-center gap-2 pt-6 pb-4">
-                                                    <Message
-                                                        title="No blogs found"
-                                                        description={`We could not find any blogs with "${state?.query}", try searching with different keyword`}
-                                                    />
-                                                </div>
-                                            )}
-                                        </div>
-                                    </React.Fragment>
-                                )}
+                                <input
+                                    type="text"
+                                    id="search"
+                                    name="search"
+                                    placeholder="Search blogs..."
+                                    className="block w-full px-4 py-3 transition bg-transparent rounded-lg pl-14 ring-2 text-slate-300 focus:outline-none focus:bg-slate-950/20 focus:ring-2 focus:ring-blue-900/50 ring-slate-800"
+                                    onChange={handleSearch}
+                                    onFocus={openModal}
+                                    onBlur={isOpen ? null : closeModal}
+                                />
                             </div>
                         </div>
-                    </section>
+
+                        {/* search results */}
+                        <div>
+                            {!state?.query ? (
+                                <div className="flex flex-col items-center justify-center gap-2 pt-6 pb-4">
+                                    <Message
+                                        title="Search blogs"
+                                        description="Start typing to search blogs"
+                                    />
+                                </div>
+                            ) : (
+                                <React.Fragment>
+                                    <h3 className="mt-6 font-bold text-slate-300">
+                                        Search Results ({state?.blogs?.length})
+                                    </h3>
+
+                                    <div className="my-4 divide-y-2 divide-slate-500/30 max-h-[440px] overflow-y-scroll overscroll-contain">
+                                        {state?.blogs?.length > 0 ? (
+                                            state?.blogs?.map((blog) => {
+                                                return (
+                                                    <SearchResultItem
+                                                        key={blog.id}
+                                                        blog={blog}
+                                                    />
+                                                );
+                                            })
+                                        ) : (
+                                            <div className="flex flex-col items-center justify-center gap-2 pt-6 pb-4">
+                                                <Message
+                                                    title="No blogs found"
+                                                    description={`We could not find any blogs with "${state?.query}", try searching with different keyword`}
+                                                />
+                                            </div>
+                                        )}
+                                    </div>
+                                </React.Fragment>
+                            )}
+                        </div>
+                    </div>
                 </ModalLayout>
             </Portal>
         </div>

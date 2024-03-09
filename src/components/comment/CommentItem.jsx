@@ -80,6 +80,7 @@ export default function CommentItem({ comment }) {
                         <CommentItemAction
                             blogId={blogState?.blog?.id}
                             commentId={comment?.id}
+                            setShowActions={setShowActions}
                         />
                     )}
                 </div>
