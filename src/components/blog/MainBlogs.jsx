@@ -3,12 +3,13 @@ import React, { useEffect } from "react";
 import { actions } from "../../actions";
 import useBlog from "../../hooks/useBlog";
 import useMainBlogs from "../../hooks/useMainBlogs";
+import BlogCardSkeleton from "../BlogCardSkeleton";
 import Message from "../Message";
 import BlogCard from "../card/BlogCard";
-import Spinner from "../ui/Spinner";
+import FadeIn from "../framer/FadeIn";
 
 export default function MainBlogs() {
-    const { blogs, error, hasMore, loaderRef, isLoading } = useMainBlogs();
+    const { blogs, error, hasMore, loaderRef } = useMainBlogs();
 
     const { state, dispatch } = useBlog();
 
@@ -54,49 +55,52 @@ export default function MainBlogs() {
         };
     }, [blogs, dispatch]);
 
-    if (!isLoading)
-        return (
-            <main className="space-y-5 md:col-span-5">
-                {state?.blogs.length > 0
-                    ? state?.blogs.map((blog) => (
-                          <BlogCard key={blog.id} blog={blog} />
-                      ))
-                    : !error && (
-                          <div className="flex flex-col items-center justify-center min-h-[60vh]">
-                              <Message
-                                  title="No blogs found!"
-                                  description="No blogs found on the server, check back later."
-                              />
-                          </div>
-                      )}
+    return (
+        <div className="space-y-5 md:col-span-5">
+            {state?.blogs && state?.blogs.length < 0 ? (
+                <div className="flex flex-col items-center justify-center">
+                    <Message
+                        title="No blogs found!"
+                        description="No blogs found on the server, check back later."
+                    />
+                </div>
+            ) : (
+                state?.blogs.map((blog) => (
+                    <FadeIn key={blog.id}>
+                        <BlogCard blog={blog} />
+                    </FadeIn>
+                ))
+            )}
 
-                {hasMore ? (
-                    <div
-                        ref={loaderRef}
-                        className="flex flex-col items-center justify-center gap-3 rounded-lg h-36 bg-slate-900/30"
-                    >
-                        <Spinner />
-                        <Message description="Fetching blogs" />
-                    </div>
-                ) : (
-                    <React.Fragment>
-                        {error ? (
-                            <div className="flex flex-col items-center justify-center min-h-[60vh]">
-                                <Message
-                                    title={error?.code}
-                                    description={error?.message}
-                                />
-                            </div>
-                        ) : (
-                            <div className="flex items-center justify-center rounded-lg h-36 bg-slate-900/30">
-                                <Message
-                                    title="That's all from us today!"
-                                    description="You have reached to the end! No more blogs on the server!"
-                                />
-                            </div>
-                        )}
-                    </React.Fragment>
-                )}
-            </main>
-        );
+            {hasMore ? (
+                <div
+                    ref={loaderRef}
+                    className="flex flex-col items-center justify-center w-full h-auto gap-5"
+                >
+                    {/* <Spinner />
+                    <Message description="Fetching blogs" /> */}
+                    <BlogCardSkeleton />
+                    <BlogCardSkeleton />
+                </div>
+            ) : (
+                <React.Fragment>
+                    {error ? (
+                        <FadeIn className="flex flex-col items-center justify-center">
+                            <Message
+                                title={error?.code}
+                                description={error?.message}
+                            />
+                        </FadeIn>
+                    ) : (
+                        <FadeIn className="flex items-center justify-center rounded-lg h-36 bg-slate-900/30">
+                            <Message
+                                title="That's all from us today!"
+                                description="You have reached to the end! No more blogs on the server!"
+                            />
+                        </FadeIn>
+                    )}
+                </React.Fragment>
+            )}
+        </div>
+    );
 }

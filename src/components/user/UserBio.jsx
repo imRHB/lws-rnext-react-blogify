@@ -19,7 +19,7 @@ export default function UserBio() {
         evt.preventDefault();
 
         dispatch({
-            type: actions.profile.DATA_FETCHING_STARTED,
+            type: actions.global.DATA_FETCHING_STARTED,
         });
 
         try {
@@ -43,7 +43,7 @@ export default function UserBio() {
             }
         } catch (error) {
             dispatch({
-                type: actions.profile.DATA_FETCHING_FAILED,
+                type: actions.global.DATA_FETCHING_FAILED,
                 payload: {
                     error,
                 },

@@ -25,7 +25,7 @@ export default function CommentItemAction({ commentId, setShowActions }) {
         evt.preventDefault();
 
         dispatch({
-            type: actions.blog.DATA_FETCHING_STARTED,
+            type: actions.global.DATA_FETCHING_STARTED,
         });
 
         try {
@@ -49,7 +49,7 @@ export default function CommentItemAction({ commentId, setShowActions }) {
             }
         } catch (error) {
             dispatch({
-                type: actions.blog.DATA_FETCHING_FAILED,
+                type: actions.global.DATA_FETCHING_FAILED,
                 payload: {
                     error,
                 },

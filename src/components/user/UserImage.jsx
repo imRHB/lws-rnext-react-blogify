@@ -58,7 +58,7 @@ export default function UserImage() {
             }
         } catch (error) {
             dispatch({
-                type: actions.profile.DATA_FETCHING_FAILED,
+                type: actions.global.DATA_FETCHING_FAILED,
                 payload: {
                     error,
                 },

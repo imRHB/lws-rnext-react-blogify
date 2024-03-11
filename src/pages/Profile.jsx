@@ -20,7 +20,7 @@ export default function ProfilePage() {
     useEffect(() => {
         const fetchProfile = async () => {
             dispatch({
-                type: actions.profile.DATA_FETCHING_STARTED,
+                type: actions.global.DATA_FETCHING_STARTED,
             });
 
             try {
@@ -40,7 +40,7 @@ export default function ProfilePage() {
                 }
             } catch (error) {
                 dispatch({
-                    type: actions.profile.DATA_FETCHING_FAILED,
+                    type: actions.global.DATA_FETCHING_FAILED,
                     payload: {
                         error,
                     },

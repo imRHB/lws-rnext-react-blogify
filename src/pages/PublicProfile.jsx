@@ -25,7 +25,7 @@ export default function PublicProfilePage() {
     useEffect(() => {
         const fetchPublicProfile = async () => {
             dispatch({
-                type: actions.profile.DATA_FETCHING_STARTED,
+                type: actions.global.DATA_FETCHING_STARTED,
             });
 
             try {
@@ -43,9 +43,9 @@ export default function PublicProfilePage() {
                 }
             } catch (error) {
                 dispatch({
-                    type: actions.profile.DATA_FETCHING_FAILED,
+                    type: actions.global.DATA_FETCHING_FAILED,
                     payload: {
-                        error: error.response.data,
+                        error: error?.response?.data ?? error,
                     },
                 });
             }
@@ -74,13 +74,17 @@ export default function PublicProfilePage() {
     if (!isLoading && error) {
         content = (
             <Message
-                title={error?.error}
-                description="We couldn't found the user!"
+                title={error?.error ? error.error : error?.code}
+                description={
+                    error?.error
+                        ? "We couldn't found the user!"
+                        : error?.message
+                }
             />
         );
     }
 
-    if (!isLoading && !error) {
+    if (!isLoading && !error && state?.publicProfile) {
         content = (
             <React.Fragment>
                 <div className="flex flex-col items-center py-8 text-center">

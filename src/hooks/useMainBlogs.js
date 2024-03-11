@@ -1,7 +1,12 @@
+/* 
+    separate function to fetch the main blogs,
+    this function is responsible for generating infinity scrolling
+*/
+
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 
-const blogsPerPage = 10;
+const blogsPerPage = 4;
 
 export default function useMainBlogs() {
     const [blogs, setBlogs] = useState([]);

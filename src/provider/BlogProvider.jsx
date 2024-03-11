@@ -4,13 +4,12 @@ import { useEffect, useReducer, useState } from "react";
 import { api } from "../api";
 import { blogInitialState } from "../constant";
 import { BlogContext } from "../context";
-import useMainBlogs from "../hooks/useMainBlogs";
 import useProfile from "../hooks/useProfile";
 import { blogReducer } from "../reducers/blogReducer";
 
 export default function BlogProvider({ children }) {
     const [popularBlogs, setPopularBlogs] = useState([]);
-    const { blogs, error } = useMainBlogs();
+    // const { blogs, error } = useMainBlogs();
     const { state: profileState } = useProfile();
     const [favouriteBlogs, setFavouriteBlogs] = useState(
         profileState?.favouriteBlogs ?? []
@@ -54,11 +53,11 @@ export default function BlogProvider({ children }) {
 
     const [state, dispatch] = useReducer(blogReducer, {
         ...blogInitialState,
-        blogs,
+        // blogs,
         popularBlogs,
         // favouriteBlogs: profileState?.user?.id && profileState?.favouriteBlogs,
         favouriteBlogs,
-        error,
+        // error,
     });
 
     return (

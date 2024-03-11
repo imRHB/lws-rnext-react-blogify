@@ -1,3 +1,9 @@
+/* 
+    custom hook that extends the axios custom config,
+    also intercepts the request and response to generate
+    new access token using the refresh token from auth
+*/
+
 import axios from "axios";
 import { useEffect } from "react";
 
@@ -18,7 +24,10 @@ const useApi = () => {
 
                 return config;
             },
-            (error) => Promise.reject(error)
+            (error) => {
+                console.error("REQUEST_ERROR:", error);
+                Promise.reject(error);
+            }
         );
 
         const responseInterceptor = api.interceptors.response.use(
@@ -45,9 +54,11 @@ const useApi = () => {
 
                         return axios(originalRequest);
                     } catch (error) {
-                        console.error(error);
+                        console.error("REFRESH_TOKEN_ERROR:", error);
                         throw error;
                     }
+                } else {
+                    console.error("API_ERROR:", error);
                 }
 
                 return Promise.reject(error);

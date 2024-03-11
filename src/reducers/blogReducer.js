@@ -2,7 +2,7 @@ import { actions } from "../actions";
 
 export const blogReducer = (state, action) => {
     switch (action.type) {
-        case actions.blog.DATA_FETCHING_STARTED: {
+        case actions.global.DATA_FETCHING_STARTED: {
             return {
                 ...state,
                 isLoading: true,
@@ -10,7 +10,7 @@ export const blogReducer = (state, action) => {
             };
         }
 
-        case actions.blog.DATA_FETCHING_FAILED: {
+        case actions.global.DATA_FETCHING_FAILED: {
             return {
                 ...state,
                 isLoading: false,
@@ -32,7 +32,14 @@ export const blogReducer = (state, action) => {
             };
         }
 
-        case actions.blog.FETCH_FAVORITE_BLOGS: {
+        case actions.blog.FETCH_POPULAR_BLOGS: {
+            return {
+                ...state,
+                popularBlogs: action.payload.blogs,
+            };
+        }
+
+        case actions.blog.FETCH_FAVOURITE_BLOGS: {
             return {
                 ...state,
                 favouriteBlogs: action.payload.blogs,

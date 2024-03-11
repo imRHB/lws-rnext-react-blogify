@@ -2,7 +2,7 @@ import { actions } from "../actions";
 
 export const profileReducer = (state, action) => {
     switch (action.type) {
-        case actions.profile.DATA_FETCHING_STARTED: {
+        case actions.global.DATA_FETCHING_STARTED: {
             return {
                 ...state,
                 isLoading: true,
@@ -10,7 +10,7 @@ export const profileReducer = (state, action) => {
             };
         }
 
-        case actions.profile.DATA_FETCHING_FAILED: {
+        case actions.global.DATA_FETCHING_FAILED: {
             return {
                 ...state,
                 isLoading: false,

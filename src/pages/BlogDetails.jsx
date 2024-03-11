@@ -21,7 +21,7 @@ export default function BlogDetailsPage() {
     useEffect(() => {
         const fetchBlogById = async () => {
             dispatch({
-                type: actions.blog.DATA_FETCHING_STARTED,
+                type: actions.global.DATA_FETCHING_STARTED,
             });
 
             try {
@@ -42,7 +42,7 @@ export default function BlogDetailsPage() {
                 }
             } catch (error) {
                 dispatch({
-                    type: actions.blog.DATA_FETCHING_FAILED,
+                    type: actions.global.DATA_FETCHING_FAILED,
                     payload: {
                         error: error.response.data,
                     },

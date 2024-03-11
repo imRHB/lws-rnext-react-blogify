@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 import { actions } from "../../actions";
 import { api } from "../../api";
@@ -7,6 +7,7 @@ import useProfile from "../../hooks/useProfile";
 import Message from "../Message";
 import SectionTitle from "../SectionTitle";
 import BlogItem from "../card/BlogItem";
+import FadeIn, { FadeInStagger } from "../framer/FadeIn";
 
 export default function FavoriteBlogs() {
     const { state } = useProfile();
@@ -15,7 +16,7 @@ export default function FavoriteBlogs() {
     useEffect(() => {
         async function fetchFavoriteBlogs() {
             blogDispatch({
-                type: actions.blog.DATA_FETCHING_STARTED,
+                type: actions.global.DATA_FETCHING_STARTED,
             });
 
             try {
@@ -25,7 +26,7 @@ export default function FavoriteBlogs() {
 
                 if (response.status === 200) {
                     blogDispatch({
-                        type: actions.blog.FETCH_FAVORITE_BLOGS,
+                        type: actions.blog.FETCH_FAVOURITE_BLOGS,
                         payload: {
                             blogs: response.data.blogs,
                         },
@@ -33,7 +34,7 @@ export default function FavoriteBlogs() {
                 }
             } catch (error) {
                 blogDispatch({
-                    type: actions.blog.DATA_FETCHING_FAILED,
+                    type: actions.global.DATA_FETCHING_FAILED,
                     payload: {
                         error,
                     },
@@ -50,21 +51,26 @@ export default function FavoriteBlogs() {
 
             <div className="my-5 space-y-5">
                 {!state?.user ? (
-                    <Message description="Login to see your favourite blogs!" />
+                    <FadeIn>
+                        <Message description="Login to see your favourite blogs!" />
+                    </FadeIn>
                 ) : (
-                    <React.Fragment>
+                    <FadeInStagger className="space-y-5" faster>
                         {blogState?.favouriteBlogs?.length > 0 ? (
                             blogState?.favouriteBlogs?.map((favBlog) => (
-                                <BlogItem
-                                    key={favBlog.id}
-                                    blog={favBlog}
-                                    category="favorite"
-                                />
+                                <FadeIn key={favBlog.id}>
+                                    <BlogItem
+                                        blog={favBlog}
+                                        category="favorite"
+                                    />
+                                </FadeIn>
                             ))
                         ) : (
-                            <Message description="You have no favourite blogs yet!" />
+                            <FadeIn>
+                                <Message description="You have no favourite blogs yet!" />
+                            </FadeIn>
                         )}
-                    </React.Fragment>
+                    </FadeInStagger>
                 )}
             </div>
         </section>

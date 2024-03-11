@@ -1,9 +1,12 @@
+import React from "react";
+
 import useAxios from "../../hooks/useAxios";
+import BlogItemSkeleton from "../BlogItemSkeleton";
 import Message from "../Message";
 import SectionTitle from "../SectionTitle";
 import BlogItem from "../card/BlogItem";
+import FadeIn, { FadeInStagger } from "../framer/FadeIn";
 import Error from "../ui/Error";
-import Spinner from "../ui/Spinner";
 
 export default function PopularBlogs() {
     const { data, error, isLoading } = useAxios("blogs/popular");
@@ -11,21 +14,41 @@ export default function PopularBlogs() {
     let content = null;
 
     if (isLoading) {
-        content = <Spinner />;
+        content = (
+            <React.Fragment>
+                <BlogItemSkeleton />
+                <BlogItemSkeleton />
+                <BlogItemSkeleton />
+            </React.Fragment>
+        );
     }
 
     if (!isLoading && error) {
-        content = <Error message={error?.message} />;
+        content = (
+            <FadeIn>
+                <Error message={error?.message} />
+            </FadeIn>
+        );
     }
 
     if (!isLoading && !error && data?.blogs?.length <= 0) {
-        content = <Message description="No popular blogs found!" />;
+        content = (
+            <FadeIn>
+                <Message description="No popular blogs found!" />
+            </FadeIn>
+        );
     }
 
     if (!isLoading && !error && data?.blogs?.length > 0) {
-        content = data.blogs.map((blog) => (
-            <BlogItem key={blog.id} blog={blog} />
-        ));
+        content = (
+            <FadeInStagger className="space-y-5" faster>
+                {data.blogs.map((blog) => (
+                    <FadeIn key={blog.id}>
+                        <BlogItem blog={blog} />
+                    </FadeIn>
+                ))}
+            </FadeInStagger>
+        );
     }
 
     return (

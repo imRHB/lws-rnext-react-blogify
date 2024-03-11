@@ -35,7 +35,7 @@ export default function BlogItemActions({ blogId, title, setShowActions }) {
         evt.preventDefault();
 
         dispatch({
-            type: actions.blog.DATA_FETCHING_STARTED,
+            type: actions.global.DATA_FETCHING_STARTED,
         });
 
         try {
@@ -62,7 +62,7 @@ export default function BlogItemActions({ blogId, title, setShowActions }) {
             }
         } catch (error) {
             dispatch({
-                type: actions.blog.DATA_FETCHING_FAILED,
+                type: actions.global.DATA_FETCHING_FAILED,
                 payload: {
                     error,
                 },

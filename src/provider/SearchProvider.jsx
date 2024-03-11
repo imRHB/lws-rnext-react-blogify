@@ -12,7 +12,7 @@ export default function SearchProvider({ children }) {
     useEffect(() => {
         async function searchBlogs() {
             dispatch({
-                type: actions.search.DATA_FETCHING_STARTED,
+                type: actions.global.DATA_FETCHING_STARTED,
             });
 
             try {
@@ -39,7 +39,7 @@ export default function SearchProvider({ children }) {
                 });
 
                 dispatch({
-                    type: actions.search.DATA_FETCHING_FAILED,
+                    type: actions.global.DATA_FETCHING_FAILED,
                     payload: {
                         error: error.response.data,
                     },

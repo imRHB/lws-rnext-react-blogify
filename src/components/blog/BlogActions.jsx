@@ -36,7 +36,7 @@ export default function BlogActions() {
         }
 
         dispatch({
-            type: actions.blog.DATA_FETCHING_STARTED,
+            type: actions.global.DATA_FETCHING_STARTED,
         });
 
         try {
@@ -58,7 +58,7 @@ export default function BlogActions() {
             }
         } catch (error) {
             dispatch({
-                type: actions.blog.DATA_FETCHING_FAILED,
+                type: actions.global.DATA_FETCHING_FAILED,
                 payload: {
                     error,
                 },
@@ -73,7 +73,7 @@ export default function BlogActions() {
         }
 
         dispatch({
-            type: actions.blog.DATA_FETCHING_STARTED,
+            type: actions.global.DATA_FETCHING_STARTED,
         });
 
         try {
@@ -100,7 +100,7 @@ export default function BlogActions() {
             }
         } catch (error) {
             dispatch({
-                type: actions.blog.DATA_FETCHING_FAILED,
+                type: actions.global.DATA_FETCHING_FAILED,
                 payload: {
                     error,
                 },

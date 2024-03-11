@@ -32,7 +32,7 @@ export default function RegisterPage() {
 
     async function onSubmit(formData) {
         dispatch({
-            type: actions.profile.DATA_FETCHING_STARTED,
+            type: actions.global.DATA_FETCHING_STARTED,
         });
 
         try {
@@ -50,7 +50,7 @@ export default function RegisterPage() {
             }
         } catch (error) {
             dispatch({
-                type: actions.profile.DATA_FETCHING_FAILED,
+                type: actions.global.DATA_FETCHING_FAILED,
                 payload: {
                     error,
                 },
@@ -70,7 +70,7 @@ export default function RegisterPage() {
     useEffect(() => {
         return () => {
             dispatch({
-                type: actions.profile.DATA_FETCHING_FAILED,
+                type: actions.global.DATA_FETCHING_FAILED,
                 payload: {
                     error: null,
                 },

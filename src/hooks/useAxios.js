@@ -1,7 +1,13 @@
+/* 
+    custom fetcher function using axios,
+    this function is used to fetch the data from the API,
+    not token is needed for fetch
+*/
+
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-export default function useAxios(endpoint) {
+export default function useAxios(endpoint, type) {
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -16,10 +22,8 @@ export default function useAxios(endpoint) {
                 const response = await axios.get(
                     `${import.meta.env.VITE_SERVER_BASE_URL}/${endpoint}`
                 );
+
                 if (response.status === 200) {
-                    // throw new Error(
-                    //     "Something went wrong, data fetching failed! Please try again later!"
-                    // );
                     if (isMounted) {
                         setData(response.data);
                         setError(null);
@@ -39,7 +43,7 @@ export default function useAxios(endpoint) {
         return () => {
             isMounted = false;
         };
-    }, [endpoint]);
+    }, [endpoint, type]);
 
     return {
         data,
