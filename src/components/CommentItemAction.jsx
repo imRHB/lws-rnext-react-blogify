@@ -24,9 +24,9 @@ export default function CommentItemAction({ commentId, setShowActions }) {
     async function handleDeleteComment(evt) {
         evt.preventDefault();
 
-        dispatch({
+        /* dispatch({
             type: actions.global.DATA_FETCHING_STARTED,
-        });
+        }); */
 
         try {
             const response = await api.delete(

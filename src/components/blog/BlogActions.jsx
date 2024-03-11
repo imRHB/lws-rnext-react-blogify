@@ -35,9 +35,9 @@ export default function BlogActions() {
             return;
         }
 
-        dispatch({
+        /* dispatch({
             type: actions.global.DATA_FETCHING_STARTED,
-        });
+        }); */
 
         try {
             const response = await api.post(
@@ -72,9 +72,9 @@ export default function BlogActions() {
             return;
         }
 
-        dispatch({
+        /* dispatch({
             type: actions.global.DATA_FETCHING_STARTED,
-        });
+        }); */
 
         try {
             const response = await api.patch(

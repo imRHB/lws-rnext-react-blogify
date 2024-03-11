@@ -5,9 +5,10 @@ import useSearch from "../hooks/useSearch";
 import ModalLayout from "./ModalLayout";
 import Portal from "./Portal";
 
+import BlogCardSkeleton from "./BlogCardSkeleton";
 import Message from "./Message";
 import SearchResultItem from "./SearchResultItem";
-import Spinner from "./ui/Spinner";
+import FadeIn from "./framer/FadeIn";
 import closeIcon from "/assets/icons/close.svg";
 import magnifyIcon from "/assets/icons/search.svg";
 
@@ -81,7 +82,7 @@ export default function Search() {
 
             <Portal>
                 <ModalLayout isOpen={isOpen} onClose={closeModal}>
-                    <div className="relative w-6/12 p-6 mx-auto border rounded-lg shadow-lg bg-slate-900 border-slate-600/50 shadow-slate-400/10">
+                    <FadeIn className="relative w-6/12 p-6 mx-auto border rounded-lg shadow-lg bg-slate-900 border-slate-600/50 shadow-slate-400/10">
                         <div className="space-y-4">
                             <div className="flex justify-between gap-6">
                                 <h3 className="text-xl font-bold text-slate-400">
@@ -134,8 +135,9 @@ export default function Search() {
                                 <React.Fragment>
                                     {state?.isLoading ? (
                                         <div className="flex flex-col items-center justify-center gap-3 py-6">
-                                            <Spinner />
-                                            <Message description="searching blogs" />
+                                            <BlogCardSkeleton size="sm" />
+                                            {/* <Spinner />
+                                            <Message description="searching blogs" /> */}
                                         </div>
                                     ) : (
                                         <React.Fragment>
@@ -147,16 +149,15 @@ export default function Search() {
                                             <div className="my-4 divide-y-2 divide-slate-500/30 max-h-[440px] overflow-y-scroll overscroll-contain">
                                                 {state?.blogs?.length > 0 ? (
                                                     state?.blogs?.map(
-                                                        (blog) => {
-                                                            return (
+                                                        (blog) => (
+                                                            <FadeIn
+                                                                key={blog.id}
+                                                            >
                                                                 <SearchResultItem
-                                                                    key={
-                                                                        blog.id
-                                                                    }
                                                                     blog={blog}
                                                                 />
-                                                            );
-                                                        }
+                                                            </FadeIn>
+                                                        )
                                                     )
                                                 ) : (
                                                     <div className="flex flex-col items-center justify-center gap-2 pt-6 pb-4">
@@ -172,7 +173,7 @@ export default function Search() {
                                 </React.Fragment>
                             )}
                         </div>
-                    </div>
+                    </FadeIn>
                 </ModalLayout>
             </Portal>
         </div>

@@ -1,9 +1,8 @@
-import React from "react";
-
 import useProfile from "../../hooks/useProfile";
 import Message from "../Message";
 import SectionTitle from "../SectionTitle";
 import BlogCard from "../card/BlogCard";
+import FadeIn, { FadeInStagger } from "../framer/FadeIn";
 
 export default function UserBlogs() {
     const { state } = useProfile();
@@ -11,16 +10,18 @@ export default function UserBlogs() {
     const publicProfile = state?.publicProfile;
 
     return (
-        <React.Fragment>
-            <SectionTitle
-                title={
-                    publicProfile
-                        ? `${publicProfile?.firstName} ${publicProfile?.lastName}'s Blogs`
-                        : "Your Blogs"
-                }
-            />
+        <FadeInStagger>
+            <FadeIn>
+                <SectionTitle
+                    title={
+                        publicProfile
+                            ? `${publicProfile?.firstName} ${publicProfile?.lastName}'s Blogs`
+                            : "Your Blogs"
+                    }
+                />
+            </FadeIn>
 
-            <div className="my-6 space-y-4">
+            <FadeIn className="my-6 space-y-4">
                 {publicProfile ? (
                     <div className="flex flex-col items-center justify-center gap-6">
                         {publicProfile?.blogs?.length <= 0 ? (
@@ -52,7 +53,7 @@ export default function UserBlogs() {
                         )}
                     </div>
                 )}
-            </div>
-        </React.Fragment>
+            </FadeIn>
+        </FadeInStagger>
     );
 }

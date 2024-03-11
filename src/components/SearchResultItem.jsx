@@ -27,7 +27,7 @@ export default function SearchResultItem({ blog }) {
         <div className="py-4">
             <Link
                 to={`/blogs/${blog?.id}`}
-                className="flex items-center gap-6 rounded-md group"
+                className="flex flex-col items-center gap-6 rounded-md lg:flex-row group"
                 onClick={handleSearchItemClick}
             >
                 <img

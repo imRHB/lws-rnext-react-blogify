@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { actions } from "../actions";
 import AppLayout from "../components/AppLayout";
 import Message from "../components/Message";
+import FadeIn, { FadeInStagger } from "../components/framer/FadeIn";
 import Divider from "../components/shared/Divider";
 import Spinner from "../components/ui/Spinner";
 import UserBio from "../components/user/UserBio";
@@ -87,12 +88,21 @@ export default function PublicProfilePage() {
     if (!isLoading && !error && state?.publicProfile) {
         content = (
             <React.Fragment>
-                <div className="flex flex-col items-center py-8 text-center">
-                    <UserImage />
-                    <UserInfo />
-                    <UserBio />
-                    <Divider />
-                </div>
+                <FadeInStagger
+                    className="flex flex-col items-center py-8 text-center"
+                    faster
+                >
+                    <FadeIn>
+                        <UserImage />
+                    </FadeIn>
+                    <FadeIn>
+                        <UserInfo />
+                    </FadeIn>
+                    <FadeIn>
+                        <UserBio />
+                        <Divider />
+                    </FadeIn>
+                </FadeInStagger>
 
                 <UserBlogs />
             </React.Fragment>

@@ -18,9 +18,9 @@ export default function CommentBox() {
     async function handlePostComment(evt) {
         evt.preventDefault();
 
-        dispatch({
+        /* dispatch({
             type: actions.global.DATA_FETCHING_STARTED,
-        });
+        }); */
 
         try {
             const response = await api.post(

@@ -2,6 +2,7 @@ import { useEffect } from "react";
 
 import { actions } from "../actions";
 import AppLayout from "../components/AppLayout";
+import FadeIn, { FadeInStagger } from "../components/framer/FadeIn";
 import Divider from "../components/shared/Divider";
 import UserBio from "../components/user/UserBio";
 import UserBlogs from "../components/user/UserBlogs";
@@ -56,16 +57,22 @@ export default function ProfilePage() {
     return (
         <AppLayout>
             <div className="mx-auto max-w-[1020px] py-8">
-                <div className="container">
+                <FadeInStagger className="container" faster>
                     <div className="flex flex-col items-center py-8 text-center">
-                        <UserImage />
-                        <UserInfo />
-                        <UserBio />
-                        <Divider />
+                        <FadeIn>
+                            <UserImage />
+                        </FadeIn>
+                        <FadeIn>
+                            <UserInfo />
+                        </FadeIn>
+                        <FadeIn>
+                            <UserBio />
+                            <Divider />
+                        </FadeIn>
                     </div>
 
                     <UserBlogs />
-                </div>
+                </FadeInStagger>
             </div>
         </AppLayout>
     );

@@ -1,8 +1,20 @@
-export default function BlogCardSkeleton() {
+import React from "react";
+
+export default function BlogCardSkeleton({ size }) {
     return (
-        <div className="flex flex-col w-full p-2 overflow-hidden border-2 rounded-lg md:flex-row border-slate-900">
+        <div
+            className={`flex flex-col w-full p-2 gap-4 overflow-hidden rounded-lg lg:flex-row ${
+                size === "sm" ? "border-none" : "border-2 border-slate-900"
+            }`}
+        >
             <div className="animate-pulse">
-                <div className="flex items-center justify-center rounded-md min-w-[340px] h-48 bg-slate-800">
+                <div
+                    className={`flex items-center justify-center rounded-md bg-slate-800 ${
+                        size === "sm"
+                            ? "min-w-[240px] h-32"
+                            : "min-w-[340px] h-48"
+                    }`}
+                >
                     <svg
                         className="w-10 h-10 text-slate-500"
                         aria-hidden="true"
@@ -15,23 +27,31 @@ export default function BlogCardSkeleton() {
                 </div>
             </div>
 
-            <div className="flex flex-col justify-between w-full gap-4 p-6 rounded-lg">
+            <div className="flex flex-col justify-between w-full gap-4 px-0 py-2 rounded-lg lg:px-6">
                 <div className="space-y-4 animate-pulse">
                     <div className="w-10/12 h-6 rounded-full bg-slate-800" />
                     <div className="space-y-3">
                         <div className="w-3/4 h-4 rounded-full bg-slate-800" />
-                        <div className="w-full h-4 rounded-full bg-slate-800 lg:hidden" />
+                        {size !== "sm" && (
+                            <div className="w-full h-4 rounded-full bg-slate-800 lg:hidden" />
+                        )}
                         <div className="w-11/12 h-4 rounded-full bg-slate-800" />
                     </div>
                 </div>
 
                 <div className="flex justify-between animate-pulse">
                     <div className="flex gap-4">
-                        <div className="w-10 h-10 rounded-full bg-slate-800" />
-                        <div className="flex flex-col justify-center gap-2">
-                            <div className="w-20 h-3 rounded-full bg-slate-800" />
-                            <div className="w-24 h-3 rounded-full bg-slate-800" />
-                        </div>
+                        {size === "sm" ? (
+                            <div className="h-3 rounded-full w-28 bg-slate-800" />
+                        ) : (
+                            <React.Fragment>
+                                <div className="w-10 h-10 rounded-full bg-slate-800" />
+                                <div className="flex flex-col justify-center gap-2">
+                                    <div className="w-20 h-3 rounded-full bg-slate-800" />
+                                    <div className="h-3 rounded-full w-28 bg-slate-800" />
+                                </div>
+                            </React.Fragment>
+                        )}
                     </div>
                     <div className="w-16 h-3 rounded-full bg-slate-800" />
                 </div>
