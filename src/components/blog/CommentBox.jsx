@@ -54,7 +54,7 @@ export default function CommentBox() {
     return (
         <section className="flex items-start space-x-4">
             <Avatar
-                name={`${state?.user?.firstName} ${state?.user?.lastName}`}
+                name={state?.user?.firstName}
                 imgSrc={
                     state?.user?.avatar
                         ? `${
@@ -64,11 +64,6 @@ export default function CommentBox() {
                 }
             />
             <div className="w-full">
-                {/* <textarea
-                    className="w-full bg-[#030317] border border-slate-500 text-slate-300 p-4 rounded-md focus:outline-none"
-                    placeholder="Write a comment"
-                /> */}
-
                 <textarea
                     name="bio"
                     id="bio"

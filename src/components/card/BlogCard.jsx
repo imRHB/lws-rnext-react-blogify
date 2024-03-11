@@ -15,6 +15,7 @@ export default function BlogCard({ blog }) {
     const { author, title, content, createdAt, id, likes, thumbnail } = blog;
 
     const isAuthorLoggedIn = state?.user?.id === author?.id;
+    const isAvatarAvailable = author?.avatar;
 
     function handleBlogActions(evt) {
         evt.preventDefault();
@@ -52,10 +53,10 @@ export default function BlogCard({ blog }) {
                             }
                         >
                             <Avatar
-                                name={author.firstName}
+                                name={author?.firstName}
                                 imgSrc={
-                                    state?.user?.id === author?.id
-                                        ? state?.user?.avatar
+                                    isAuthorLoggedIn
+                                        ? isAvatarAvailable
                                             ? `${
                                                   import.meta.env
                                                       .VITE_SERVER_BASE_URL
@@ -63,10 +64,12 @@ export default function BlogCard({ blog }) {
                                                   state?.user?.avatar
                                               }`
                                             : null
-                                        : `${
+                                        : isAvatarAvailable
+                                        ? `${
                                               import.meta.env
                                                   .VITE_SERVER_BASE_URL
-                                          }/uploads/avatar/${author.avatar}`
+                                          }/uploads/avatar/${author?.avatar}`
+                                        : null
                                 }
                             />
                         </Link>

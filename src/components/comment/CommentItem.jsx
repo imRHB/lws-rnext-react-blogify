@@ -15,6 +15,7 @@ export default function CommentItem({ comment }) {
     const { state: blogState } = useBlog();
 
     const isAuthorLoggedIn = state?.user?.id === comment?.author?.id;
+    const isAvatarAvailable = comment?.author?.avatar;
 
     return (
         <div
@@ -31,16 +32,23 @@ export default function CommentItem({ comment }) {
                     }
                 >
                     <Avatar
-                        name={state?.user?.firstName}
+                        name={
+                            isAuthorLoggedIn
+                                ? state?.user?.firstName
+                                : comment?.author?.firstName
+                        }
                         imgSrc={
-                            state?.user &&
-                            state?.user?.id === comment?.author?.id
+                            isAuthorLoggedIn
+                                ? isAvatarAvailable
+                                    ? `${
+                                          import.meta.env.VITE_SERVER_BASE_URL
+                                      }/uploads/avatar/${state?.user?.avatar}`
+                                    : null
+                                : isAvatarAvailable
                                 ? `${
                                       import.meta.env.VITE_SERVER_BASE_URL
-                                  }/uploads/avatar/${state?.user?.avatar}`
-                                : `${
-                                      import.meta.env.VITE_SERVER_BASE_URL
                                   }/uploads/avatar/${comment?.author?.avatar}`
+                                : null
                         }
                     />
                 </Link>

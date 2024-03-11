@@ -1,3 +1,5 @@
+import React from "react";
+
 import useBlog from "../../hooks/useBlog";
 import CommentItem from "../comment/CommentItem";
 
@@ -7,11 +9,11 @@ export default function CommentList() {
     const comments = state?.blog?.comments;
 
     return (
-        <section>
+        <React.Fragment>
             {comments &&
                 comments?.map((comment) => (
                     <CommentItem key={comment.id} comment={comment} />
                 ))}
-        </section>
+        </React.Fragment>
     );
 }

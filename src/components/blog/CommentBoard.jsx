@@ -1,5 +1,6 @@
 import useProfile from "../../hooks/useProfile";
 import Message from "../Message";
+import FadeIn from "../framer/FadeIn";
 import CommentBox from "./CommentBox";
 import CommentList from "./CommentList";
 
@@ -7,7 +8,7 @@ export default function CommentBoard({ comments }) {
     const { state } = useProfile();
 
     return (
-        <div id="comments" className="w-full mx-auto space-y-8 md:w-10/12">
+        <FadeIn id="comments" className="w-full mx-auto space-y-8 md:w-10/12">
             <h2 className="text-3xl font-bold">
                 Comments ({comments?.length})
             </h2>
@@ -24,6 +25,6 @@ export default function CommentBoard({ comments }) {
             )}
 
             <CommentList />
-        </div>
+        </FadeIn>
     );
 }
