@@ -58,7 +58,11 @@ export default function Header() {
                                     <img src={logoutIcon} alt="Logout" />
                                 </div>
                             ) : (
-                                <AppLink href="/login" label="Login" />
+                                <AppLink
+                                    href="/login"
+                                    label="Login"
+                                    variant="base"
+                                />
                             )}
                         </li>
 

@@ -6,6 +6,7 @@ import { getTimestamp } from "../../lib/getTimestamp";
 import BlogItemActions from "../blog/BlogItemActions";
 import Avatar from "../ui/Avatar";
 
+import AppLink from "../ui/AppLink";
 import dotsIcon from "/assets/icons/3dots.svg";
 
 export default function BlogCard({ blog }) {
@@ -76,15 +77,14 @@ export default function BlogCard({ blog }) {
 
                         <div>
                             <h5 className="text-sm text-indigo-600 w-fit hover:text-indigo-700">
-                                <Link
-                                    to={
+                                <AppLink
+                                    href={
                                         isAuthorLoggedIn
                                             ? "/profile"
                                             : `/profile/${author?.id}`
                                     }
-                                >
-                                    {author.firstName} {author.lastName}
-                                </Link>
+                                    label={`${author.firstName} ${author.lastName}`}
+                                />
                             </h5>
                             <div className="flex items-center text-xs text-slate-700">
                                 <span>{getTimestamp(createdAt)}</span>

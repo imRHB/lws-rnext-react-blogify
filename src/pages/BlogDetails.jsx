@@ -7,8 +7,8 @@ import BlogActions from "../components/blog/BlogActions";
 import BlogContents from "../components/blog/BlogContents";
 import CommentBoard from "../components/blog/CommentBoard";
 import AppLayout from "../components/layout/AppLayout";
+import BlogContentsSkeleton from "../components/ui/BlogContentsSkeleton";
 import Message from "../components/ui/Message";
-import Spinner from "../components/ui/Spinner";
 import useBlog from "../hooks/useBlog";
 
 export default function BlogDetailsPage() {
@@ -58,7 +58,11 @@ export default function BlogDetailsPage() {
     let content = null;
 
     if (isLoading) {
-        content = <Spinner />;
+        content = (
+            <div className="my-8">
+                <BlogContentsSkeleton />
+            </div>
+        );
     }
 
     if (!isLoading && error) {

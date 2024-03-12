@@ -61,7 +61,7 @@ export default function CommentItem({ comment }) {
                                     : `/profile/${comment?.author?.id}`
                             }
                         >
-                            <h5 className="font-bold text-indigo-600 hover:text-indigo-700">
+                            <h5 className="font-bold text-indigo-400 hover:text-indigo-500">
                                 {comment?.author?.firstName}{" "}
                                 {comment?.author?.lastName}
                             </h5>

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import useProfile from "../../hooks/useProfile";
 import { getTimestamp } from "../../lib/getTimestamp";
 import FadeIn, { FadeInStagger } from "../framer/FadeIn";
+import AppLink from "../ui/AppLink";
 import Avatar from "../ui/Avatar";
 import Badge from "../ui/Badge";
 
@@ -51,16 +52,14 @@ export default function BlogContents({ blog }) {
                             />
                         </Link>
                         <h5 className="text-sm text-slate-500">
-                            <Link
-                                to={
+                            <AppLink
+                                href={
                                     isAuthorLoggedIn
                                         ? "/profile"
                                         : `/profile/${author?.id}`
                                 }
-                                className="text-indigo-600 hover:text-indigo-700"
-                            >
-                                {author?.firstName} {author?.lastName}
-                            </Link>
+                                label={`${author?.firstName} ${author?.lastName}`}
+                            />
                         </h5>
                     </div>
                     <span className="text-sm text-slate-700 dot">

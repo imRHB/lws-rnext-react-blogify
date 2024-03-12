@@ -91,7 +91,7 @@ export default function Search() {
                                 </h3>
 
                                 <div className="absolute flex items-center gap-4 right-4 top-4">
-                                    <kbd className="px-2 py-0.5 border rounded text-slate-400 border-slate-600">
+                                    <kbd className="px-3 py-0.5 ring-2 rounded text-slate-400 ring-slate-300">
                                         Esc
                                     </kbd>
 

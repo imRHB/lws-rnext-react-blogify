@@ -6,7 +6,7 @@ import useBlog from "../../hooks/useBlog";
 import useProfile from "../../hooks/useProfile";
 import SectionTitle from "../SectionTitle";
 import BlogItem from "../card/BlogItem";
-import FadeIn, { FadeInStagger } from "../framer/FadeIn";
+import FadeIn from "../framer/FadeIn";
 import Message from "../ui/Message";
 
 export default function FavoriteBlogs() {
@@ -55,11 +55,12 @@ export default function FavoriteBlogs() {
                         <Message description="Login to see your favourite blogs!" />
                     </FadeIn>
                 ) : (
-                    <FadeInStagger className="space-y-5" faster>
+                    <div className="space-y-5">
                         {blogState?.favouriteBlogs?.length > 0 ? (
                             blogState?.favouriteBlogs?.map((favBlog) => (
                                 <FadeIn key={favBlog.id}>
                                     <BlogItem
+                                        key={favBlog.id}
                                         blog={favBlog}
                                         category="favorite"
                                     />
@@ -70,7 +71,7 @@ export default function FavoriteBlogs() {
                                 <Message description="You have no favourite blogs yet!" />
                             </FadeIn>
                         )}
-                    </FadeInStagger>
+                    </div>
                 )}
             </div>
         </section>

@@ -1,11 +1,12 @@
 import axios from "axios";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { actions } from "../actions";
 import Field from "../components/form/Field";
 import AppLayout from "../components/layout/AppLayout";
+import AppLink from "../components/ui/AppLink";
 import Error from "../components/ui/Error";
 import Spinner from "../components/ui/Spinner";
 import useAuth from "../hooks/useAuth";
@@ -168,12 +169,10 @@ export default function LoginPage() {
                                 Don&apos;t have an account?
                             </p>
                             <p className="text-center text-slate-300">
-                                <Link
-                                    to="/register"
-                                    className="text-indigo-400 hover:text-indigo-500 hover:underline underline-offset-2"
-                                >
-                                    Create an account
-                                </Link>
+                                <AppLink
+                                    href="/register"
+                                    label="Create an account"
+                                />
                             </p>
                         </div>
                     </div>
