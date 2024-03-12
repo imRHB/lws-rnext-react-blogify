@@ -7,7 +7,10 @@ import FadeIn, { FadeInStagger } from "../components/framer/FadeIn";
 import AppLayout from "../components/layout/AppLayout";
 import Divider from "../components/shared/Divider";
 import Message from "../components/ui/Message";
-import Spinner from "../components/ui/Spinner";
+import UserBioSkeleton from "../components/ui/UserBioSkeleton";
+import UserBlogsSkeleton from "../components/ui/UserBlogsSkeleton";
+import UserImageSkeleton from "../components/ui/UserImageSkeleton";
+import UserInfoSkeleton from "../components/ui/UserInfoSkeleton";
 import UserBio from "../components/user/UserBio";
 import UserBlogs from "../components/user/UserBlogs";
 import UserImage from "../components/user/UserImage";
@@ -69,7 +72,17 @@ export default function PublicProfilePage() {
     let content = null;
 
     if (isLoading) {
-        content = <Spinner />;
+        content = (
+            <div className="space-y-8">
+                <div className="flex flex-col items-center py-8 space-y-8 text-center">
+                    <UserImageSkeleton />
+                    <UserInfoSkeleton />
+                    <UserBioSkeleton />
+                </div>
+
+                <UserBlogsSkeleton />
+            </div>
+        );
     }
 
     if (!isLoading && error) {

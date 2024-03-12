@@ -4,6 +4,10 @@ import { actions } from "../actions";
 import FadeIn, { FadeInStagger } from "../components/framer/FadeIn";
 import AppLayout from "../components/layout/AppLayout";
 import Divider from "../components/shared/Divider";
+import UserBioSkeleton from "../components/ui/UserBioSkeleton";
+import UserBlogsSkeleton from "../components/ui/UserBlogsSkeleton";
+import UserImageSkeleton from "../components/ui/UserImageSkeleton";
+import UserInfoSkeleton from "../components/ui/UserInfoSkeleton";
 import UserBio from "../components/user/UserBio";
 import UserBlogs from "../components/user/UserBlogs";
 import UserImage from "../components/user/UserImage";
@@ -13,7 +17,7 @@ import useAuth from "../hooks/useAuth";
 import useProfile from "../hooks/useProfile";
 
 export default function ProfilePage() {
-    const { dispatch } = useProfile();
+    const { state, dispatch } = useProfile();
 
     const { auth } = useAuth();
     const { api } = useApi();
@@ -57,22 +61,34 @@ export default function ProfilePage() {
     return (
         <AppLayout>
             <div className="mx-auto max-w-[1020px] py-8">
-                <FadeInStagger className="container" faster>
-                    <div className="flex flex-col items-center py-8 text-center">
-                        <FadeIn>
-                            <UserImage />
-                        </FadeIn>
-                        <FadeIn>
-                            <UserInfo />
-                        </FadeIn>
-                        <FadeIn>
-                            <UserBio />
-                            <Divider />
-                        </FadeIn>
-                    </div>
+                {state?.isLoading ? (
+                    <div className="space-y-8">
+                        <div className="flex flex-col items-center py-8 space-y-8 text-center">
+                            <UserImageSkeleton />
+                            <UserInfoSkeleton />
+                            <UserBioSkeleton />
+                        </div>
 
-                    <UserBlogs />
-                </FadeInStagger>
+                        <UserBlogsSkeleton />
+                    </div>
+                ) : (
+                    <FadeInStagger className="container" faster>
+                        <div className="flex flex-col items-center py-8 text-center">
+                            <FadeIn>
+                                <UserImage />
+                            </FadeIn>
+                            <FadeIn>
+                                <UserInfo />
+                            </FadeIn>
+                            <FadeIn>
+                                <UserBio />
+                                <Divider />
+                            </FadeIn>
+                        </div>
+
+                        <UserBlogs />
+                    </FadeInStagger>
+                )}
             </div>
         </AppLayout>
     );
