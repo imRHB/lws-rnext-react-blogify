@@ -150,7 +150,8 @@ export default function LoginPage() {
 
                                 <Error
                                     message={
-                                        state?.error?.response?.data?.error
+                                        state?.error?.response?.data?.error ??
+                                        state?.error?.message
                                     }
                                 />
 

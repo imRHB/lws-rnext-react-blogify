@@ -57,6 +57,7 @@ export default function UserImage() {
                 });
             }
         } catch (error) {
+            toast.error("An error occurred while updating avatar!");
             dispatch({
                 type: actions.global.DATA_FETCHING_FAILED,
                 payload: {

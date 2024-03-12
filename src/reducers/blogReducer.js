@@ -18,13 +18,6 @@ export const blogReducer = (state, action) => {
             };
         }
 
-        case actions.blog.FETCH_ALL_BLOGS: {
-            return {
-                ...state,
-                blogs: action.payload.blogs,
-            };
-        }
-
         case actions.blog.FETCH_BLOGS_INFINITELY: {
             return {
                 ...state,
@@ -72,7 +65,6 @@ export const blogReducer = (state, action) => {
                 blog: action.payload.blog,
                 isLoading: false,
                 error: null,
-                // favouriteBlogs: [...state.favouriteBlogs, action.payload.blog],
             };
         }
 

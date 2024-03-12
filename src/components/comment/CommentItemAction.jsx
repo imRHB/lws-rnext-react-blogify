@@ -24,10 +24,6 @@ export default function CommentItemAction({ commentId, setShowActions }) {
     async function handleDeleteComment(evt) {
         evt.preventDefault();
 
-        /* dispatch({
-            type: actions.global.DATA_FETCHING_STARTED,
-        }); */
-
         try {
             const response = await api.delete(
                 `${
@@ -75,7 +71,6 @@ export default function CommentItemAction({ commentId, setShowActions }) {
                         evt.stopPropagation();
                     }}
                 >
-                    {/* actual content */}
                     <div className="relative overflow-hidden text-left transition-all transform border rounded-lg shadow-lg bg-slate-900 border-slate-600/50 shadow-slate-400/10 sm:my-8 sm:w-full sm:max-w-lg">
                         <div className="px-4 pt-5 pb-4 bg-slate-900 sm:p-6 sm:pb-4">
                             <div className="sm:flex sm:items-start">

@@ -167,7 +167,8 @@ export default function RegisterPage() {
 
                                 <Error
                                     message={
-                                        state?.error?.response?.data?.error
+                                        state?.error?.response?.data?.error ??
+                                        state?.error?.message
                                     }
                                 />
 

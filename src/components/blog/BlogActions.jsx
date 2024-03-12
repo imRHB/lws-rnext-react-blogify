@@ -25,19 +25,12 @@ export default function BlogActions() {
     );
 
     const isFavourite = isLoggedIn && state?.blog?.isFavourite;
-    // const isFavourite = state?.favouriteBlogs?.find(
-    //     (blog) => blog?.id === blogId
-    // );
 
     async function handleToggleLike() {
         if (!isLoggedIn) {
             toast.warning("Login to like this blog!");
             return;
         }
-
-        /* dispatch({
-            type: actions.global.DATA_FETCHING_STARTED,
-        }); */
 
         try {
             const response = await api.post(
@@ -71,10 +64,6 @@ export default function BlogActions() {
             toast.warning("Login to add this blog in your favourite list!");
             return;
         }
-
-        /* dispatch({
-            type: actions.global.DATA_FETCHING_STARTED,
-        }); */
 
         try {
             const response = await api.patch(

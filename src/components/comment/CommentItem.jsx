@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import useBlog from "../../hooks/useBlog";
 import useProfile from "../../hooks/useProfile";
 import Avatar from "../ui/Avatar";
-
 import CommentItemAction from "./CommentItemAction";
+
 import dotsIcon from "/assets/icons/3dots.svg";
 
 export default function CommentItem({ comment }) {

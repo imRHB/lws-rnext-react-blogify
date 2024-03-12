@@ -13,30 +13,6 @@ export default function MainBlogs() {
 
     const { state, dispatch } = useBlog();
 
-    /* worked */
-    /* useEffect(() => {
-        async function fetchBlogs() {
-            try {
-                const response = await axios.get(
-                    `${import.meta.env.VITE_SERVER_BASE_URL}/blogs`
-                );
-
-                if (response.status === 200) {
-                    dispatch({
-                        type: actions.blog.FETCH_ALL_BLOGS,
-                        payload: {
-                            blogs: response.data.blogs,
-                        },
-                    });
-                }
-            } catch (error) {
-                console.error(error);
-            }
-        }
-
-        fetchBlogs();
-    }, [dispatch]); */
-
     useEffect(() => {
         dispatch({
             type: actions.blog.FETCH_BLOGS_INFINITELY,
@@ -77,8 +53,6 @@ export default function MainBlogs() {
                     ref={loaderRef}
                     className="flex flex-col items-center justify-center w-full h-auto gap-5"
                 >
-                    {/* <Spinner />
-                    <Message description="Fetching blogs" /> */}
                     <BlogCardSkeleton />
                     <BlogCardSkeleton />
                 </div>

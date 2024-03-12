@@ -7,9 +7,9 @@ import Portal from "../Portal";
 import FadeIn from "../framer/FadeIn";
 import ModalLayout from "../layout/ModalLayout";
 import BlogCardSkeleton from "../ui/BlogCardSkeleton";
+import Message from "../ui/Message";
 import SearchResultItem from "./SearchResultItem";
 
-import Message from "../ui/Message";
 import closeIcon from "/assets/icons/close.svg";
 import magnifyIcon from "/assets/icons/search.svg";
 
@@ -55,7 +55,7 @@ export default function Search() {
         });
     };
 
-    /* auto focus the search input on search modal when the modal is open */
+    /* auto focus the search input on the actual search input when the search modal is open */
     useEffect(() => {
         if (isOpen) {
             document.getElementById("search").focus();
@@ -137,8 +137,6 @@ export default function Search() {
                                     {state?.isLoading ? (
                                         <div className="flex flex-col items-center justify-center gap-3 py-6">
                                             <BlogCardSkeleton size="sm" />
-                                            {/* <Spinner />
-                                            <Message description="searching blogs" /> */}
                                         </div>
                                     ) : (
                                         <React.Fragment>

@@ -7,6 +7,7 @@ import { actions } from "../actions";
 import { api } from "../api";
 import Field from "../components/form/Field";
 import AppLayout from "../components/layout/AppLayout";
+import Error from "../components/ui/Error";
 import useBlog from "../hooks/useBlog";
 
 export default function CreateBlogPage() {
@@ -187,7 +188,7 @@ export default function CreateBlogPage() {
                         />
                     </Field>
 
-                    {/* <Error message={errors?.root?.manual?.message} /> */}
+                    <Error message="An unknown error occurred!" />
 
                     <button
                         type="submit"

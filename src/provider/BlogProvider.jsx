@@ -9,7 +9,7 @@ import { blogReducer } from "../reducers/blogReducer";
 
 export default function BlogProvider({ children }) {
     const [popularBlogs, setPopularBlogs] = useState([]);
-    // const { blogs, error } = useMainBlogs();
+    const [error, setError] = useState(null);
     const { state: profileState } = useProfile();
     const [favouriteBlogs, setFavouriteBlogs] = useState(
         profileState?.favouriteBlogs ?? []
@@ -26,7 +26,7 @@ export default function BlogProvider({ children }) {
                     setPopularBlogs(response.data.blogs);
                 }
             } catch (error) {
-                console.error(error);
+                setError(error);
             }
         }
 
@@ -44,7 +44,7 @@ export default function BlogProvider({ children }) {
                     setFavouriteBlogs(response.data.blogs);
                 }
             } catch (error) {
-                console.error(error);
+                setError(error);
             }
         }
 
@@ -53,11 +53,9 @@ export default function BlogProvider({ children }) {
 
     const [state, dispatch] = useReducer(blogReducer, {
         ...blogInitialState,
-        // blogs,
         popularBlogs,
-        // favouriteBlogs: profileState?.user?.id && profileState?.favouriteBlogs,
         favouriteBlogs,
-        // error,
+        error,
     });
 
     return (

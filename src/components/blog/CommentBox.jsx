@@ -8,7 +8,6 @@ import useProfile from "../../hooks/useProfile";
 import Avatar from "../ui/Avatar";
 
 export default function CommentBox() {
-    // const { user } = useUserProfile();
     const [comment, setComment] = useState("");
 
     const { state } = useProfile();
@@ -23,10 +22,6 @@ export default function CommentBox() {
             toast.warning("Comment should not be empty!");
             return;
         }
-
-        /* dispatch({
-            type: actions.global.DATA_FETCHING_STARTED,
-        }); */
 
         try {
             const response = await api.post(

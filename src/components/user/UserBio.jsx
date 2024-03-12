@@ -114,31 +114,6 @@ export default function UserBio() {
                     </button>
                 </div>
             )}
-
-            {/* {isEditing ? (
-                <div className="flex flex-col gap-4 my-2">
-                    <button
-                        className="px-6 py-2 text-white transition-all duration-200 bg-indigo-600 rounded-md md:py-3 hover:bg-indigo-700"
-                        onClick={handleUpdateBio}
-                    >
-                        Update
-                    </button>
-
-                    <button
-                        className="px-6 py-2 text-white transition-all duration-200 rounded-md bg-slate-800 md:py-3 hover:bg-slate-900"
-                        onClick={() => setIsEditing(false)}
-                    >
-                        Cancel
-                    </button>
-                </div>
-            ) : (
-                <button
-                    className="rounded-full flex-center h-7 w-7"
-                    onClick={() => setIsEditing(true)}
-                >
-                    <img src={pencilIcon} alt="Edit" />
-                </button>
-            )} */}
         </div>
     );
 }

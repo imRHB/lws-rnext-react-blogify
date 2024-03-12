@@ -24,7 +24,6 @@ export default function App() {
                 <ProfileProvider>
                     <BlogProvider>
                         <Router>
-                            {/* <Header /> */}
                             <Routes>
                                 <Route
                                     path="/profile/:userId"
@@ -61,7 +60,6 @@ export default function App() {
 
                                 <Route path="*" element={<NotFoundPage />} />
                             </Routes>
-                            {/* <Footer /> */}
                         </Router>
                     </BlogProvider>
                 </ProfileProvider>

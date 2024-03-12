@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 import useProfile from "../../hooks/useProfile";
 import { getTimestamp } from "../../lib/getTimestamp";
 import BlogItemActions from "../blog/BlogItemActions";
+import AppLink from "../ui/AppLink";
 import Avatar from "../ui/Avatar";
 
-import AppLink from "../ui/AppLink";
 import dotsIcon from "/assets/icons/3dots.svg";
 
 export default function BlogCard({ blog }) {

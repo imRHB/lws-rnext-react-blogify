@@ -6,7 +6,7 @@
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 
-const blogsPerPage = 4;
+const blogsPerPage = 10;
 
 export default function useMainBlogs() {
     const [blogs, setBlogs] = useState([]);
@@ -34,7 +34,6 @@ export default function useMainBlogs() {
                     setPage((prevPage) => prevPage + 1);
                 }
             } catch (error) {
-                console.error(error);
                 setError(error);
                 setHasMore(false);
             } finally {

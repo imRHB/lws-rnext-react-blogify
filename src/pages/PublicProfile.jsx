@@ -18,9 +18,6 @@ import UserInfo from "../components/user/UserInfo";
 import useProfile from "../hooks/useProfile";
 
 export default function PublicProfilePage() {
-    // const { search } = useLocation();
-    // const queryParams = new URLSearchParams(search);
-    // const userId = queryParams.get("view");
     const { userId } = useParams();
 
     const { state, dispatch } = useProfile();

@@ -35,14 +35,6 @@ export default function EditBlogPage() {
 
                 if (response.status === 200) {
                     setBlog(response.data);
-                    /* dispatch({
-                        type: actions.blog.FETCH_BLOG_BY_ID,
-                        payload: {
-                            blog: {
-                                ...response.data,
-                            },
-                        },
-                    }); */
                 }
             } catch (error) {
                 dispatch({
@@ -63,7 +55,6 @@ export default function EditBlogPage() {
         register,
         handleSubmit,
         formState: { errors },
-        // setError,
     } = useForm({
         defaultValues: {
             title: blog?.title,
