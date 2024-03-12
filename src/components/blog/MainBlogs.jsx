@@ -3,10 +3,10 @@ import React, { useEffect } from "react";
 import { actions } from "../../actions";
 import useBlog from "../../hooks/useBlog";
 import useMainBlogs from "../../hooks/useMainBlogs";
-import BlogCardSkeleton from "../BlogCardSkeleton";
-import Message from "../Message";
 import BlogCard from "../card/BlogCard";
 import FadeIn from "../framer/FadeIn";
+import BlogCardSkeleton from "../ui/BlogCardSkeleton";
+import Message from "../ui/Message";
 
 export default function MainBlogs() {
     const { blogs, error, hasMore, loaderRef } = useMainBlogs();

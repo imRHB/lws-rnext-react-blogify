@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { actions } from "../actions";
-import useDebounce from "../hooks/useDebounce";
-import useSearch from "../hooks/useSearch";
-import ModalLayout from "./ModalLayout";
-import Portal from "./Portal";
 
-import BlogCardSkeleton from "./BlogCardSkeleton";
-import Message from "./Message";
+import { actions } from "../../actions";
+import useDebounce from "../../hooks/useDebounce";
+import useSearch from "../../hooks/useSearch";
+import Portal from "../Portal";
+import FadeIn from "../framer/FadeIn";
+import ModalLayout from "../layout/ModalLayout";
+import BlogCardSkeleton from "../ui/BlogCardSkeleton";
 import SearchResultItem from "./SearchResultItem";
-import FadeIn from "./framer/FadeIn";
+
+import Message from "../ui/Message";
 import closeIcon from "/assets/icons/close.svg";
 import magnifyIcon from "/assets/icons/search.svg";
 

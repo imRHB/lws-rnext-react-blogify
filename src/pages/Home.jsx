@@ -1,7 +1,7 @@
-import AppLayout from "../components/AppLayout";
 import FavoriteBlogs from "../components/blog/FavoriteBlogs";
 import MainBlogs from "../components/blog/MainBlogs";
 import PopularBlogs from "../components/blog/PopularBlogs";
+import AppLayout from "../components/layout/AppLayout";
 
 export default function HomePage() {
     return (

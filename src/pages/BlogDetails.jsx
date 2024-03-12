@@ -3,11 +3,11 @@ import { useParams } from "react-router-dom";
 
 import { actions } from "../actions";
 import { api } from "../api";
-import AppLayout from "../components/AppLayout";
-import Message from "../components/Message";
 import BlogActions from "../components/blog/BlogActions";
 import BlogContents from "../components/blog/BlogContents";
 import CommentBoard from "../components/blog/CommentBoard";
+import AppLayout from "../components/layout/AppLayout";
+import Message from "../components/ui/Message";
 import Spinner from "../components/ui/Spinner";
 import useBlog from "../hooks/useBlog";
 

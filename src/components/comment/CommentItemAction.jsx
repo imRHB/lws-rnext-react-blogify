@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 
-import { actions } from "../actions";
-import { api } from "../api";
-import useBlog from "../hooks/useBlog";
+import { actions } from "../../actions";
+import { api } from "../../api";
+import useBlog from "../../hooks/useBlog";
+import Alert from "../ui/Alert";
 
-import Alert from "./ui/Alert";
 import trashIcon from "/assets/icons/delete.svg";
 
 export default function CommentItemAction({ commentId, setShowActions }) {

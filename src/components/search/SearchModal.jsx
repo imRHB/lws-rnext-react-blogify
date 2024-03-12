@@ -1,5 +1,5 @@
-import ModalLayout from "./ModalLayout";
-import Portal from "./Portal";
+import Portal from "../Portal";
+import ModalLayout from "../layout/ModalLayout";
 
 export default function SearchModal({ isOpen, closeModal }) {
     return (

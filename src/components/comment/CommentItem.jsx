@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 
 import useBlog from "../../hooks/useBlog";
 import useProfile from "../../hooks/useProfile";
-import CommentItemAction from "../CommentItemAction";
 import Avatar from "../ui/Avatar";
 
+import CommentItemAction from "./CommentItemAction";
 import dotsIcon from "/assets/icons/3dots.svg";
 
 export default function CommentItem({ comment }) {
@@ -53,7 +53,7 @@ export default function CommentItem({ comment }) {
                     />
                 </Link>
                 <div className="w-full">
-                    <p className="max-w-fit">
+                    <p className="w-fit">
                         <Link
                             to={
                                 isAuthorLoggedIn
@@ -61,7 +61,7 @@ export default function CommentItem({ comment }) {
                                     : `/profile/${comment?.author?.id}`
                             }
                         >
-                            <h5 className="font-bold text-slate-500">
+                            <h5 className="font-bold text-indigo-600 hover:text-indigo-700">
                                 {comment?.author?.firstName}{" "}
                                 {comment?.author?.lastName}
                             </h5>

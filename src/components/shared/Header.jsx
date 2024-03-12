@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { actions } from "../../actions";
 import useProfile from "../../hooks/useProfile";
-import Search from "../Search";
+import Search from "../search/Search";
 import AppLink from "../ui/AppLink";
 import Avatar from "../ui/Avatar";
 

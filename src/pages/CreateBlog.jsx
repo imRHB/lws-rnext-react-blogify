@@ -5,8 +5,8 @@ import { toast } from "react-toastify";
 
 import { actions } from "../actions";
 import { api } from "../api";
-import AppLayout from "../components/AppLayout";
 import Field from "../components/form/Field";
+import AppLayout from "../components/layout/AppLayout";
 import useBlog from "../hooks/useBlog";
 
 export default function CreateBlogPage() {

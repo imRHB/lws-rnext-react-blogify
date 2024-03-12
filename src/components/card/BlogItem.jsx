@@ -31,6 +31,7 @@ export default function BlogItem({ blog, category }) {
                                 ? "/profile"
                                 : `/profile/${blog?.author?.id}`
                         }
+                        className="text-indigo-600 hover:text-indigo-700"
                     >
                         {blog.author.firstName} {blog.author.lastName}
                     </Link>{" "}

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 import { actions } from "../../actions";
 import { api } from "../../api";
@@ -17,6 +18,11 @@ export default function CommentBox() {
 
     async function handlePostComment(evt) {
         evt.preventDefault();
+
+        if (comment.trim().length <= 0) {
+            toast.warning("Comment should not be empty!");
+            return;
+        }
 
         /* dispatch({
             type: actions.global.DATA_FETCHING_STARTED,
@@ -72,6 +78,7 @@ export default function CommentBox() {
                     value={comment}
                     onChange={(evt) => setComment(evt.target.value)}
                     className="block w-full p-4 transition bg-transparent rounded-lg ring-2 text-slate-300 focus:outline-none focus:bg-slate-950/20 focus:ring-2 focus:ring-blue-900/50 ring-slate-800"
+                    required
                 />
 
                 <div className="flex justify-end mt-4">

@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 
 import { actions } from "../actions";
-import AppLayout from "../components/AppLayout";
 import FadeIn, { FadeInStagger } from "../components/framer/FadeIn";
+import AppLayout from "../components/layout/AppLayout";
 import Divider from "../components/shared/Divider";
 import UserBio from "../components/user/UserBio";
 import UserBlogs from "../components/user/UserBlogs";

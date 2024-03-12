@@ -71,7 +71,13 @@ export default function BlogItemActions({ blogId, title, setShowActions }) {
     }
 
     return (
-        <div className="z-50 action-modal-container">
+        <div
+            className="z-50 action-modal-container"
+            onClick={(evt) => {
+                evt.preventDefault();
+                evt.stopPropagation();
+            }}
+        >
             <button
                 className="action-menu-item hover:text-lwsGreen"
                 onClick={handleEditBlog}
@@ -88,13 +94,7 @@ export default function BlogItemActions({ blogId, title, setShowActions }) {
             </button>
 
             <Alert isOpen={isOpen}>
-                <div
-                    className="relative overflow-hidden text-left transition-all transform border rounded-lg shadow-lg bg-slate-900 border-slate-600/50 shadow-slate-400/10 sm:my-8 sm:w-full sm:max-w-lg"
-                    onClick={(evt) => {
-                        evt.preventDefault();
-                        evt.stopPropagation();
-                    }}
-                >
+                <div className="relative overflow-hidden text-left transition-all transform border rounded-lg shadow-lg bg-slate-900 border-slate-600/50 shadow-slate-400/10 sm:my-8 sm:w-full sm:max-w-lg">
                     <div className="px-4 pt-5 pb-4 bg-slate-900 sm:p-6 sm:pb-4">
                         <div className="sm:flex sm:items-start">
                             <div className="flex items-center justify-center flex-shrink-0 w-12 h-12 mx-auto bg-red-100 rounded-full sm:mx-0 sm:h-10 sm:w-10">

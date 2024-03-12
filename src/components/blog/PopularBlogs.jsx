@@ -1,12 +1,12 @@
 import React from "react";
 
 import useAxios from "../../hooks/useAxios";
-import BlogItemSkeleton from "../BlogItemSkeleton";
-import Message from "../Message";
 import SectionTitle from "../SectionTitle";
 import BlogItem from "../card/BlogItem";
 import FadeIn, { FadeInStagger } from "../framer/FadeIn";
+import BlogItemSkeleton from "../ui/BlogItemSkeleton";
 import Error from "../ui/Error";
+import Message from "../ui/Message";
 
 export default function PopularBlogs() {
     const { data, error, isLoading } = useAxios("blogs/popular");

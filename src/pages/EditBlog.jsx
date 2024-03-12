@@ -5,9 +5,9 @@ import { toast } from "react-toastify";
 
 import { actions } from "../actions";
 import { api } from "../api";
-import AppLayout from "../components/AppLayout";
-import Message from "../components/Message";
 import Field from "../components/form/Field";
+import AppLayout from "../components/layout/AppLayout";
+import Message from "../components/ui/Message";
 import useBlog from "../hooks/useBlog";
 import useProfile from "../hooks/useProfile";
 

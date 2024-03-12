@@ -4,10 +4,10 @@ import { actions } from "../../actions";
 import { api } from "../../api";
 import useBlog from "../../hooks/useBlog";
 import useProfile from "../../hooks/useProfile";
-import Message from "../Message";
 import SectionTitle from "../SectionTitle";
 import BlogItem from "../card/BlogItem";
 import FadeIn, { FadeInStagger } from "../framer/FadeIn";
+import Message from "../ui/Message";
 
 export default function FavoriteBlogs() {
     const { state } = useProfile();

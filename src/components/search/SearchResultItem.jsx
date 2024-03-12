@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 
-import { actions } from "../actions";
-import useSearch from "../hooks/useSearch";
-import { getTimestamp } from "../lib/getTimestamp";
+import { actions } from "../../actions";
+import useSearch from "../../hooks/useSearch";
+import { getTimestamp } from "../../lib/getTimestamp";
 
 export default function SearchResultItem({ blog }) {
     const { dispatch } = useSearch();

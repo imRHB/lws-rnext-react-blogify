@@ -4,8 +4,8 @@ import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { actions } from "../actions";
-import AppLayout from "../components/AppLayout";
 import Field from "../components/form/Field";
+import AppLayout from "../components/layout/AppLayout";
 import Error from "../components/ui/Error";
 import Spinner from "../components/ui/Spinner";
 import useAuth from "../hooks/useAuth";

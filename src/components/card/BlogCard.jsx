@@ -75,7 +75,7 @@ export default function BlogCard({ blog }) {
                         </Link>
 
                         <div>
-                            <h5 className="text-sm text-slate-500">
+                            <h5 className="text-sm text-indigo-600 w-fit hover:text-indigo-700">
                                 <Link
                                     to={
                                         isAuthorLoggedIn

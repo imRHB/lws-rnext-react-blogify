@@ -1,6 +1,6 @@
 import useProfile from "../../hooks/useProfile";
-import Message from "../Message";
 import FadeIn from "../framer/FadeIn";
+import Message from "../ui/Message";
 import CommentBox from "./CommentBox";
 import CommentList from "./CommentList";
 

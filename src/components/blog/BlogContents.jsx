@@ -57,6 +57,7 @@ export default function BlogContents({ blog }) {
                                         ? "/profile"
                                         : `/profile/${author?.id}`
                                 }
+                                className="text-indigo-600 hover:text-indigo-700"
                             >
                                 {author?.firstName} {author?.lastName}
                             </Link>

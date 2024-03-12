@@ -1,8 +1,8 @@
 import useProfile from "../../hooks/useProfile";
-import Message from "../Message";
 import SectionTitle from "../SectionTitle";
 import BlogCard from "../card/BlogCard";
 import FadeIn, { FadeInStagger } from "../framer/FadeIn";
+import Message from "../ui/Message";
 
 export default function UserBlogs() {
     const { state } = useProfile();

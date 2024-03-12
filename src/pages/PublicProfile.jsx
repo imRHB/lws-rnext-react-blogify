@@ -3,10 +3,10 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import { actions } from "../actions";
-import AppLayout from "../components/AppLayout";
-import Message from "../components/Message";
 import FadeIn, { FadeInStagger } from "../components/framer/FadeIn";
+import AppLayout from "../components/layout/AppLayout";
 import Divider from "../components/shared/Divider";
+import Message from "../components/ui/Message";
 import Spinner from "../components/ui/Spinner";
 import UserBio from "../components/user/UserBio";
 import UserBlogs from "../components/user/UserBlogs";
