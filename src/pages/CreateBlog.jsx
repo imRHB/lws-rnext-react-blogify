@@ -14,7 +14,7 @@ export default function CreateBlogPage() {
     const [imagePreview, setImagePreview] = useState(null);
     const navigate = useNavigate();
 
-    const { dispatch } = useBlog();
+    const { state, dispatch } = useBlog();
 
     const {
         register,
@@ -42,6 +42,8 @@ export default function CreateBlogPage() {
 
         if (file) setError("thumbnail", false);
     };
+
+    console.log(state?.error);
 
     async function onSubmit(data) {
         dispatch({
@@ -74,6 +76,7 @@ export default function CreateBlogPage() {
                 navigate(`/blogs/${response.data.blog.id}`);
             }
         } catch (error) {
+            console.log("error:", error);
             dispatch({
                 type: actions.global.DATA_FETCHING_FAILED,
                 payload: {
@@ -188,11 +191,17 @@ export default function CreateBlogPage() {
                         />
                     </Field>
 
-                    <Error message="An unknown error occurred!" />
+                    <Error
+                        message={
+                            state?.error?.response?.data?.error ??
+                            state?.error?.message
+                        }
+                    />
 
                     <button
                         type="submit"
                         className="px-6 py-2 text-white transition-all duration-200 bg-indigo-600 rounded-md md:py-3 ring-1 ring-indigo-700 hover:bg-indigo-700 disabled:cursor-not-allowed disabled:bg-indigo-900 disabled:ring-indigo-950"
+                        disabled={state?.isLoading}
                     >
                         Create blog
                     </button>
