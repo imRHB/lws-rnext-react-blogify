@@ -43,8 +43,6 @@ export default function CreateBlogPage() {
         if (file) setError("thumbnail", false);
     };
 
-    console.log(state?.error);
-
     async function onSubmit(data) {
         dispatch({
             type: actions.global.DATA_FETCHING_STARTED,
@@ -76,7 +74,6 @@ export default function CreateBlogPage() {
                 navigate(`/blogs/${response.data.blog.id}`);
             }
         } catch (error) {
-            console.log("error:", error);
             dispatch({
                 type: actions.global.DATA_FETCHING_FAILED,
                 payload: {
