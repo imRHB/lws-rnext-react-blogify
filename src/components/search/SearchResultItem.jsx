@@ -4,10 +4,12 @@ import { actions } from "../../actions";
 import useSearch from "../../hooks/useSearch";
 import { getTimestamp } from "../../lib/getTimestamp";
 
-export default function SearchResultItem({ blog }) {
+export default function SearchResultItem({ blog, onClose }) {
     const { dispatch } = useSearch();
 
     function handleSearchItemClick() {
+        onClose();
+
         dispatch({
             type: actions.search.SEARCH_QUERY,
             payload: {
