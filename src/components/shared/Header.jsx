@@ -38,15 +38,13 @@ export default function Header() {
                 {/* <!-- For Not Logged in User - Login Menu --> */}
                 <div>
                     <ul className="flex items-center space-x-5">
-                        {state?.user && (
-                            <li>
-                                <AppLink
-                                    href="/create-blog"
-                                    label="Write"
-                                    variant="primary"
-                                />
-                            </li>
-                        )}
+                        <li>
+                            <AppLink
+                                href="/create-blog"
+                                label="Write"
+                                variant="primary"
+                            />
+                        </li>
 
                         <li>
                             {state?.user ? (
