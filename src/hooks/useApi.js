@@ -35,7 +35,7 @@ const useApi = () => {
             async (error) => {
                 const originalRequest = error.config;
 
-                if (error.response.status === 401 && !originalRequest._retry) {
+                if (error.response.status === 403 && !originalRequest._retry) {
                     originalRequest._retry = true;
 
                     try {
@@ -47,6 +47,7 @@ const useApi = () => {
                             }/auth/refresh-token`,
                             { refreshToken }
                         );
+
                         const { accessToken } = response.data;
                         setAuth({ ...auth, accessToken });
 
